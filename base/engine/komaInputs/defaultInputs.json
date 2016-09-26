@@ -1,0 +1,5 @@
+[
+    {"context":"HOME_SCREEN","actions":[{"32":"START"},{"27":"QUIT"}],"states":[],"ranges":[]},
+    {"context":"MAIN_MENU","actions":[{"87":"UP"},{"83":"DOWN"},{"32":"OK"},{"8":"NOPE"},{"27":"QUIT"}],"states":[],"ranges":[]},
+    {"context":"LEVEL","ACTIONS":[{"65":"RIGHT"},{"68":"LEFT"},{"32":"JUMP"},{"13":"PAUSE"},{"27":"QUIT"}],"states":[],"ranges":[]}
+]
