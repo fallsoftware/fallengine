@@ -1,18 +1,18 @@
 requirejs.config({
     paths: {
-        jQuery: '../lib/jquery-2.1.1.min',
+        jQuery: '../lib/jquery-3.1.1.min',
         observer: '../lib/observer',
-		TimeObject: 'TimeObject/TimeObject',
-        CoreEngine: 'CoreEngine/CoreEngine',
-        GameEngine: 'GameEngine/GameEngine',
-        GameObject: 'GameObject/GameObject',
-        GameComponent: 'GameComponent/GameComponent',
-        RenderingEngine: 'RenderingEngine/RenderingEngine',
-        PhysicsEngine: 'PhysicsEngine/PhysicsEngine',
-        GameScene: 'GameScene/GameScene',
-        InputContext: 'InputContext/InputContext',
-        Inputs: 'Inputs/Inputs',
-        InputType: 'InputType/InputType',
+	      TimeObject: 'timeobject/timeobject',
+        CoreEngine: 'coreengine/coreengine',
+        GameEngine: 'gameengine/gameengine',
+        GameObject: 'gameobject/gameobject',
+        GameComponent: 'gamecomponent/gamecomponent',
+        RenderingEngine: 'renderingengine/renderingengine',
+        PhysicsEngine: 'physicsengine/physicsengine',
+        GameScene: 'gamescene/gamescene',
+        InputContext: 'inputcontext/inputcontext',
+        Inputs: 'inputs/inputs',
+        InputType: 'inputtype/inputtype',
         Game: 'game/game'
     },
     shim: {
@@ -26,6 +26,6 @@ require(['Game'], init);
 
 function init(Game) {
     'use strict';
-    
+
     var g = new Game();
 }

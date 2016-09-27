@@ -1,26 +1,33 @@
-define(['TimeObject','GameEngine','RenderingEngine'],function(t,g,r){
+define(['TimeObject','GameEngine','RenderingEngine'], function(TimeObject,
+	GameEngine, RenderingEngine) {
 	'use strict';
-	function CoreEngine(){
+
+	function CoreEngine() {
 		this.fps = 60;
-		this.gameEngine= new g();
-		this.renderingEngine = new r();
-		this.timeObject
-		this.running=false;
+		this.gameEngine = new GameEngine();
+		this.renderingEngine = new RenderingEngine();
+		this.timeObject = new TimeObject();
+		this.running = false;
 	}
-	CoreEngine.prototype.start = function(){
-		this.running=true;
+
+	CoreEngine.prototype.start = function() {
+		this.running = true;
 		this.loop();
 	}
-	CoreEngine.prototype.loop = function(){
-		if(this.running){
-			t.initialize();
-			this.physicEngine.Refresh();
-			this.renderingEngine.Refresh();
-			var delay = (1000/this.fps)-t.getDelta();
-			setTimeout(this.loop,delay);
+
+	CoreEngine.prototype.loop = function() {
+		if (this.running) {
+			this.timeObject.initialize();
+			this.gameEngine.update();
+			this.renderingEngine.render();
+			var delay = (1000/this.fps) - this.timeObject.getDelta();
+			setTimeout(this.loop, delay);
 		}
 	}
-	CoreEngine.prototype.stop(){
-		this.running=false;
+
+	CoreEngine.prototype.stop = function() {
+		this.running = false;
 	}
+
+    return CoreEngine;
 });

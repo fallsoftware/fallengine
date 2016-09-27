@@ -1,13 +1,13 @@
-define(['jQuery', 'observer'], function ($, o) {
+define(['jQuery', 'observer'], function ($, observer) {
     'use strict';
-    
-    function KomaInputContext(context, actions, states, ranges) {
+
+    function InputContext(context, actions, states, ranges) {
         if (context !== undefined) {
             this.context = context;
         } else {
             this.context = 'Unknown';
         }
-        
+
         if (actions !== undefined) {
             this.actions = actions;
         } else {
@@ -27,5 +27,5 @@ define(['jQuery', 'observer'], function ($, o) {
         }
     }
 
-    return KomaInputContext;
+    return InputContext;
 });

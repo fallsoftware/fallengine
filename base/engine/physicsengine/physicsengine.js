@@ -1,29 +1,29 @@
-define(['jQuery', 'observer'], function ($, o) {
+define(['jQuery', 'observer'], function ($, observer) {
     'use strict';
-    
-    function komaPhysicsEngine() {
+
+    function PhysicsEngine() {
         //
     }
-    
-    komaPhysicsEngine.prototype = new Observer();
-    
-    komaPhysicsEngine.prototype.update = function (scene) {
+
+    PhysicsEngine.prototype = new Observer();
+
+    PhysicsEngine.prototype.update = function (scene) {
         console.log("Updating scene...");
-        
+
         var size = this.gameObjects.length,
             i = 0;
-        
+
         this.computePhysics(scene.seamLessBackground);
         this.computePhysics(scene.background);
-        
+
         for (i = 0; i < size; i++) {
             this.gameObjects[i].notifyObservers();
         }
     };
-    
-    komaPhysicsEngine.prototype.computePhysics = function (gameObject) {
+
+    PhysicsEngine.prototype.computePhysics = function (gameObject) {
         console.log("Computing gameObject...");
     };
 
-    return komaPhysicsEngine;
+    return PhysicsEngine;
 });

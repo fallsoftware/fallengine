@@ -1,9 +1,9 @@
 define([], function () {
     'use strict';
-    
-    function KomaInputType(type, input) {
+
+    function InputType(type, input) {
         this[input] = type;
     }
 
-    return KomaInputType;
+    return InputType;
 });
