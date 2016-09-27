@@ -10,19 +10,17 @@ define(['jQuery', 'observer', 'Inputs','PhysicsEngine'], function ($, observer,
 
     GameEngine.prototype.getDefaultInputContexts = function () {
         var callback = function (data, status, xhr) {
-                this.keyBindings = data;
-            };
+            this.keyBindings = data;
+        };
 
         $.getJSON('../engine/inputs/defaultinputs.json', callback.bind(this));
     };
 
     GameEngine.prototype.getInput = function () {
-        var kGE = this;
-
         $(window).keypress(function (ev) {
             console.log("Keypress!" + ev.keyCode);
-            kGE.input = ev.keyCode;
-        });
+            this.input = ev.keyCode;
+        }).bind(this);
     };
 
     GameEngine.prototype.update = function (step) {

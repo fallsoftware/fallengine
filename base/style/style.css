@@ -1,30 +1,65 @@
 body {
     background: rgb(100,100,100);
-    color: white;
-    font-family: sans-serif;
-    height: calc(100% - 45px);
-    margin: 0;
-    padding: 0;
+    cursor: default;
     text-align: justify;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-header {
-    font-size: 3em;
-    text-align: center;
-}
-html {
+html, body {
+    height: 100%;
     margin: 0 auto;
-    width: 900px;
+    padding: 0;
+    width: 100%;
+}
+#fallEngineStartButton {
+    background-image: url('elements/fallEngineStartButton.png');
+}
+#fallEngineStartButton:active {
+    background-image: url('elements/fallEngineStartButtonActive.png');
+}
+#fallEngineStartButton:hover {
+    background-image: url('elements/fallEngineStartButtonHover.png');
+}
+#fallEngineStopButton {
+    background-image: url('elements/fallEngineStopButton.png');
+}
+#fallEngineStopButton:active {
+    background-image: url('elements/fallEngineStopButtonActive.png');
+}
+#fallEngineStopButton:hover {
+    background-image: url('elements/fallEngineStopButtonHover.png');
+}
+#fallEngineStartButton, #fallEngineStopButton {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border: none;
+    cursor:pointer;
+    outline:none;
+    height: 64px;
+    position: relative;
+    top: 10px;
+    width: 64px;
+}
+#fallEngine {
+    display:block;
+    margin: 0 auto;
 }
 #interface {
     border-radius: 5px;
     margin: 0 auto;
-    width: 720px;
+    position: absolute;
 }
-#fallEngine {
-    background: rgb(50,50,50);
-    height: 480px;
-    width: 720px;
+#title {
+    color: white;
+    display: inline-block;
+    font-family: ChunkFive, serif;
+    font-size: 4em;
+    padding: 10px;
 }
-#fallEngineStartButton {
-    margin: 0 auto;
+@font-face {
+    font-family: ChunkFive;
+    src: url('elements/ChunkFive.otf');
 }

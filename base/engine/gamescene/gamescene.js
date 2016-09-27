@@ -1,8 +1,7 @@
 define(['jQuery', 'observer'], function ($, observer) {
     'use strict';
 
-    function GameScene(context, seamLessBackground, background,
-      gameObjects) {
+    function GameScene(context, seamLessBackground, background, gameObjects) {
         if (seamLessBackground !== undefined) {
             this.context = context;
         } else {

@@ -4,5 +4,12 @@ define(['jQuery', 'observer'], function ($, observer) {
     function GameComponent() {
     }
 
+    GameComponent.prototype.onImageLoad = function () {
+        console.log('Loading image...');
+    };
+
+    GameComponent.prototype.update = function (context) {
+    };
+
     return GameComponent;
 });

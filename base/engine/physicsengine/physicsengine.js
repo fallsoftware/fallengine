@@ -2,7 +2,6 @@ define(['jQuery', 'observer'], function ($, observer) {
     'use strict';
 
     function PhysicsEngine() {
-        //
     }
 
     PhysicsEngine.prototype = new Observer();

@@ -2,20 +2,20 @@ define([], function() {
 	'use strict';
 
 	function TimeObject() {
-		this.start = 0;
+		this.start = null;
 	}
 
 	TimeObject.prototype.initialize = function() {
-		this.start = (new Date).getTime();
+		this.start = performance.now();
 	}
 
 	TimeObject.prototype.getDelta = function() {
-		if (this.start == 0) {
-			this.start = (new Date).getTime();
+		if (this.start == null) {
+			this.start = performance.now();
 		}
 
-		return (new Date).getTime() - this.start;
+		return (performance.now() - this.start) / 1000;
 	}
 
-    return TimeObject;
+	return TimeObject;
 });

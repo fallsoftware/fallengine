@@ -2,7 +2,6 @@ define(['jQuery', 'observer', 'InputContext'], function ($, observer, InputConte
     'use strict';
 
     function Inputs(inputContexts) {
-
         if (inputContexts !== undefined) {
             this.inputContexts = inputContexts;
         } else {
@@ -12,8 +11,8 @@ define(['jQuery', 'observer', 'InputContext'], function ($, observer, InputConte
 
     Inputs.prototype.getDefaultInputContexts = function () {
         var callback = function (data, status, xhr) {
-                this.inputContexts = data;
-            };
+            this.inputContexts = data;
+        };
 
         $.getJSON('../engine/inputs/defaultinputs.json', callback.bind(this));
     };

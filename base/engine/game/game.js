@@ -5,16 +5,19 @@ define(['jQuery', 'observer', 'CoreEngine'], function ($, observer,
     'use strict';
 
     var Game = function () {
-        console.log("Welcome to the fall engine tech demo!");
+        console.log("Welcome to the Fall Engine tech demo!");
 
-        var coreEngine = new CoreEngine();
+        var coreEngine = new CoreEngine($('#fallEngine')[0]);
+        var fallEngineButton = $('#fallEngineStartButton');
 
-        $('#fallEngineStartButton').click(function () {
-            coreEngine.start();
-        });
-
-        $('#fallEngineStopButton').click(function () {
-            coreEngine.stop();
+        fallEngineButton.click(function () {
+            if (!coreEngine.running) {
+                fallEngineButton.attr('id', 'fallEngineStopButton');
+                coreEngine.start();
+            } else {
+                fallEngineButton.attr('id', 'fallEngineStartButton');
+                coreEngine.stop();
+            }
         });
     };
 
