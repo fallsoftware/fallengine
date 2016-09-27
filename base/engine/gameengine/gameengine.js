@@ -13,7 +13,7 @@ define(['jQuery', 'observer', 'Inputs','PhysicsEngine'], function ($, observer,
             this.keyBindings = data;
         };
 
-        $.getJSON('../engine/inputs/defaultinputs.json', callback.bind(this));
+        $.getJSON('https://raw.githubusercontent.com/fallsoftware/fallengine/master/base/engine/inputs/defaultinputs.json', callback.bind(this));
     };
 
     GameEngine.prototype.getInput = function () {
@@ -33,7 +33,7 @@ define(['jQuery', 'observer', 'Inputs','PhysicsEngine'], function ($, observer,
         }
 
         if (this.currentScene.context === "MAIN_MENU") {
-            this.mainMenuInput();
+            window.alert('Button pressed!');
         }
 
         this.input = -1;

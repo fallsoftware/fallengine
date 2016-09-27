@@ -1,5 +1,5 @@
 body {
-    background: rgb(100,100,100);
+    background: #B0BEC5;
     cursor: default;
     text-align: justify;
     -webkit-user-select: none;
@@ -48,6 +48,27 @@ html, body {
     top: 10px;
     width: 64px;
 }
+#FallSoftwareLogo {
+    margin-top: 10px;
+}
+#footer {
+    background-color: #37474F;
+    bottom: 0px;
+    height: 150px;
+    position: absolute;
+    width: 100%;
+}
+#logos {
+    margin: 0 auto;
+    text-align: center;
+    width: 800px;
+}
+#logos img {
+    display: inline-block;
+    padding-left: 10%;
+    padding-right: 10%;
+    vertical-align: middle;
+}
 #interface {
     border-radius: 5px;
     margin: 0 auto;
@@ -59,6 +80,9 @@ html, body {
     font-family: ChunkFive, serif;
     font-size: 4em;
     padding: 10px;
+}
+#UQACLogo {
+    margin-top: 15px;
 }
 @font-face {
     font-family: ChunkFive;

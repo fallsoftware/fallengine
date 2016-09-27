@@ -14,7 +14,7 @@ define(['jQuery', 'observer', 'InputContext'], function ($, observer, InputConte
             this.inputContexts = data;
         };
 
-        $.getJSON('../engine/inputs/defaultinputs.json', callback.bind(this));
+        $.getJSON('https://raw.githubusercontent.com/fallsoftware/fallengine/master/base/engine/inputs/defaultinputs.json', callback.bind(this));
     };
 
     Inputs.prototype.errorRawInput = function (input) {
