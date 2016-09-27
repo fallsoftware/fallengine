@@ -13,10 +13,15 @@ html, body {
     padding: 0;
     width: 100%;
 }
+#fallEngine {
+    display:block;
+    margin: 0 auto;
+    z-index: 999;
+}
 #fallEngineStartButton {
     background-image: url('elements/fallEngineStartButton.png');
 }
-#fallEngineStartButton:active {
+#fallEngineStartButton:active, #fallEngineStartButton:active:hover {
     background-image: url('elements/fallEngineStartButtonActive.png');
 }
 #fallEngineStartButton:hover {
@@ -25,7 +30,7 @@ html, body {
 #fallEngineStopButton {
     background-image: url('elements/fallEngineStopButton.png');
 }
-#fallEngineStopButton:active {
+#fallEngineStopButton:active, #fallEngineStopButton:active:hover {
     background-image: url('elements/fallEngineStopButtonActive.png');
 }
 #fallEngineStopButton:hover {
@@ -42,10 +47,6 @@ html, body {
     position: relative;
     top: 10px;
     width: 64px;
-}
-#fallEngine {
-    display:block;
-    margin: 0 auto;
 }
 #interface {
     border-radius: 5px;
