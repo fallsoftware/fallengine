@@ -17,10 +17,12 @@ define(['jQuery', 'observer', 'Inputs','PhysicsEngine'], function ($, observer,
     };
 
     GameEngine.prototype.getInput = function () {
+        var gameEngine = this;
+
         $(window).keypress(function (ev) {
             console.log("Keypress!" + ev.keyCode);
-            this.input = ev.keyCode;
-        }).bind(this);
+            gameEngine.input = ev.keyCode;
+        });
     };
 
     GameEngine.prototype.update = function (step) {
