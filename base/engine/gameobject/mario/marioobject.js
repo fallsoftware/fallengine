@@ -3,10 +3,12 @@ function ($, observer, GameObject, MarioGraphicsComponent) {
     'use strict';
 
     function MarioObject() {
-        this.addGraphicsComponent(new MarioGraphicsComponent());
+        GameObject.call(this);
+        this.addGraphicsComponent(new MarioGraphicsComponent(this));
     }
 
-    MarioObject.prototype = new GameObject();
+    MarioObject.prototype = Object.create(GameObject.prototype);
+    MarioObject.prototype.constructor = MarioObject;
 
     return MarioObject;
 });

@@ -1,7 +1,9 @@
-define(['jQuery', 'observer'], function ($, observer) {
+define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
+    GameComponent) {
     'use strict';
 
-    function MarioGraphicsComponent() {
+    function MarioGraphicsComponent(gameObject) {
+        GameComponent.call(this, gameObject);
         this.frames = [];
         this.frame = 0;
         this.assets = ['../assets/mario/frame1.gif',
@@ -15,6 +17,9 @@ define(['jQuery', 'observer'], function ($, observer) {
             this.frames[i].onload = this.onImageLoad;
         }
     }
+
+    MarioGraphicsComponent.prototype = Object.create(GameComponent.prototype);
+    MarioGraphicsComponent.prototype.constructor = MarioGraphicsComponent;
 
     MarioGraphicsComponent.prototype.onImageLoad = function () {
         console.log('Loading Mario...');

@@ -1,7 +1,8 @@
 define(['jQuery', 'observer'], function ($, observer) {
     'use strict';
 
-    function GameComponent() {
+    function GameComponent(gameObject) {
+        this.gameObject = gameObject;
     }
 
     GameComponent.prototype.onImageLoad = function () {

@@ -4,7 +4,8 @@ define(['jQuery', 'observer'], function ($, observer) {
     function PhysicsEngine() {
     }
 
-    PhysicsEngine.prototype = new Observer();
+    PhysicsEngine.prototype = Object.create(Observer.prototype);
+    PhysicsEngine.prototype.constructor = PhysicsEngine;
 
     PhysicsEngine.prototype.update = function (scene) {
         console.log("Updating scene...");

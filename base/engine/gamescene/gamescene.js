@@ -27,7 +27,8 @@ define(['jQuery', 'observer'], function ($, observer) {
         }
     }
 
-    GameScene.prototype = new Subject();
+    GameScene.prototype = Object.create(Subject.prototype);
+    GameScene.prototype.constructor = GameScene;
 
     return GameScene;
 });
