@@ -14,7 +14,8 @@ requirejs.config({
         Inputs: 'inputs/inputs',
         InputType: 'inputtype/inputtype',
         Game: 'game/game',
-        Mario: 'gamecomponent/mario/mario'
+        MarioGraphicsComponent: 'gamecomponent/mario/mariographicscomponent',
+        MarioObject: 'gameobject/mario/marioobject'
     },
     shim: {
         'jQuery': {

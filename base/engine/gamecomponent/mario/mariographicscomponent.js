@@ -1,11 +1,11 @@
 define(['jQuery', 'observer'], function ($, observer) {
     'use strict';
 
-    function Mario() {
+    function MarioGraphicsComponent() {
         this.frames = [];
         this.frame = 0;
-        this.assets = ['../assets/mario/frame1.gif', '../assets/mario/frame2.gif',
-            '../assets/mario/frame3.gif'];
+        this.assets = ['../assets/mario/frame1.gif',
+            '../assets/mario/frame2.gif', '../assets/mario/frame3.gif'];
 
         var length = this.assets.length;
 
@@ -16,14 +16,14 @@ define(['jQuery', 'observer'], function ($, observer) {
         }
     }
 
-    Mario.prototype.onImageLoad = function () {
-        console.log('Loading image...');
+    MarioGraphicsComponent.prototype.onImageLoad = function () {
+        console.log('Loading Mario...');
     };
 
-    Mario.prototype.update = function (context) {
+    MarioGraphicsComponent.prototype.update = function (context) {
         context.drawImage(this.frames[this.frame], 192, 192);
         this.frame = ++this.frame % this.frames.length;
     };
 
-    return Mario;
+    return MarioGraphicsComponent;
 });

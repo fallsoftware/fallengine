@@ -1,4 +1,5 @@
-define(['jQuery', 'observer', 'Mario'], function ($, observer, Mario) {
+define(['jQuery', 'observer', 'MarioObject'], function ($, observer,
+    MarioObject) {
     'use strict';
 
     function RenderingEngine(canvas) {
@@ -13,7 +14,7 @@ define(['jQuery', 'observer', 'Mario'], function ($, observer, Mario) {
 
         this.defaultColor = '#69f0ae';
         this.gameObjects = [];
-        this.gameObjects.push(new Mario());
+        this.gameObjects.push(new MarioObject());
     }
 
     RenderingEngine.prototype.render = function (scene) {
