@@ -1,9 +1,9 @@
-define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
-    GameComponent) {
+define(['jQuery', 'observer', 'PhysicsComponent'], function ($, observer,
+    PhysicsComponent) {
     'use strict';
 
     function RectanglePhysicsComponent(gameObject, x, y, width, height, angle) {
-        GameComponent.call(this, gameObject);
+        PhysicsComponent.call(this, gameObject);
 
         this.x = x;
         this.y = y;
@@ -18,7 +18,7 @@ define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
     }
 
     RectanglePhysicsComponent.prototype =
-        Object.create(GameComponent.prototype);
+        Object.create(PhysicsComponent.prototype);
     RectanglePhysicsComponent.prototype.constructor = RectanglePhysicsComponent;
 
     RectanglePhysicsComponent.prototype.update = function (context) {

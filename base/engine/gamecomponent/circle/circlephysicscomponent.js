@@ -1,10 +1,10 @@
-define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
-    GameComponent) {
+define(['jQuery', 'observer', 'PhysicsComponent'], function ($, observer,
+    PhysicsComponent) {
     'use strict';
 
     function CirclePhysicsComponent(gameObject, x, y, radius, startingAngle,
         endingAngle, counterClockwise) {
-        GameComponent.call(this, gameObject);
+        PhysicsComponent.call(this, gameObject);
 
         this.x = x;
         this.y = y;
@@ -29,7 +29,8 @@ define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
         }
     }
 
-    CirclePhysicsComponent.prototype = Object.create(GameComponent.prototype);
+    CirclePhysicsComponent.prototype
+        = Object.create(PhysicsComponent.prototype);
     CirclePhysicsComponent.prototype.constructor = CirclePhysicsComponent;
 
     CirclePhysicsComponent.prototype.update = function (context) {

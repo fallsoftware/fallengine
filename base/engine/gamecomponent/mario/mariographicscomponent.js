@@ -1,9 +1,9 @@
-define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
-    GameComponent) {
+define(['jQuery', 'observer', 'GraphicsComponent'], function ($, observer,
+    GraphicsComponent) {
     'use strict';
 
     function MarioGraphicsComponent(gameObject) {
-        GameComponent.call(this, gameObject);
+        GraphicsComponent.call(this, gameObject);
         this.frames = [];
         this.frame = 0;
         this.assets = ['../assets/mario/frame1.gif',
@@ -18,7 +18,8 @@ define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
         }
     }
 
-    MarioGraphicsComponent.prototype = Object.create(GameComponent.prototype);
+    MarioGraphicsComponent.prototype
+        = Object.create(GraphicsComponent.prototype);
     MarioGraphicsComponent.prototype.constructor = MarioGraphicsComponent;
 
     MarioGraphicsComponent.prototype.onImageLoad = function () {

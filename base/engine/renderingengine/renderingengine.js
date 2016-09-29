@@ -14,16 +14,20 @@ define(['jQuery', 'observer', 'MarioObject', 'CircleObject', 'RectangleObject'],
 
         this.defaultColor = '#69f0ae';
         this.gameObjects = [];
+
         this.gameObjects.push(new MarioObject());
         this.gameObjects.push(
             new CircleObject(250, 250, 25, 0, Math.PI * 2, true, '#eceff1',
-                20));
+            '../engine/gamecomponent/circle/elements/background.png', 20));
         this.gameObjects.push(
-            new RectangleObject(200, 500, 100, 150, 0, '#eceff1', 20));
+            new RectangleObject(200, 500, 100, 150, 0, '#eceff1',
+            '../engine/gamecomponent/rectangle/elements/background.png', 20));
         this.gameObjects.push(
-            new RectangleObject(300, 200, 30, 30, -123*Math.PI/180, '#eceff1'));
+            new RectangleObject(300, 200, 30, 30, -123*Math.PI/180, '#e6ee9c',
+            '../engine/gamecomponent/rectangle/elements/background.png'));
         this.gameObjects.push(
-            new RectangleObject(500, 300, 200, 100, 70, '#eceff1', 20));
+            new RectangleObject(500, 300, 200, 100, 70, '#f8bbd0',
+            '../engine/gamecomponent/rectangle/elements/background.png', 20));
     }
 
     RenderingEngine.prototype.render = function (scene) {

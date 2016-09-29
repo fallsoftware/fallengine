@@ -4,7 +4,7 @@ define(['jQuery', 'observer', 'GameObject', 'CircleGraphicsComponent',
     'use strict';
 
     function CircleObject(x, y, radius, startingAngle, endingAngle,
-        counterClockwise, fillStyle, paddingX, paddingY) {
+        counterClockwise, fillStyle, backgroundSrc, paddingX, paddingY) {
         GameObject.call(this);
         this.addPhysicsComponent(new CirclePhysicsComponent(this, x, y, radius,
             startingAngle, endingAngle, counterClockwise));
@@ -22,7 +22,7 @@ define(['jQuery', 'observer', 'GameObject', 'CircleGraphicsComponent',
         }
 
         this.addGraphicsComponent(new CircleGraphicsComponent(this, fillStyle,
-            paddingX, paddingY));
+            backgroundSrc, paddingX, paddingY));
     }
 
     CircleObject.prototype = Object.create(GameObject.prototype);

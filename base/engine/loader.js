@@ -7,6 +7,9 @@ requirejs.config({
         GameEngine: 'gameengine/gameengine',
         GameObject: 'gameobject/gameobject',
         GameComponent: 'gamecomponent/gamecomponent',
+        GraphicsComponent: 'gamecomponent/graphicscomponent',
+        PhysicsComponent: 'gamecomponent/physicscomponent',
+        InputComponent: 'gamecomponent/inputcomponent',
         RenderingEngine: 'renderingengine/renderingengine',
         PhysicsEngine: 'physicsengine/physicsengine',
         GameScene: 'gamescene/gamescene',
@@ -21,7 +24,7 @@ requirejs.config({
         CircleObject: 'gameobject/circle/circleobject',
         RectangleGraphicsComponent:
             'gamecomponent/rectangle/rectanglegraphicscomponent',
-        RectanglePhysicsComponent: 
+        RectanglePhysicsComponent:
             'gamecomponent/rectangle/rectanglephysicscomponent',
         RectangleObject: 'gameobject/rectangle/rectangleobject'
     },

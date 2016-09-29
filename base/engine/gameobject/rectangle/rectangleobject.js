@@ -3,8 +3,8 @@ define(['jQuery', 'observer', 'GameObject', 'RectangleGraphicsComponent',
     RectangleGraphicsComponent, RectanglePhysicsComponent) {
     'use strict';
 
-    function RectangleObject(x, y, width, height, angle, fillStyle, paddingX,
-        paddingY) {
+    function RectangleObject(x, y, width, height, angle, fillStyle,
+        backgroundSrc, paddingX, paddingY) {
         GameObject.call(this);
 
         if (height === null || height === undefined) {
@@ -27,7 +27,7 @@ define(['jQuery', 'observer', 'GameObject', 'RectangleGraphicsComponent',
         }
 
         this.addGraphicsComponent(new RectangleGraphicsComponent(this,
-            fillStyle, paddingX, paddingY));
+            fillStyle, backgroundSrc, paddingX, paddingY));
     }
 
     RectangleObject.prototype = Object.create(GameObject.prototype);

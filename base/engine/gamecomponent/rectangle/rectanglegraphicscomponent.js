@@ -1,10 +1,12 @@
-define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
-    GameComponent) {
+define(['jQuery', 'observer', 'GraphicsComponent'], function ($, observer,
+    GraphicsComponent) {
     'use strict';
 
-    function RectangleGraphicsComponent(gameObject, fillStyle, paddingX, paddingY) {
-        GameComponent.call(this, gameObject);
+    function RectangleGraphicsComponent(gameObject, fillStyle, backgroundSrc,
+        paddingX, paddingY) {
+        GraphicsComponent.call(this, gameObject);
         this.fillStyle = fillStyle;
+        this.backgroundSrc = backgroundSrc;
         this.paddingX = paddingX;
         this.paddingY = paddingY;
         // not generic:
@@ -12,48 +14,34 @@ define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
     }
 
     RectangleGraphicsComponent.prototype =
-        Object.create(GameComponent.prototype);
+        Object.create(GraphicsComponent.prototype);
     RectangleGraphicsComponent.prototype.constructor =
         RectangleGraphicsComponent;
 
-    RectangleGraphicsComponent.prototype.update = function (context) {
+    RectangleGraphicsComponent.prototype.draw = function (context) {
+        context.beginPath();
+
+        if (this.rectangleData.angle !== null) {
+            this.rotate(context, this.rectangleData.angle,
+                this.rectangleData.x+this.rectangleData.width/2,
+                this.rectangleData.y+this.rectangleData.width/2);
+        }
+
+        context.rect(this.rectangleData.x, this.rectangleData.y,
+            this.rectangleData.width, this.rectangleData.height);
+        context.closePath();
+        context.fill();
+    }
+
+    RectangleGraphicsComponent.prototype.drawImage = function (context) {
         var background = new Image();
 
-        background.src =
-            '../engine/gamecomponent/circle/elements/background.png';
+        background.src = this.backgroundSrc;
         background.onload = (function() {
-            context.save();
-            context.fillStyle = this.fillStyle;
-            context.beginPath();
-
-            if (this.rectangleData.angle !== null) {
-                context.translate(
-                    this.rectangleData.x+this.rectangleData.width/2,
-                    this.rectangleData.y+this.rectangleData.width/2);
-                context.rotate(this.rectangleData.angle);
-                context.translate(
-                    -this.rectangleData.x-this.rectangleData.width/2,
-                    -this.rectangleData.y-this.rectangleData.width/2);
-            }
-
-            context.rect(this.rectangleData.x, this.rectangleData.y,
-                this.rectangleData.width, this.rectangleData.height);
-            context.closePath();
-            context.fill();
+            this.draw(context);
             context.clip();
 
-            this.paddingX = 0;
-            this.paddingY = 0;
-
-            var maxRectangleLength =
-                Math.min(this.rectangleData.width, this.rectangleData.height);
-            var maxImageLength = Math.max(background.width, background.height);
-            var ratio = 1;
-
-            if (maxImageLength > maxRectangleLength) {
-                ratio = maxRectangleLength / maxImageLength;
-            }
-
+            var ratio = this.getRatio(background);
 
             context.drawImage(background,
                 this.rectangleData.x+this.rectangleData.width/2-
@@ -63,8 +51,34 @@ define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
                     this.paddingY/2,
                 background.width*ratio-this.paddingX,
                 background.height*ratio-this.paddingY);
-            context.restore();
+                context.restore();
         }).bind(this);
+    }
+
+    RectangleGraphicsComponent.prototype.getRatio = function (background) {
+        var maxRectangleLength =
+            Math.min(this.rectangleData.width, this.rectangleData.height);
+        var maxImageLength = Math.max(background.width, background.height);
+        var ratio = 1;
+
+        if (maxImageLength > maxRectangleLength) {
+            ratio = maxRectangleLength / maxImageLength;
+        }
+
+        return ratio;
+    }
+
+    RectangleGraphicsComponent.prototype.update = function (context) {
+        context.save();
+        context.fillStyle = this.fillStyle;
+
+        if (this.backgroundSrc !== null && this.backgroundSrc !== undefined &&
+            this.backgroundSrc !== '') {
+            this.drawImage(context);
+        } else {
+            this.draw(context);
+            context.restore();
+        }
     };
 
     return RectangleGraphicsComponent;
