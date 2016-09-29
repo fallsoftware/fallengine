@@ -15,7 +15,9 @@ define(['jQuery', 'observer', 'MarioObject', 'CircleObject'], function ($,
         this.defaultColor = '#69f0ae';
         this.gameObjects = [];
         this.gameObjects.push(new MarioObject());
-        this.gameObjects.push(new CircleObject());
+        this.gameObjects.push(
+            new CircleObject(250, 250, 25, 0, Math.PI * 2, true, '#eceff1',
+                20));
     }
 
     RenderingEngine.prototype.render = function (scene) {

@@ -14,7 +14,7 @@ define(['jQuery', 'observer'], function ($, observer) {
     };
 
     GameObject.prototype.addPhysicsComponent = function (component) {
-        this.physicsCComponents.push(component);
+        this.physicsComponents.push(component);
     };
 
     GameObject.prototype.addInputComponent = function (component) {

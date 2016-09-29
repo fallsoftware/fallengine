@@ -17,6 +17,7 @@ requirejs.config({
         MarioGraphicsComponent: 'gamecomponent/mario/mariographicscomponent',
         MarioObject: 'gameobject/mario/marioobject',
         CircleGraphicsComponent: 'gamecomponent/circle/circlegraphicscomponent',
+        CirclePhysicsComponent:'gamecomponent/circle/circlephysicscomponent',
         CircleObject: 'gameobject/circle/circleobject'
     },
     shim: {

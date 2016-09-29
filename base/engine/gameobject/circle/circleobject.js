@@ -1,10 +1,28 @@
-define(['jQuery', 'observer', 'GameObject', 'CircleGraphicsComponent'],
-function ($, observer, GameObject, CircleGraphicsComponent) {
+define(['jQuery', 'observer', 'GameObject', 'CircleGraphicsComponent',
+    'CirclePhysicsComponent'], function ($, observer, GameObject,
+    CircleGraphicsComponent, CirclePhysicsComponent) {
     'use strict';
 
-    function CircleObject() {
+    function CircleObject(x, y, radius, startingAngle,
+        endingAngle, counterClockwise, fillStyle, paddingX, paddingY) {
         GameObject.call(this);
-        this.addGraphicsComponent(new CircleGraphicsComponent(this));
+        this.addPhysicsComponent(new CirclePhysicsComponent(this, x, y, radius,
+            startingAngle, endingAngle, counterClockwise));
+
+        if (fillStyle === null || fillStyle === undefined) {
+            fillStyle = '#ECEFF1';
+        }
+
+        if (paddingX === null || paddingX === undefined) {
+            paddingX = 0;
+        }
+
+        if (paddingY === null || paddingY === undefined) {
+            paddingY = paddingX;
+        }
+
+        this.addGraphicsComponent(new CircleGraphicsComponent(this, fillStyle,
+            paddingX, paddingY));
     }
 
     CircleObject.prototype = Object.create(GameObject.prototype);
