@@ -2,9 +2,10 @@ define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
     GameComponent) {
     'use strict';
 
-    function CircleGraphicsComponent(gameObject, fillStyle, paddingX, paddingY) {
+    function CircleGraphicsComponent(gameObject, fillStyle, paddingX,
+        paddingY) {
         GameComponent.call(this, gameObject);
-        this.fillStyle = '#eceff1';
+        this.fillStyle = fillStyle;
         this.paddingX = paddingX;
         this.paddingY = paddingY;
         this.circleData = this.gameObject.physicsComponents[0]; // not generic
@@ -12,10 +13,6 @@ define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
 
     CircleGraphicsComponent.prototype = Object.create(GameComponent.prototype);
     CircleGraphicsComponent.prototype.constructor = CircleGraphicsComponent;
-
-    /*Child.prototype = Object.create(Parent.prototype);
-    Child.prototype.constructor = Child;
-    Parent.call(this, name);*/
 
     CircleGraphicsComponent.prototype.update = function (context) {
         var background = new Image();

@@ -3,7 +3,7 @@ define(['jQuery', 'observer', 'GameObject', 'RectangleGraphicsComponent',
     RectangleGraphicsComponent, RectanglePhysicsComponent) {
     'use strict';
 
-    function RectangleObject(x, y, width, height, fillStyle, paddingX,
+    function RectangleObject(x, y, width, height, angle, fillStyle, paddingX,
         paddingY) {
         GameObject.call(this);
 
@@ -12,7 +12,7 @@ define(['jQuery', 'observer', 'GameObject', 'RectangleGraphicsComponent',
         }
 
         this.addPhysicsComponent(new RectanglePhysicsComponent(this, x, y,
-            width, height));
+            width, height, angle));
 
         if (fillStyle === null || fillStyle === undefined) {
             fillStyle = '#ECEFF1';

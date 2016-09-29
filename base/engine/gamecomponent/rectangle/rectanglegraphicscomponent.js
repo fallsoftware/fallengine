@@ -25,11 +25,22 @@ define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
             context.save();
             context.fillStyle = this.fillStyle;
             context.beginPath();
+
+            if (this.rectangleData.angle !== null) {
+                context.translate(
+                    this.rectangleData.x+this.rectangleData.width/2,
+                    this.rectangleData.y+this.rectangleData.width/2);
+                context.rotate(this.rectangleData.angle);
+                context.translate(
+                    -this.rectangleData.x-this.rectangleData.width/2,
+                    -this.rectangleData.y-this.rectangleData.width/2);
+            }
+
             context.rect(this.rectangleData.x, this.rectangleData.y,
                 this.rectangleData.width, this.rectangleData.height);
             context.closePath();
             context.fill();
-            //context.clip();
+            context.clip();
 
             this.paddingX = 0;
             this.paddingY = 0;
@@ -40,7 +51,7 @@ define(['jQuery', 'observer', 'GameComponent'], function ($, observer,
             var ratio = 1;
 
             if (maxImageLength > maxRectangleLength) {
-                ratio = maxImageLength / maxRectangleLength;
+                ratio = maxRectangleLength / maxImageLength;
             }
 
 

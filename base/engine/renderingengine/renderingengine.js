@@ -19,7 +19,11 @@ define(['jQuery', 'observer', 'MarioObject', 'CircleObject', 'RectangleObject'],
             new CircleObject(250, 250, 25, 0, Math.PI * 2, true, '#eceff1',
                 20));
         this.gameObjects.push(
-            new RectangleObject(500, 500, 100, 150, '#eceff1', 20));
+            new RectangleObject(200, 500, 100, 150, 0, '#eceff1', 20));
+        this.gameObjects.push(
+            new RectangleObject(300, 200, 30, 30, -123*Math.PI/180, '#eceff1'));
+        this.gameObjects.push(
+            new RectangleObject(500, 300, 200, 100, 70, '#eceff1', 20));
     }
 
     RenderingEngine.prototype.render = function (scene) {
