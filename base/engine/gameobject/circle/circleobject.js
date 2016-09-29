@@ -3,8 +3,8 @@ define(['jQuery', 'observer', 'GameObject', 'CircleGraphicsComponent',
     CircleGraphicsComponent, CirclePhysicsComponent) {
     'use strict';
 
-    function CircleObject(x, y, radius, startingAngle,
-        endingAngle, counterClockwise, fillStyle, paddingX, paddingY) {
+    function CircleObject(x, y, radius, startingAngle, endingAngle,
+        counterClockwise, fillStyle, paddingX, paddingY) {
         GameObject.call(this);
         this.addPhysicsComponent(new CirclePhysicsComponent(this, x, y, radius,
             startingAngle, endingAngle, counterClockwise));

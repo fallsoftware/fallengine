@@ -1,5 +1,5 @@
-define(['jQuery', 'observer', 'MarioObject', 'CircleObject'], function ($,
-    observer, MarioObject, CircleObject) {
+define(['jQuery', 'observer', 'MarioObject', 'CircleObject', 'RectangleObject'],
+    function ($, observer, MarioObject, CircleObject, RectangleObject) {
     'use strict';
 
     function RenderingEngine(canvas) {
@@ -18,6 +18,8 @@ define(['jQuery', 'observer', 'MarioObject', 'CircleObject'], function ($,
         this.gameObjects.push(
             new CircleObject(250, 250, 25, 0, Math.PI * 2, true, '#eceff1',
                 20));
+        this.gameObjects.push(
+            new RectangleObject(500, 500, 100, 150, '#eceff1', 20));
     }
 
     RenderingEngine.prototype.render = function (scene) {
