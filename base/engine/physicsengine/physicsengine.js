@@ -1,7 +1,8 @@
 define(['jQuery', 'observer'], function ($, observer) {
     'use strict';
 
-    function PhysicsEngine() {
+    function PhysicsEngine(gameObjects) {
+        this.gameObjects = gameObjects;
     }
 
     PhysicsEngine.prototype = Object.create(Observer.prototype);
