@@ -23,7 +23,6 @@ define(['jQuery', 'observer', 'GraphicsComponent'], function ($, observer,
     MarioGraphicsComponent.prototype.constructor = MarioGraphicsComponent;
 
     MarioGraphicsComponent.prototype.onImageLoad = function () {
-        console.log('Loading Mario...');
     };
 
     MarioGraphicsComponent.prototype.update = function (context) {

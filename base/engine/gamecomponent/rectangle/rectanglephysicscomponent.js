@@ -15,6 +15,9 @@ define(['jQuery', 'observer', 'PhysicsComponent'], function ($, observer,
         } else {
             this.height = this.width;
         }
+
+        this.centerX = this.x+this.width/2;
+        this.centerY = this.y+this.height/2;
     }
 
     RectanglePhysicsComponent.prototype =

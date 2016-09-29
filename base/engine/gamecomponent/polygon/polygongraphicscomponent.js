@@ -2,7 +2,7 @@ define(['jQuery', 'observer', 'GraphicsComponent'], function ($, observer,
     GraphicsComponent) {
     'use strict';
 
-    function RectangleGraphicsComponent(gameObject, fillStyle, backgroundSrc,
+    function PolygonGraphicsComponent(gameObject, fillStyle, backgroundSrc,
         paddingX, paddingY) {
         GraphicsComponent.call(this, gameObject);
         this.fillStyle = fillStyle;
@@ -10,30 +10,41 @@ define(['jQuery', 'observer', 'GraphicsComponent'], function ($, observer,
         this.paddingX = paddingX;
         this.paddingY = paddingY;
         // not generic:
-        this.rectangleData = this.gameObject.physicsComponents[0];
+        this.polygonData = this.gameObject.physicsComponents[0];
     }
 
-    RectangleGraphicsComponent.prototype =
+    PolygonGraphicsComponent.prototype =
         Object.create(GraphicsComponent.prototype);
-    RectangleGraphicsComponent.prototype.constructor =
-        RectangleGraphicsComponent;
+    PolygonGraphicsComponent.prototype.constructor =
+        PolygonGraphicsComponent;
 
-    RectangleGraphicsComponent.prototype.draw = function (context) {
+    PolygonGraphicsComponent.prototype.drawPolygon = function (context) {
+        var points = this.polygonData.points;
+        var pointsSize = points.length;
+
+        context.moveTo(points[0][0], points[0][1]);
+
+        for (var i = 1; i < pointsSize; i++) {
+            context.lineTo(points[i][0], points[i][1]);
+        }
+    }
+
+    PolygonGraphicsComponent.prototype.draw = function (context) {
         context.beginPath();
 
-        if (this.rectangleData.angle !== null) {
-            this.rotate(context, this.rectangleData.angle,
-                this.rectangleData.centerX,
-                this.rectangleData.centerY);
+        if (this.polygonData.angle !== null) {
+            /*this.rotate(context, this.rectangleData.angle,
+                this.rectangleData.x+this.rectangleData.width/2,
+                this.rectangleData.y+this.rectangleData.width/2);*/
         }
 
-        context.rect(this.rectangleData.x, this.rectangleData.y,
-            this.rectangleData.width, this.rectangleData.height);
+        this.drawPolygon(context);
+
         context.closePath();
         context.fill();
     }
 
-    RectangleGraphicsComponent.prototype.drawImage = function (context) {
+    PolygonGraphicsComponent.prototype.drawImage = function (context) {
         var background = new Image();
 
         background.src = this.backgroundSrc;
@@ -41,21 +52,21 @@ define(['jQuery', 'observer', 'GraphicsComponent'], function ($, observer,
             this.draw(context);
             context.clip();
 
-            var ratio = this.getRatio(background);
+            //var ratio = this.getRatio(background);
 
-            context.drawImage(background,
+            /*context.drawImage(background,
                 this.rectangleData.x+this.rectangleData.width/2-
                     (background.width*ratio)/2+this.paddingX/2,
                 this.rectangleData.y
                     +this.rectangleData.height/2-(background.height*ratio)/2+
                     this.paddingY/2,
                 background.width*ratio-this.paddingX,
-                background.height*ratio-this.paddingY);
+                background.height*ratio-this.paddingY);*/
                 context.restore();
         }).bind(this);
     }
 
-    RectangleGraphicsComponent.prototype.getRatio = function (background) {
+    PolygonGraphicsComponent.prototype.getRatio = function (background) {
         var maxRectangleLength =
             Math.min(this.rectangleData.width, this.rectangleData.height);
         var maxImageLength = Math.max(background.width, background.height);
@@ -68,7 +79,7 @@ define(['jQuery', 'observer', 'GraphicsComponent'], function ($, observer,
         return ratio;
     }
 
-    RectangleGraphicsComponent.prototype.update = function (context) {
+    PolygonGraphicsComponent.prototype.update = function (context) {
         context.save();
         context.fillStyle = this.fillStyle;
 
@@ -81,5 +92,5 @@ define(['jQuery', 'observer', 'GraphicsComponent'], function ($, observer,
         }
     };
 
-    return RectangleGraphicsComponent;
+    return PolygonGraphicsComponent;
 });

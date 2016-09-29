@@ -26,7 +26,11 @@ requirejs.config({
             'gamecomponent/rectangle/rectanglegraphicscomponent',
         RectanglePhysicsComponent:
             'gamecomponent/rectangle/rectanglephysicscomponent',
-        RectangleObject: 'gameobject/rectangle/rectangleobject'
+        RectangleObject: 'gameobject/rectangle/rectangleobject',
+        PolygonGraphicsComponent:
+            'gamecomponent/polygon/polygongraphicscomponent',
+        PolygonPhysicsComponent:'gamecomponent/polygon/polygonphysicscomponent',
+        PolygonObject: 'gameobject/polygon/polygonobject'
     },
     shim: {
         'jQuery': {

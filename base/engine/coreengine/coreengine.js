@@ -1,6 +1,7 @@
 define(['TimeObject','GameEngine','RenderingEngine', 'MarioObject',
-	'CircleObject', 'RectangleObject'], function(TimeObject, GameEngine,
-	RenderingEngine, MarioObject, CircleObject, RectangleObject) {
+	'CircleObject', 'RectangleObject', 'PolygonObject'], function(TimeObject,
+	GameEngine, RenderingEngine, MarioObject, CircleObject, RectangleObject,
+	PolygonObject) {
 	'use strict';
 
 	function CoreEngine(canvas) {
@@ -47,6 +48,8 @@ define(['TimeObject','GameEngine','RenderingEngine', 'MarioObject',
         this.gameObjects.push(
             new RectangleObject(500, 300, 200, 100, 70, '#f8bbd0',
             '../engine/gamecomponent/rectangle/elements/background.png', 20));
+		this.gameObjects.push(
+            new PolygonObject([[10, 0], [100, 50], [50, 100], [0, 90]], 70, '#eceff1'));
 	}
 
 	return CoreEngine;
