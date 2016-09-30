@@ -1,7 +1,5 @@
-define(['TimeObject','GameEngine','RenderingEngine', 'MarioObject',
-	'CircleObject', 'RectangleObject', 'PolygonObject'], function(TimeObject,
-	GameEngine, RenderingEngine, MarioObject, CircleObject, RectangleObject,
-	PolygonObject) {
+define(['TimeObject','GameEngine','RenderingEngine'], function(TimeObject,
+	GameEngine, RenderingEngine) {
 	'use strict';
 
 	function CoreEngine(canvas) {
@@ -10,7 +8,6 @@ define(['TimeObject','GameEngine','RenderingEngine', 'MarioObject',
 		this.generateGameObjects();
 		this.gameEngine = new GameEngine(this.gameObjects);
 		this.renderingEngine = new RenderingEngine(this.gameObjects, canvas);
-		this.renderingEngine.init();
 		this.timeObject = new TimeObject();
 		this.running = false;
 	}
@@ -35,21 +32,7 @@ define(['TimeObject','GameEngine','RenderingEngine', 'MarioObject',
 	}
 
 	CoreEngine.prototype.generateGameObjects = function () {
-		this.gameObjects.push(new MarioObject());
-        this.gameObjects.push(
-            new CircleObject(250, 250, 25, 0, Math.PI * 2, true, '#eceff1',
-            '../engine/gamecomponent/circle/elements/background.png', 20));
-        this.gameObjects.push(
-            new RectangleObject(200, 500, 100, 150, 0, '#eceff1',
-            '../engine/gamecomponent/rectangle/elements/background.png', 20));
-        this.gameObjects.push(
-            new RectangleObject(300, 200, 30, 30, -123*Math.PI/180, '#e6ee9c',
-            '../engine/gamecomponent/rectangle/elements/background.png'));
-        this.gameObjects.push(
-            new RectangleObject(500, 300, 200, 100, 70, '#f8bbd0',
-            '../engine/gamecomponent/rectangle/elements/background.png', 20));
-		this.gameObjects.push(
-            new PolygonObject([[10, 0], [100, 50], [50, 100], [0, 90]], 70, '#eceff1'));
+
 	}
 
 	return CoreEngine;

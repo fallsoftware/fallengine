@@ -16,21 +16,7 @@ requirejs.config({
         InputContext: 'inputcontext/inputcontext',
         Inputs: 'inputs/inputs',
         InputType: 'inputtype/inputtype',
-        Game: 'game/game',
-        MarioGraphicsComponent: 'gamecomponent/mario/mariographicscomponent',
-        MarioObject: 'gameobject/mario/marioobject',
-        CircleGraphicsComponent: 'gamecomponent/circle/circlegraphicscomponent',
-        CirclePhysicsComponent:'gamecomponent/circle/circlephysicscomponent',
-        CircleObject: 'gameobject/circle/circleobject',
-        RectangleGraphicsComponent:
-            'gamecomponent/rectangle/rectanglegraphicscomponent',
-        RectanglePhysicsComponent:
-            'gamecomponent/rectangle/rectanglephysicscomponent',
-        RectangleObject: 'gameobject/rectangle/rectangleobject',
-        PolygonGraphicsComponent:
-            'gamecomponent/polygon/polygongraphicscomponent',
-        PolygonPhysicsComponent:'gamecomponent/polygon/polygonphysicscomponent',
-        PolygonObject: 'gameobject/polygon/polygonobject'
+        Game: 'game/game'
     },
     shim: {
         'jQuery': {
