@@ -12,7 +12,6 @@ define(['jQuery', 'observer'],
             this.canvas = null;
         }
 
-        this.defaultColor = '#69f0ae';
         this.gameObjects = gameObjects;
     }
 
@@ -33,9 +32,6 @@ define(['jQuery', 'observer'],
     }
 
     RenderingEngine.prototype.render = function (scene) {
-        this.context.fillStyle = this.defaultColor;
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
         var length = this.gameObjects.length;
 
         for (var gameObject of this.gameObjects) {
