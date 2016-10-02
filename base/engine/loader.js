@@ -16,7 +16,31 @@ requirejs.config({
         InputContext: 'inputcontext/inputcontext',
         Inputs: 'inputs/inputs',
         InputType: 'inputtype/inputtype',
-        Game: 'game/game'
+        Game: 'game/game',
+        MarioGraphicsComponent: 'gamecomponent/mario/mariographicscomponent',
+        MarioObject: 'gameobject/mario/marioobject',
+        CircleGraphicsComponent: 'gamecomponent/circle/circlegraphicscomponent',
+        CirclePhysicsComponent:'gamecomponent/circle/circlephysicscomponent',
+        CircleObject: 'gameobject/circle/circleobject',
+        RectangleGraphicsComponent:
+            'gamecomponent/rectangle/rectanglegraphicscomponent',
+        RectanglePhysicsComponent:
+            'gamecomponent/rectangle/rectanglephysicscomponent',
+        RectangleObject: 'gameobject/rectangle/rectangleobject',
+        PolygonGraphicsComponent:
+            'gamecomponent/polygon/polygongraphicscomponent',
+        PolygonPhysicsComponent:'gamecomponent/polygon/polygonphysicscomponent',
+        PolygonObject: 'gameobject/polygon/polygonobject',
+        AABBPhysicsComponent: 'gamecomponent/polygon/aabbphysicscomponent',
+        OBBPhysicsComponent:'gamecomponent/polygon/obbphysicscomponent',
+        KDopPhysicsComponent:'gamecomponent/polygon/kdopphysicscomponent',
+        AABBObject: 'gameobject/polygon/aabbobject',
+        OBBObject:'gameobject/polygon/obbobject',
+        KDopObject: 'gameobject/polygon/kdopobject',
+        PointPhysicsComponent:'gamecomponent/point/pointphysicscomponent',
+        PointObject: 'gameobject/point/pointobject',
+        Point: 'utility/point',
+        Vector: 'utility/vector'
     },
     shim: {
         'jQuery': {

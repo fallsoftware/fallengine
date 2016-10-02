@@ -1,5 +1,7 @@
-define(['TimeObject','GameEngine','RenderingEngine'], function(TimeObject,
-	GameEngine, RenderingEngine) {
+define(['TimeObject','GameEngine','RenderingEngine', 'MarioObject',
+	'CircleObject', 'RectangleObject', 'PolygonObject', 'AABBObject', 'Point'], function(TimeObject,
+	GameEngine, RenderingEngine, MarioObject, CircleObject, RectangleObject,
+	PolygonObject, AABBObject, P) {
 	'use strict';
 
 	function CoreEngine(canvas) {
@@ -8,6 +10,7 @@ define(['TimeObject','GameEngine','RenderingEngine'], function(TimeObject,
 		this.generateGameObjects();
 		this.gameEngine = new GameEngine(this.gameObjects);
 		this.renderingEngine = new RenderingEngine(this.gameObjects, canvas);
+		this.renderingEngine.init();
 		this.timeObject = new TimeObject();
 		this.running = false;
 	}
@@ -32,7 +35,16 @@ define(['TimeObject','GameEngine','RenderingEngine'], function(TimeObject,
 	}
 
 	CoreEngine.prototype.generateGameObjects = function () {
-
+		this.gameObjects.push(new MarioObject());
+        this.gameObjects.push(
+            new CircleObject(250, 250, 25, 0, Math.PI * 2, true, '#eceff1',
+            '../engine/gamecomponent/circle/elements/background.png', 20));
+        /*this.gameObjects.push(
+            new RectangleObject(200, 500, 100, 150, '#eceff1'));*/
+		/*this.gameObjects.push(
+            new PolygonObject([[10, 0], [100, 50], [50, 100], [0, 90]], 70, '#eceff1'));*/
+		this.gameObjects.push(
+			new AABBObject(new P(10, 10), new P(100, 150), '#eceff1'));
 	}
 
 	return CoreEngine;
