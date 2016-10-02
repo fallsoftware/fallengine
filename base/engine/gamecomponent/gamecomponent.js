@@ -6,7 +6,6 @@ define(['jQuery', 'observer'], function ($, observer) {
     }
 
     GameComponent.prototype.onImageLoad = function () {
-        console.log('Loading image...');
     };
 
     GameComponent.prototype.update = function (context) {

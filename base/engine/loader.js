@@ -16,6 +16,7 @@ requirejs.config({
         InputContext: 'inputcontext/inputcontext',
         Inputs: 'inputs/inputs',
         InputType: 'inputtype/inputtype',
+<<<<<<< HEAD
         Game: 'game/game',
         MarioGraphicsComponent: 'gamecomponent/mario/mariographicscomponent',
         MarioObject: 'gameobject/mario/marioobject',
@@ -41,6 +42,9 @@ requirejs.config({
         PointObject: 'gameobject/point/pointobject',
         Point: 'utility/point',
         Vector: 'utility/vector'
+=======
+        Game: 'game/game'
+>>>>>>> 17f07f62bb6f83cdf034a641e8801c0860e9ea8c
     },
     shim: {
         'jQuery': {
