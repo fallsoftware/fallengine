@@ -2,13 +2,12 @@ define(['jQuery', 'observer', 'PhysicsComponent'], function ($, observer,
     PhysicsComponent) {
     'use strict';
 
-    function RectanglePhysicsComponent(gameObject, x, y, width, height, angle) {
+    function RectanglePhysicsComponent(gameObject, x, y, width, height) {
         PhysicsComponent.call(this, gameObject);
 
         this.x = x;
         this.y = y;
         this.width = width;
-        this.angle = angle;
 
         if (height !== null || height !== undefined) {
             this.height = height;

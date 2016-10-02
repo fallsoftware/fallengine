@@ -30,7 +30,17 @@ requirejs.config({
         PolygonGraphicsComponent:
             'gamecomponent/polygon/polygongraphicscomponent',
         PolygonPhysicsComponent:'gamecomponent/polygon/polygonphysicscomponent',
-        PolygonObject: 'gameobject/polygon/polygonobject'
+        PolygonObject: 'gameobject/polygon/polygonobject',
+        AABBPhysicsComponent: 'gamecomponent/polygon/aabbphysicscomponent',
+        OBBPhysicsComponent:'gamecomponent/polygon/obbphysicscomponent',
+        KDopPhysicsComponent:'gamecomponent/polygon/kdopphysicscomponent',
+        AABBObject: 'gameobject/polygon/aabbobject',
+        OBBObject:'gameobject/polygon/obbobject',
+        KDopObject: 'gameobject/polygon/kdopobject',
+        PointPhysicsComponent:'gamecomponent/point/pointphysicscomponent',
+        PointObject: 'gameobject/point/pointobject',
+        Point: 'utility/point',
+        Vector: 'utility/vector'
     },
     shim: {
         'jQuery': {
