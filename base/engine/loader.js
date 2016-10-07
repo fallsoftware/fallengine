@@ -40,7 +40,8 @@ requirejs.config({
         PointPhysicsComponent:'gamecomponent/point/pointphysicscomponent',
         PointObject: 'gameobject/point/pointobject',
         Point: 'utility/point',
-        Vector: 'utility/vector'
+        Vector: 'utility/vector',
+        MathUtils: 'utility/mathutils'
     },
     shim: {
         'jQuery': {

@@ -1,4 +1,5 @@
-define(['Point', 'Vector', 'KDopObject'], function (P, V, KDopObject) {
+define(['Point', 'Vector', 'KDopObject', 'MathUtils'], function (P, V,
+    KDopObject, M) {
     'use strict';
 
     function PhysicsEngine(gameObjects) {
@@ -43,6 +44,27 @@ define(['Point', 'Vector', 'KDopObject'], function (P, V, KDopObject) {
     };
 
     PhysicsEngine.prototype.CircleAABB = function (circle, AABB) {
+        var circleCenter = new P(circle.physicsComponents[0].x,
+            circle.physicsComponents[0].y);
+        var radius = circle.physicsComponents[0].radius;
+        var p1 = AABB.physicsComponents[0].p1;
+        var p2 = AABB.physicsComponents[0].p2;
+
+        if (circleCenter.x > Math.min(p1.x, p2.x) && circleCenter.x < Math.max(p1.x, p2.x) &&
+            circleCenter.y > Math.min(p1.y, p2.y) && circleCenter.y < Math.max(p1.y, p2.y)) {
+                return true;
+            }
+
+        var closestPoint = new P(M.clamp(circleCenter.x, Math.min(p1.x, p2.x), Math.max(p1.x, p2.x)),
+            M.clamp(circleCenter.y, Math.min(p1.y, p2.y), Math.max(p1.y, p2.y)));
+
+        var toClosest = (new V(circleCenter.x - closestPoint.x, circleCenter.y - closestPoint.y)).lengthSquare();
+
+        if (toClosest < radius*radius) {
+            return true;
+        }
+
+        return false;
 
     };
 
