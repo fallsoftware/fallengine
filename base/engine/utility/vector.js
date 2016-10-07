@@ -24,5 +24,9 @@ define([], function () {
         return new Vector(-this.y, this.x);
     };
 
+    Vector.prototype.dot = function (vector) {
+        return this.x * vector.x + this.y * vector.y;
+    };
+
     return Vector;
 });

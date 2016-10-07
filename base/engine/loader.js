@@ -41,6 +41,7 @@ requirejs.config({
         PointObject: 'gameobject/point/pointobject',
         Point: 'utility/point',
         Vector: 'utility/vector',
+        Edge: 'utility/edge',
         MathUtils: 'utility/mathutils'
     },
     shim: {

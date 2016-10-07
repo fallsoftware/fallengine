@@ -50,23 +50,68 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils'], function (P, V,
         var p1 = AABB.physicsComponents[0].p1;
         var p2 = AABB.physicsComponents[0].p2;
 
-        if (circleCenter.x > Math.min(p1.x, p2.x) && circleCenter.x < Math.max(p1.x, p2.x) &&
-            circleCenter.y > Math.min(p1.y, p2.y) && circleCenter.y < Math.max(p1.y, p2.y)) {
+        if (circleCenter.x > Math.min(p1.x, p2.x)
+            && circleCenter.x < Math.max(p1.x, p2.x)
+            && circleCenter.y > Math.min(p1.y, p2.y)
+            && circleCenter.y < Math.max(p1.y, p2.y)) {
                 return true;
             }
 
-        var closestPoint = new P(M.clamp(circleCenter.x, Math.min(p1.x, p2.x), Math.max(p1.x, p2.x)),
-            M.clamp(circleCenter.y, Math.min(p1.y, p2.y), Math.max(p1.y, p2.y)));
+        var closestPoint = new P(M.clamp(circleCenter.x,
+            Math.min(p1.x, p2.x), Math.max(p1.x, p2.x)),
+            M.clamp(circleCenter.y,
+            Math.min(p1.y, p2.y), Math.max(p1.y, p2.y)));
 
-        var toClosest = (new V(circleCenter.x - closestPoint.x, circleCenter.y - closestPoint.y)).lengthSquare();
+        var toClosest = (new V(circleCenter.x - closestPoint.x,
+            circleCenter.y - closestPoint.y)).lengthSquare();
 
         if (toClosest < radius*radius) {
             return true;
         }
 
-        return false;
-
+        return false;s
     };
+
+    PhysicsEngine.prototype.CircleEdge = function (circle, edge) {
+        var circleCenter = new P(circle.physicsComponents[0].x,
+            circle.physicsComponents[0].y);
+        var radius = circle.physicsComponents[0].radius;
+        var p1 = edge.physicsComponents[0].p1;
+        var p2 = edge.physicsComponents[0].p2;
+
+        var distance1 = new V(circleCenter.x - p1.x, circleCenter.y - p1.y);
+        var distance2 = new V(circleCenter.x - p2.x, circleCenter.y - p2.y);
+
+        if (distance1.lengthSquare() < radius*radius
+            || distance2.lengthSquare() < radius*radius) {
+            return true;
+        }
+
+        var edgeNormal = edge.normal();
+        var edgeNormalize = edge.normalize();
+        var p1DotNormal = edgeNormal.dot(p1);
+        var p1DotNormalize = edgeNormalize.dot(p1);
+        var p2DotNormalize = edgeNormalize.dot(p2);
+        var circleCenterNormal = edgeNormal.dot(circleCenter);
+        var circleCenterNormalize = edgeNormalize.dot(circleCenter);
+
+        if (Math.abs(circleCenterNormal - p1DotNormal) > radius) {
+            return false;
+        }
+
+        if (circleCenterNormalize - Math.min(p1DotNormalize, p2DotNormalize)
+            > radius
+            && circleCenterNormalize - Math.max(p1DotNormalize, p2DotNormalize)
+            < radius) {
+            return true;
+        }
+
+        return false;
+    }
+
+    PhysicsEngine.prototype.EdgeCircle = function (edge, circle) {
+        this.CircleEdge(circle, edge);
+    }
 
     PhysicsEngine.prototype.CircleOBB = function (circle, OBB) {
 
