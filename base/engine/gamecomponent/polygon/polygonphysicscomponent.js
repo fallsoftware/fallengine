@@ -1,5 +1,4 @@
-define(['jQuery', 'observer', 'PhysicsComponent'], function ($, observer,
-    PhysicsComponent) {
+define(['PhysicsComponent'], function (PhysicsComponent) {
     'use strict';
 
     function PolygonPhysicsComponent(gameObject, points) {

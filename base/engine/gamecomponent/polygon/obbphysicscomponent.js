@@ -1,17 +1,18 @@
-define(['jQuery', 'observer', 'PhysicsComponent', 'PointObject'], function ($, observer,
-    PhysicsComponent, P) {
+define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
     'use strict';
 
     function OBBPhysicsComponent(gameObject, point, vector, width, length) {
         PhysicsComponent.call(this, gameObject);
 
-        this.graphicsComponent = gameObject.graphicsComponents[0]; // not generic
+        this.point = point;
+        this.vector = vector;
+        this.width = width;
+        this.length = length;
+
+        // not generic
+        this.graphicsComponent = gameObject.graphicsComponents[0];
         this.computePoints();
     }
-
-    OBBPhysicsComponent.prototype.computePoints = function () {
-        this.graphicsComponent.points = [];
-    };
 
     OBBPhysicsComponent.prototype =
         Object.create(PhysicsComponent.prototype);
@@ -19,6 +20,23 @@ define(['jQuery', 'observer', 'PhysicsComponent', 'PointObject'], function ($, o
 
     OBBPhysicsComponent.prototype.update = function (context) {
 
+    };
+
+    OBBPhysicsComponent.prototype.computePoints = function () {
+        var points = [];
+        var vectorN = this.vector.normalize();
+        var vectorP = vectorN.normal();
+
+        points[0] = new P(this.point.x + vectorN.x*this.width/2+vectorP.x*this.length/2,
+            this.point.y + vectorP.y*this.length/2+ vectorN.y*this.width/2);
+        points[1] = new P(this.point.x + vectorN.x*this.width/2-vectorP.x*this.length/2,
+            this.point.y - vectorP.y*this.length/2+ vectorN.y*this.width/2);
+        points[2] = new P(this.point.x - vectorN.x*this.width/2-vectorP.x*this.length/2,
+            this.point.y - vectorP.y*this.length/2- vectorN.y*this.width/2);
+        points[3] = new P(this.point.x - vectorN.x*this.width/2+vectorP.x*this.length/2,
+            this.point.y + vectorP.y*this.length/2- vectorN.y*this.width/2);
+
+        this.graphicsComponent.points = points;
     };
 
     return OBBPhysicsComponent;

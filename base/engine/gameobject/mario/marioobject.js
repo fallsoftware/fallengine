@@ -1,5 +1,5 @@
-define(['jQuery', 'observer', 'GameObject', 'MarioGraphicsComponent'],
-function ($, observer, GameObject, MarioGraphicsComponent) {
+define(['GameObject', 'MarioGraphicsComponent'], function (GameObject,
+    MarioGraphicsComponent) {
     'use strict';
 
     function MarioObject() {

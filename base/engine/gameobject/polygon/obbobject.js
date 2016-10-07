@@ -1,19 +1,20 @@
-define(['jQuery', 'observer', 'GameObject', 'PolygonGraphicsComponent',
-    'OBBPhysicsComponent'], function ($, observer, GameObject,
+define(['GameObject', 'PolygonGraphicsComponent',
+    'OBBPhysicsComponent'], function (GameObject,
     PolygonGraphicsComponent, OBBPhysicsComponent) {
     'use strict';
 
     function OBBObject(point, vector, width, length, fillStyle) {
         GameObject.call(this);
+
+        this.addGraphicsComponent(new PolygonGraphicsComponent(this,
+            fillStyle));
+        
         this.addPhysicsComponent(new OBBPhysicsComponent(this, point, vector,
             width, length));
 
         if (fillStyle === null || fillStyle === undefined) {
             fillStyle = '#ECEFF1';
         }
-
-        this.addGraphicsComponent(new PolygonGraphicsComponent(this,
-            fillStyle));
     }
 
     OBBObject.prototype = Object.create(GameObject.prototype);

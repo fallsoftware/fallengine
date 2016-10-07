@@ -1,19 +1,17 @@
-define(['jQuery', 'observer', 'GameObject', 'PolygonGraphicsComponent',
-    'KDopPhysicsComponent'], function ($, observer, GameObject,
-    PolygonGraphicsComponent, KDopPhysicsComponent) {
+define(['GameObject', 'PolygonGraphicsComponent', 'KDopPhysicsComponent'],
+    function (GameObject, PolygonGraphicsComponent, KDopPhysicsComponent) {
     'use strict';
 
-    function KDopObject(points, fillStyle) {
+    function KDopObject(polygon, axis, fillStyle) {
         GameObject.call(this);
-        this.addPhysicsComponent(new KDopPhysicsComponent(this, points,
-            angle));
+
+        this.addGraphicsComponent(new PolygonGraphicsComponent(this,
+            fillStyle));
+        this.addPhysicsComponent(new KDopPhysicsComponent(this, polygon, axis));
 
         if (fillStyle === null || fillStyle === undefined) {
             fillStyle = '#ECEFF1';
         }
-
-        this.addGraphicsComponent(new PolygonGraphicsComponent(this,
-            fillStyle));
     }
 
     KDopObject.prototype = Object.create(GameObject.prototype);

@@ -1,6 +1,5 @@
-define(['jQuery', 'observer', 'GameObject', 'PolygonGraphicsComponent',
-    'AABBPhysicsComponent'], function ($, observer, GameObject,
-    PolygonGraphicsComponent, AABBPhysicsComponent) {
+define(['GameObject', 'PolygonGraphicsComponent', 'AABBPhysicsComponent'],
+    function (GameObject, PolygonGraphicsComponent, AABBPhysicsComponent) {
     'use strict';
 
     function AABBObject(p1, p2, fillStyle) {

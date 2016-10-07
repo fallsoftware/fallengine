@@ -6,15 +6,19 @@ define([], function () {
         this.y = y;
     }
 
-    this.Vector.prototype.length = function () {
+    Vector.prototype.length = function () {
         return Math.sqrt(this.x*this.x + this.y*this.y);
-    }
+    };
 
-    this.Vector.prototype.normalize = function () {
-        var length = this.lenth();
+    Vector.prototype.normalize = function () {
+        var length = this.length();
 
-        return new Vector(x/length, y/length);
-    }
+        return new Vector(this.x/length, this.y/length);
+    };
+    
+    Vector.prototype.normal = function () {
+        return new Vector(-this.y, this.x);
+    };
 
     return Vector;
 });

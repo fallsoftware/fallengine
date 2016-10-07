@@ -1,5 +1,4 @@
-define(['jQuery', 'observer', 'PhysicsComponent', 'Point'], function ($,
-    observer, PhysicsComponent, P) {
+define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
     'use strict';
 
     function AABBPhysicsComponent(gameObject, p1, p2) {

@@ -1,5 +1,5 @@
-define(['jQuery', 'observer', 'Inputs','PhysicsEngine'], function ($, observer,
-  Inputs, PhysicsEngine) {
+define(['jQuery', 'Inputs','PhysicsEngine'], function ($, Inputs,
+    PhysicsEngine) {
     'use strict';
 
     function GameEngine(gameObjects) {

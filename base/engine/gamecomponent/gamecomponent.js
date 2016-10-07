@@ -1,4 +1,4 @@
-define(['jQuery', 'observer'], function ($, observer) {
+define([], function () {
     'use strict';
 
     function GameComponent(gameObject) {

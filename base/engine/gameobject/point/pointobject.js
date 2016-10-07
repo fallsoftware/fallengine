@@ -1,5 +1,5 @@
-define(['jQuery', 'observer', 'GameObject', 'PointPhysicsComponent'],
-function ($, observer, GameObject, PointPhysicsComponent) {
+define(['GameObject', 'PointPhysicsComponent'], function (GameObject,
+    PointPhysicsComponent) {
     'use strict';
 
     function Point(x, y) {

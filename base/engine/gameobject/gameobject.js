@@ -35,7 +35,7 @@ define(['jQuery', 'observer'], function ($, observer) {
         var index = this.physicsCComponents.indexOf(observer);
 
         if (index >= 0) {
-            return this.physicsCComponents.splice(index, 1);
+            return this.physicsComponents.splice(index, 1);
         }
 
         throw 'Unknown component!';

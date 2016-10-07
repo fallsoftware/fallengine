@@ -1,6 +1,5 @@
-define(['jQuery', 'observer', 'GameObject', 'CircleGraphicsComponent',
-    'CirclePhysicsComponent'], function ($, observer, GameObject,
-    CircleGraphicsComponent, CirclePhysicsComponent) {
+define(['GameObject', 'CircleGraphicsComponent', 'CirclePhysicsComponent'],
+    function (GameObject, CircleGraphicsComponent, CirclePhysicsComponent) {
     'use strict';
 
     function CircleObject(x, y, radius, startingAngle, endingAngle,
