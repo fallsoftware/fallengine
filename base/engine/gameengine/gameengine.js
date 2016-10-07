@@ -22,7 +22,6 @@ define(['jQuery', 'Inputs','PhysicsEngine'], function ($, Inputs,
         var gameEngine = this;
 
         $(window).keypress(function (ev) {
-            console.log("Keypress!" + ev.keyCode);
             gameEngine.input = ev.keyCode;
         });
     };
@@ -30,12 +29,8 @@ define(['jQuery', 'Inputs','PhysicsEngine'], function ($, Inputs,
     GameEngine.prototype.update = function (step) {
         this.getInput();
 
-        if (this.input === -1) {
-            return;
-        }
-
         if (this.currentScene.context === "MAIN_MENU") {
-            window.alert('Button pressed!');
+            //window.alert('Button pressed!');
         }
 
         this.physicsEngine.update();
