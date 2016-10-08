@@ -157,15 +157,15 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         var p12 = AABB2.physicsComponents['data'].p1;
         var p22 = AABB2.physicsComponents['data'].p2;
 
-        var minX1 = Math.min(p11.x, p12.x);
-        var maxX1 = Math.max(p11.x, p12.x);
-        var minY1 = Math.min(p11.y, p12.y);
-        var maxY1 = Math.max(p11.y, p12.y);
+        var minX1 = p11.x;
+        var maxX1 = p12.x;
+        var minY1 = p11.y;
+        var maxY1 = p12.y;
 
-        var minX2 = Math.min(p21.x, p22.x);
-        var maxX2 = Math.max(p21.x, p22.x);
-        var minY2 = Math.min(p21.y, p22.y);
-        var maxY2 = Math.max(p21.y, p22.y);
+        var minX2 = p21.x;
+        var maxX2 = p22.x;
+        var minY2 = p21.y;
+        var maxY2 = p22.y;
 
         if (maxX1 < minX2 || minX1 > maxX2) {
             return false;
@@ -471,31 +471,56 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.createCollisionsHashmap = function () {
         this.computeCollisions = [];
-        this.computeCollisions['CircleObjectCircleObject'] = this.CircleCircle.bind(this);
-        this.computeCollisions['CircleObjectAABBObject'] = this.CircleAABB.bind(this);
-        this.computeCollisions['CircleObjectOBBObject'] = this.CircleOBB.bind(this);
-        this.computeCollisions['CircleObjectKDopObject'] = this.CircleKDop.bind(this);
-        this.computeCollisions['CircleObjectPointObject'] = this.CirclePoint.bind(this);
-        this.computeCollisions['AABBObjectCircleObject'] = this.AABBCircle.bind(this);
-        this.computeCollisions['AABBObjectAABBObject'] = this.AABBAABB.bind(this);
-        this.computeCollisions['AABBObjectOBBObject'] = this.AABBOBB.bind(this);
-        this.computeCollisions['AABBObjectKDopObject'] = this.AABBKDop.bind(this);
-        this.computeCollisions['AABBObjectPointObject'] = this.AABBPoint.bind(this);
-        this.computeCollisions['OBBObjectCircleObject'] = this.OBBCircle.bind(this);
-        this.computeCollisions['OBBObjectAABBObject'] = this.OBBAABB.bind(this);
-        this.computeCollisions['OBBObjectOBBObject'] = this.OBBOBB.bind(this);
-        this.computeCollisions['OBBObjectKDopObject'] = this.OBBKDop.bind(this);
-        this.computeCollisions['OBBObjectPointObject'] = this.OBBPoint.bind(this);
-        this.computeCollisions['KDopObjectCircleObject'] = this.KDopCircle.bind(this);
-        this.computeCollisions['KDopObjectAABBObject'] = this.KDopAABB.bind(this);
-        this.computeCollisions['KDopObjectOBBObject'] = this.KDopOBB.bind(this);
-        this.computeCollisions['KDopObjectKDopObject'] = this.KDopKDop.bind(this);
-        this.computeCollisions['KDopObjectPointObject'] = this.KDopPoint.bind(this);
-        this.computeCollisions['PointObjectCircleObject'] = this.PointCircle.bind(this);
-        this.computeCollisions['PointObjectAABBObject'] = this.PointAABB.bind(this);
-        this.computeCollisions['PointObjectOBBObject'] = this.PointOBB.bind(this);
-        this.computeCollisions['PointObjectKDopObject'] = this.PointKDop.bind(this);
-        this.computeCollisions['PointObjectPointObject'] = this.PointPoint.bind(this);
+        this.computeCollisions['CircleObjectCircleObject']
+            = this.CircleCircle.bind(this);
+        this.computeCollisions['CircleObjectAABBObject']
+            = this.CircleAABB.bind(this);
+        this.computeCollisions['CircleObjectOBBObject']
+            = this.CircleOBB.bind(this);
+        this.computeCollisions['CircleObjectKDopObject']
+            = this.CircleKDop.bind(this);
+        this.computeCollisions['CircleObjectPointObject']
+            = this.CirclePoint.bind(this);
+        this.computeCollisions['AABBObjectCircleObject']
+            = this.AABBCircle.bind(this);
+        this.computeCollisions['AABBObjectAABBObject']
+            = this.AABBAABB.bind(this);
+        this.computeCollisions['AABBObjectOBBObject']
+            = this.AABBOBB.bind(this);
+        this.computeCollisions['AABBObjectKDopObject']
+            = this.AABBKDop.bind(this);
+        this.computeCollisions['AABBObjectPointObject']
+            = this.AABBPoint.bind(this);
+        this.computeCollisions['OBBObjectCircleObject']
+            = this.OBBCircle.bind(this);
+        this.computeCollisions['OBBObjectAABBObject']
+            = this.OBBAABB.bind(this);
+        this.computeCollisions['OBBObjectOBBObject']
+            = this.OBBOBB.bind(this);
+        this.computeCollisions['OBBObjectKDopObject']
+            = this.OBBKDop.bind(this);
+        this.computeCollisions['OBBObjectPointObject']
+            = this.OBBPoint.bind(this);
+        this.computeCollisions['KDopObjectCircleObject']
+            = this.KDopCircle.bind(this);
+        this.computeCollisions['KDopObjectAABBObject']
+            = this.KDopAABB.bind(this);
+        this.computeCollisions['KDopObjectOBBObject']
+            = this.KDopOBB.bind(this);
+        this.computeCollisions['KDopObjectKDopObject']
+            = this.KDopKDop.bind(this);
+        this.computeCollisions['KDopObjectPointObject']
+            = this.KDopPoint.bind(this);
+        this.computeCollisions['PointObjectCircleObject']
+            = this.PointCircle.bind(this);
+        this.computeCollisions['PointObjectAABBObject']
+            = this.PointAABB.bind(this);
+        this.computeCollisions['PointObjectOBBObject']
+            = this.PointOBB.bind(this);
+        this.computeCollisions['PointObjectKDopObject']
+            = this.PointKDop.bind(this);
+        this.computeCollisions['PointObjectPointObject']
+            = this.PointPoint.bind(this);
         this.computeCollisions['CircleObjectEdge'] = this.CircleEdge.bind(this);
         this.computeCollisions['EdgeCircleObject'] = this.EdgeCircle.bind(this);
     };

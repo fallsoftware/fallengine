@@ -8,7 +8,7 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
         this.backgroundSrc = backgroundSrc;
         this.paddingX = paddingX;
         this.paddingY = paddingY;
-        this.circleData = this.gameObject.physicsComponents['data']; // not generic
+        this.circleData = this.gameObject.physicsComponents['data'];
     }
 
     CircleGraphicsComponent.prototype
@@ -17,7 +17,7 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
 
     CircleGraphicsComponent.prototype.draw = function (context) {
         context.beginPath();
-        context.arc(this.circleData.x, this.circleData.y,
+        context.arc(this.circleData.center.x, this.circleData.center.y,
             this.circleData.radius, this.circleData.startingAngle,
             this.circleData.endingAngle, this.circleData.counterClockwise);
         context.closePath();
@@ -35,8 +35,8 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
             var ratio = this.getRatio(background);
 
             context.drawImage(background,
-                this.circleData.x-this.circleData.radius+this.paddingX/2,
-                this.circleData.y-this.circleData.radius+this.paddingY/2,
+                this.circleData.center.x-this.circleData.radius+this.paddingX/2,
+                this.circleData.center.y-this.circleData.radius+this.paddingY/2,
                 background.width/ratio-this.paddingX,
                 background.height/ratio-this.paddingY);
             context.restore();

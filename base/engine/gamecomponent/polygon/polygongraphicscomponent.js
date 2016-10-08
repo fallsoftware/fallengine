@@ -5,8 +5,6 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
         GraphicsComponent.call(this, gameObject);
         this.fillStyle = fillStyle;
         this.points = [];
-        // not generic:
-        //this.polygonData = this.gameObject.physicsComponents['data'];
     }
 
     PolygonGraphicsComponent.prototype =
@@ -29,19 +27,6 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
         this.drawPolygon(context);
         context.closePath();
         context.fill();
-    }
-
-    PolygonGraphicsComponent.prototype.getRatio = function (background) {
-        var maxRectangleLength =
-            Math.min(this.rectangleData.width, this.rectangleData.height);
-        var maxImageLength = Math.max(background.width, background.height);
-        var ratio = 1;
-
-        if (maxImageLength > maxRectangleLength) {
-            ratio = maxRectangleLength / maxImageLength;
-        }
-
-        return ratio;
     }
 
     PolygonGraphicsComponent.prototype.update = function (context) {

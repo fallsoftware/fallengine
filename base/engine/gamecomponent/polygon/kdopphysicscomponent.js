@@ -9,7 +9,6 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
 
     	this.buildKDop(polygon);
 
-        // not generic
         this.graphicsComponent = gameObject.graphicsComponents['rendering'];
         this.computePoints();
     }
@@ -47,31 +46,31 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
                     k2 = this.max[i % (this.k/2)];
                 }
 
-                b1=currentAxis.x;
-                b2=currentAxis.y;
+                b1 = currentAxis.x;
+                b2 = currentAxis.y;
             }
 
             if (b1 == 0) {
                 c2 = k2 / b2;
-                c1 = (k1 - (c2/a2))/a1;
+                c1 = (k1 - (c2/a2)) / a1;
             } else if (b2 == 0){
-                c1=k2/b1;
-                c2=(k1-(c1/a1))/a2;
+                c1 = k2 / b1;
+                c2 = (k1 - (c1/a1)) / a2;
             } else if (a1 == 0){
-                c2=k1/a2;
-                c1=(k2-(c2/b2))/b1;
+                c2 = k1 / a2;
+                c1 = (k2 - (c2/b2)) / b1;
             } else if (a2 == 0){
-                c1=k1/a1;
-                c2=(k2-(c1/b1))/b2;
+                c1 = k1 / a1;
+                c2 = (k2 - (c1/b1)) / b2;
             } else {
-                c1=(k1*b2-k2*a2)/(a1*b2-b1*a2);
-                c2=(k1-(a2*c2))/a1;
+                c1 = (k1*b2 - k2*a2) / (a1*b2 - b1*a2);
+                c2 = (k1 - (a2*c2)) / a1;
             }
 
             points.push(new P(c1, c2));
             a1 = b1;
             a2 = b2;
-            k1=k2;
+            k1 = k2;
         }
 
         this.graphicsComponent.points = points;
@@ -88,7 +87,7 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
 
     	for (var point of points) {
     		for (var i = 0; i < this.k/2; i++) {
-    			var value = this.axis[i].x * point.x + this.axis[i].y * point.y
+    			var value = this.axis[i].x * point.x + this.axis[i].y * point.y;
     			if (value < this.min[i]) {
     				this.min[i] = value;
     			}
