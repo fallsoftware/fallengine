@@ -3,10 +3,10 @@ define(['GameObject', 'CircleGraphicsComponent', 'CirclePhysicsComponent',
     CirclePhysicsComponent, MovementComponent) {
     'use strict';
 
-    function CircleObject(x, y, radius, startingAngle, endingAngle,
+    function CircleObject(center, radius, startingAngle, endingAngle,
         counterClockwise, speed, fillStyle, backgroundSrc, paddingX, paddingY) {
         GameObject.call(this);
-        this.addPhysicsComponent(new CirclePhysicsComponent(this, x, y, radius,
+        this.addPhysicsComponent(new CirclePhysicsComponent(this, center, radius,
             startingAngle, endingAngle, counterClockwise));
         this.addPhysicsComponent(new MovementComponent(this, speed));
 

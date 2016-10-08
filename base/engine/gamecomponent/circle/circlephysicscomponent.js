@@ -1,12 +1,11 @@
 define(['PhysicsComponent'], function (PhysicsComponent) {
     'use strict';
 
-    function CirclePhysicsComponent(gameObject, x, y, radius, startingAngle,
+    function CirclePhysicsComponent(gameObject, center, radius, startingAngle,
         endingAngle, counterClockwise) {
         PhysicsComponent.call(this, gameObject);
 
-        this.x = x;
-        this.y = y;
+        this.center = center;
         this.radius = radius;
 
         if (startingAngle !== null || startingAngle !== undefined) {

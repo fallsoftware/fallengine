@@ -37,15 +37,16 @@ define(['TimeObject','GameEngine','RenderingEngine', 'CircleObject',
 
 	CoreEngine.prototype.generateGameObjects = function () {
         this.gameObjects.push(
-            new CircleObject(250, 250, 25, 0, Math.PI * 2, true, new V(10, 0),
-			'#eceff1',
+            new CircleObject(new P(250, 250), 25, 0, Math.PI * 2, true,
+			new V(10, 0), '#eceff1',
             '../engine/gamecomponent/circle/elements/background.png', 19));
 		this.gameObjects.push(
-            new CircleObject(260, 260, 25, 0, Math.PI * 2, true, new V(10, 0),
-			'#eceff1',
+            new CircleObject(new P(260, 260), 25, 0, Math.PI * 2, true,
+			new V(10, 0), '#eceff1',
             '../engine/gamecomponent/circle/elements/background.png', 19));
 		this.gameObjects.push(
-			new AABBObject(new P(10, 10), new P(100, 150), new V(4, 1), '#eceff1'));
+			new AABBObject(new P(10, 10), new P(100, 150), new V(4, 1),
+			'#eceff1'));
 		this.gameObjects.push(
 			new OBBObject(new P(200, 200), new V(4, 1), 200, 100, new V(4, 1),
 				'#eceff1'));

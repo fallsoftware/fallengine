@@ -63,8 +63,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.CircleAABB = function (circle, AABB) {
-        var circleCenter = new P(circle.physicsComponents[0].x,
-            circle.physicsComponents[0].y);
+        var circleCenter = circle.physicsComponents[0].center;
         var radius = circle.physicsComponents[0].radius;
         var p1 = AABB.physicsComponents[0].p1;
         var p2 = AABB.physicsComponents[0].p2;
@@ -362,8 +361,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.CircleEdge = function (circle, edge) {
-        var circleCenter = new P(circle.physicsComponents[0].x,
-            circle.physicsComponents[0].y);
+        var circleCenter = circle.physicsComponents[0].center;
         var radius = circle.physicsComponents[0].radius;
         var p1 = edge.p1;
         var p2 = edge.p2;
