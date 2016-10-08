@@ -349,11 +349,13 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.PointPoint = function (point1, point2) {
-        if (point1.physicsComponents['data'].x != point2.physicsComponents['data'].x) {
+        if (point1.physicsComponents['data'].x
+            != point2.physicsComponents['data'].x) {
             return false;
         }
 
-        if (point1.physicsComponents['data'].y != point2.physicsComponents['data'].y) {
+        if (point1.physicsComponents['data'].y
+            != point2.physicsComponents['data'].y) {
             return false;
         }
 
