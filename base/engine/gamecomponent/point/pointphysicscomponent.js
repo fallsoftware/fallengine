@@ -1,10 +1,9 @@
 define(['PhysicsComponent'], function (PhysicsComponent) {
     'use strict';
 
-    function PointPhysicsComponent(gameObject, x, y) {
+    function PointPhysicsComponent(gameObject, point) {
         PhysicsComponent.call(this, gameObject);
-        this.x = x;
-        this.y = y;
+        this.point = point;
     }
 
     PointPhysicsComponent.prototype =

@@ -3,13 +3,13 @@ define(['GameObject', 'PolygonGraphicsComponent', 'KDopPhysicsComponent',
     KDopPhysicsComponent, MovementComponent) {
     'use strict';
 
-    function KDopObject(polygon, axis, speed, fillStyle) {
+    function KDopObject(polygon, axis, speed, fillStyle, min, max) {
         GameObject.call(this);
 
         this.addGraphicsComponent(new PolygonGraphicsComponent(this,
             fillStyle), 'rendering');
-        this.addPhysicsComponent(new KDopPhysicsComponent(this, polygon, axis),
-            'data');
+        this.addPhysicsComponent(new KDopPhysicsComponent(this, polygon, axis,
+            min, max), 'data');
         this.addPhysicsComponent(new MovementComponent(this, speed),
             'movement');
 

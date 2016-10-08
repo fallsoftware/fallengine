@@ -92,8 +92,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.CircleOBB = function (circle, OBB) {
         var points = OBB.graphicsComponents['rendering'].points;
-        var center = new PointObject(circle.physicsComponents['data'].x,
-            circle.physicsComponents['data'].y);
+        var center = new PointObject(new P(circle.physicsComponents['data'].x,
+            circle.physicsComponents['data'].y));
 
         if (this.OBBPoint(OBB, center)) {
             return true;
@@ -113,8 +113,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.CircleKDop = function (circle, KDop) {
         var points = KDop.graphicsComponents['rendering'].points;
-        var center = new PointObject(circle.physicsComponents['data'].x,
-            circle.physicsComponents['data'].y);
+        var center = new PointObject(new P(circle.physicsComponents['data'].x,
+            circle.physicsComponents['data'].y));
 
         if (this.KDopPoint(KDop, center)) {
             return true;

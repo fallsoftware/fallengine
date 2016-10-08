@@ -37,7 +37,8 @@ requirejs.config({
         Vector: 'utility/vector',
         Edge: 'utility/edge',
         MathUtils: 'utility/mathutils',
-        MovementComponent: 'gamecomponent/movementcomponent'
+        MovementComponent: 'gamecomponent/movementcomponent',
+        ObjectGenerator: 'objectgenerator/objectgenerator'
     },
     shim: {
         'jQuery': {

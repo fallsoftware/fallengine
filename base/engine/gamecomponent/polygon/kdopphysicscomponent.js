@@ -1,13 +1,18 @@
 define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
     'use strict';
 
-    function KDopPhysicsComponent(gameObject, polygon, axis) {
+    function KDopPhysicsComponent(gameObject, polygon, axis, min, max) {
         PhysicsComponent.call(this, gameObject);
 
     	this.k = axis.length * 2;
     	this.axis = axis;
 
-    	this.buildKDop(polygon);
+        if (polygon !== undefined && polygon !== null) {
+            this.buildKDop(polygon);
+        } else {
+            this.min = min;
+            this.max = max;
+        }
 
         this.graphicsComponent = gameObject.graphicsComponents['rendering'];
         this.computePoints();

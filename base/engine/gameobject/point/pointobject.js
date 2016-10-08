@@ -1,14 +1,17 @@
-define(['GameObject', 'PointPhysicsComponent', 'MovementComponent'],
-    function (GameObject, PointPhysicsComponent, MovementComponent) {
+define(['GameObject', 'PointPhysicsComponent', 'MovementComponent', 'Vector'],
+    function (GameObject, PointPhysicsComponent, MovementComponent, V) {
     'use strict';
 
-    function PointObject(x, y, speed) {
+    function PointObject(point, speed=new V(0, 0)) {
         GameObject.call(this);
-        /*this.addGraphicsComponent(new PointGraphicsComponent(this), 
+        /*this.addGraphicsComponent(new PointGraphicsComponent(this),
             'rendering');*/
-        this.addPhysicsComponent(new PointPhysicsComponent(this, x, y), 'data');
+        this.addPhysicsComponent(new PointPhysicsComponent(this, point),
+            'data');
         this.addPhysicsComponent(new MovementComponent(this, speed),
             'movement');
+        this.x = point.x;
+        this.y = point.y;
     }
 
     PointObject.prototype = Object.create(GameObject.prototype);

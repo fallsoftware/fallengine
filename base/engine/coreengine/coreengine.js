@@ -1,24 +1,23 @@
-define(['TimeObject','GameEngine','RenderingEngine', 'CircleObject',
-	'AABBObject', 'OBBObject', 'KDopObject', 'Point', 'Vector'],
-	function(TimeObject, GameEngine, RenderingEngine, CircleObject, AABBObject,
-		OBBObject, KDopObject, P, V) {
+define(['TimeObject','GameEngine','RenderingEngine', 'MathUtils',
+	'ObjectGenerator'], function(TimeObject, GameEngine, RenderingEngine, M,
+	ObjectGenerator) {
 	'use strict';
 
 	function CoreEngine(canvas) {
 		this.fps = 60;
 		this.gameObjects = [];
-		this.generateGameObjects();
 		this.gameEngine = new GameEngine(this.gameObjects);
 		this.renderingEngine = new RenderingEngine(this.gameObjects, canvas);
 		this.renderingEngine.init();
 		this.timeObject = new TimeObject();
 		this.running = false;
+		this.generateGameObjects();
 	}
 
 	CoreEngine.prototype.start = function () {
 		this.running = true;
 		this.loop();
-	}
+	};
 
 	CoreEngine.prototype.loop = function () {
 		if (this.running) {
@@ -28,34 +27,20 @@ define(['TimeObject','GameEngine','RenderingEngine', 'CircleObject',
 			var delay = (1000/this.fps) - this.timeObject.getDelta();
 			window.setTimeout(this.loop.bind(this), delay);
 		}
-	}
+	};
 
 	CoreEngine.prototype.stop = function () {
 		this.running = false;
-	}
+	};
 
 	CoreEngine.prototype.generateGameObjects = function () {
-        this.gameObjects.push(
-            new CircleObject(new P(250, 250), 25, 0, Math.PI * 2, true,
-			new V(10, 0), '#3d5afe',
-            '../engine/gamecomponent/circle/elements/background.png', 19));
-		this.gameObjects.push(
-            new CircleObject(new P(260, 260), 25, 0, Math.PI * 2, true,
-			new V(10, 0), '#ff5722',
-            '../engine/gamecomponent/circle/elements/background.png', 19));
-		this.gameObjects.push(
-			new AABBObject(new P(10, 10), new P(100, 150), new V(4, 1),
-			'#ff9800'));
-		this.gameObjects.push(
-			new OBBObject(new P(200, 200), new V(4, 1), 200, 100, new V(4, 1),
-				'#ff1744'));
-		var polygon = [new P(300, 100), new P(500, 400), new P(100, 500)];
-		this.gameObjects.push(
-			new KDopObject(polygon, [new V(1, -1),
-				new V(1, 0),
-				new V(1, 1),
-				new V(0, 1)], new V(4, 1), '#ba68C8'));
-	}
+		var objectGenerator = new ObjectGenerator(M.randomInt(3, 10),
+		this.gameObjects, this.gameEngine.physicsEngine,
+			this.renderingEngine.canvas.width,
+			this.renderingEngine.canvas.height);
+
+		objectGenerator.generate();
+	};
 
 	return CoreEngine;
 });
