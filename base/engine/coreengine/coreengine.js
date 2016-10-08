@@ -37,24 +37,24 @@ define(['TimeObject','GameEngine','RenderingEngine', 'CircleObject',
 	CoreEngine.prototype.generateGameObjects = function () {
         this.gameObjects.push(
             new CircleObject(new P(250, 250), 25, 0, Math.PI * 2, true,
-			new V(10, 0), '#eceff1',
+			new V(10, 0), '#3d5afe',
             '../engine/gamecomponent/circle/elements/background.png', 19));
 		this.gameObjects.push(
             new CircleObject(new P(260, 260), 25, 0, Math.PI * 2, true,
-			new V(10, 0), '#eceff1',
+			new V(10, 0), '#ff5722',
             '../engine/gamecomponent/circle/elements/background.png', 19));
 		this.gameObjects.push(
 			new AABBObject(new P(10, 10), new P(100, 150), new V(4, 1),
-			'#eceff1'));
+			'#ff9800'));
 		this.gameObjects.push(
 			new OBBObject(new P(200, 200), new V(4, 1), 200, 100, new V(4, 1),
-				'#eceff1'));
+				'#ff1744'));
 		var polygon = [new P(300, 100), new P(500, 400), new P(100, 500)];
 		this.gameObjects.push(
 			new KDopObject(polygon, [new V(1, -1),
 				new V(1, 0),
 				new V(1, 1),
-				new V(0, 1)], new V(4, 1), '#eceff1'));
+				new V(0, 1)], new V(4, 1), '#ba68C8'));
 	}
 
 	return CoreEngine;
