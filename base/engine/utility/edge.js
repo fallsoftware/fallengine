@@ -1,4 +1,4 @@
-define([], function () {
+define(['Vector'], function (V) {
     'use strict';
 
     function Edge(p1, p2) {
@@ -19,11 +19,11 @@ define([], function () {
     Edge.prototype.normalize = function () {
         var length = this.length();
 
-        return new Vector(this.dx/length, this.dy/length);
+        return new V(this.dx/length, this.dy/length);
     };
 
     Edge.prototype.normal = function () {
-        return new Vector(-this.dy, this.dx);
+        return (new V(-this.dy, this.dx)).normalize();
     };
 
     return Edge;
