@@ -21,7 +21,7 @@ define([], function () {
     };
 
     Vector.prototype.normal = function () {
-        return new Vector(-this.y, this.x);
+        return (new Vector(-this.y, this.x)).normalize();
     };
 
     Vector.prototype.dot = function (vector) {
