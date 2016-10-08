@@ -10,8 +10,9 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
         this.physicsEngine = physicsEngine;
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
-        this.objectTypes = ['PointObject', 'CircleObject', 'AABBObject',
-            'OBBObject', 'KDopObject'];
+        //this.objectTypes = ['PointObject', 'CircleObject', 'AABBObject',
+        //    'OBBObject', 'KDopObject'];
+        this.objectTypes = ['KDopObject']
         this.createObjectsHashmap();
         this.createColorBank();
 	}
@@ -86,13 +87,16 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
 
     ObjectGenerator.prototype.generateKDopObject = function () {
         var maxLength;
-        var min = [M.randomInt(-250, 250), M.randomInt(0, 250),
-            M.randomInt(0, 250), M.randomInt(0, 250)];
-        var max = [];
-
-        for (var i = 0; i < 4; i++) {
-            max.push(min[i] + M.randomInt(0, 500));
-        }
+        var minx=M.randomInt(0, 250);
+        var maxx=M.randomInt(minx, minx+250);
+        var miny=M.randomInt(0, 250);
+        var maxy=M.randomInt(miny, miny+250);
+        var mina=M.randomInt(minx+miny, maxx+maxy);
+        var maxa=M.randomInt(mina, maxx+maxy);
+        var minb=M.randomInt(minx-maxy, maxx-miny);
+        var maxb=M.randomInt(minb, maxx-miny);
+        var min = [minx-maxy,minx,mina,miny];
+        var max = [maxx-miny,maxx,maxx+maxy,maxy];
 
         return new KDopObject(null, [new V(1, -1),
             new V(1, 0),
