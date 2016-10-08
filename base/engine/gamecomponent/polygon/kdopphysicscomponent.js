@@ -100,5 +100,15 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
     	}
     };
 
+    KDopPhysicsComponent.prototype.move = function (speed) {
+        for (var i = 0; i < this.k/2; i++) {
+            var value = speed.x*this.axis[i].x + speed.y*this.axis[i].y;
+            this.min[i] += value;
+            this.max[i] += value;
+        }
+
+        this.computePoints();
+    };
+
     return KDopPhysicsComponent;
 });

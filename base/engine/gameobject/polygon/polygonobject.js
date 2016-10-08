@@ -1,13 +1,15 @@
 define(['jQuery', 'observer', 'GameObject', 'PolygonGraphicsComponent',
-    'PolygonPhysicsComponent'], function ($, observer, GameObject,
-    PolygonGraphicsComponent, PolygonPhysicsComponent) {
+    'PolygonPhysicsComponent', 'MovementComponent'], function ($, observer,
+    GameObject, PolygonGraphicsComponent, PolygonPhysicsComponent,
+    MovementComponent) {
     'use strict';
 
-    function PolygonObject(points, fillStyle, angle, backgroundSrc, paddingX,
-        paddingY) {
+    function PolygonObject(points, speed, fillStyle, angle, backgroundSrc,
+        paddingX, paddingY) {
         GameObject.call(this);
         this.addPhysicsComponent(new PolygonPhysicsComponent(this, points,
             angle));
+        this.addPhysicsComponent(new MovementComponent(this));
 
         if (fillStyle === null || fillStyle === undefined) {
             fillStyle = '#ECEFF1';

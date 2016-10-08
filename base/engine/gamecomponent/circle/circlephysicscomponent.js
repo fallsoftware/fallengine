@@ -36,5 +36,10 @@ define(['PhysicsComponent'], function (PhysicsComponent) {
 
     };
 
+    CirclePhysicsComponent.prototype.move = function (speed) {
+        this.x += speed.x;
+        this.y += speed.y;
+    };
+
     return CirclePhysicsComponent;
 });

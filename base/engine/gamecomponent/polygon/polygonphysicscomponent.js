@@ -20,5 +20,9 @@ define(['PhysicsComponent'], function (PhysicsComponent) {
 
     };
 
+    PolygonPhysicsComponent.prototype.move = function (speed) {
+    
+    };
+
     return PolygonPhysicsComponent;
 });

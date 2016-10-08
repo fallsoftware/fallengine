@@ -44,7 +44,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     PhysicsEngine.prototype.computePhysics = function (gameObject1,
         gameObject2) {
         this.computeCollisions[gameObject1.constructor.name
-            + gameObject2.constructor.name](gameObject1, gameObject2);
+            + gameObject2.constructor.name](gameObject1,gameObject2);
     };
 
     PhysicsEngine.prototype.CircleCircle = function (circle1, circle2) {
@@ -96,7 +96,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         var center = new PointObject(circle.physicsComponents[0].x,
             circle.physicsComponents[0].y);
 
-        if (this.OBBPoint(center, OBB)) {
+        if (this.OBBPoint(OBB, center)) {
             return true;
         }
 
@@ -117,7 +117,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         var center = new PointObject(circle.physicsComponents[0].x,
             circle.physicsComponents[0].y);
 
-        if (this.KDopPoint(center, KDop)) {
+        if (this.KDopPoint(KDop, center)) {
             return true;
         }
 
@@ -134,10 +134,10 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.CirclePoint = function (circle, point) {
-        var center circle.physicalComponents[0].center;
-        var radius circle.physicalComponents[0].radius;
-        var p = new P(point.pphysicalComponents[0].x,
-            point.pphysicalComponents[0].y);
+        var center = circle.physicsComponents[0].center;
+        var radius = circle.physicsComponents[0].radius;
+        var p = new P(point.physicsComponents[0].x,
+            point.physicsComponents[0].y);
 
         var v = new V(p.x - center.x, p.y - center.y);
 
@@ -153,10 +153,10 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.AABBAABB = function (AABB1, AABB2) {
-        var p11 = AABB1.physicalComponents[0].p1;
-        var p21 = AABB1.physicalComponents[0].p2;
-        var p12 = AABB2.physicalComponents[0].p1;
-        var p22 = AABB2.physicalComponents[0].p2;
+        var p11 = AABB1.physicsComponents[0].p1;
+        var p21 = AABB1.physicsComponents[0].p2;
+        var p12 = AABB2.physicsComponents[0].p1;
+        var p22 = AABB2.physicsComponents[0].p2;
 
         var minX1 = Math.min(p11.x, p12.x);
         var maxX1 = Math.max(p11.x, p12.x);
@@ -194,8 +194,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.AABBPoint = function (AABB, point) {
-        var p1 = AABB.physicalComponents[0].p1;
-        var p2 = AABB.physicalComponents[0].p2;
+        var p1 = AABB.physicsComponents[0].p1;
+        var p2 = AABB.physicsComponents[0].p2;
 
         if (point.x < p1.x && point.x > p2.x) {
             return false;
@@ -218,9 +218,9 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.OBBOBB = function (OBB1, OBB2) {
         var axis = [];
-        axis.push(OBB1.physicalComponents[0].vector.normalize());
+        axis.push(OBB1.physicsComponents[0].vector.normalize());
         axis.push(axis[0].normal());
-        axis.push(OBB2.physicalComponents[0].vector.normalize());
+        axis.push(OBB2.physicsComponents[0].vector.normalize());
         axis.push(axis[2].normal());
 
         return this.SATTheorem(axis, OBB1.graphicsComponents[0].points,
@@ -229,18 +229,18 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.OBBKDop = function (OBB, KDop) {
         var axis = [];
-        axis.push(OBB.physicalComponents[0].vector.normalize());
+        axis.push(OBB.physicsComponents[0].vector.normalize());
         axis.push(axis[0].normal());
-        axis.concat(KDop.physicalComponents[0].axis);
+        axis.concat(KDop.physicsComponents[0].axis);
 
-        return this.SATTheorem(axis, OBB1.graphicsComponents[0].points,
+        return this.SATTheorem(axis, OBB.graphicsComponents[0].points,
             KDop.graphicsComponents[0].points);
     };
 
     PhysicsEngine.prototype.OBBPoint = function (OBB, point) {
         var vectorNormalized = OBB.physicsComponents[0].vector.normalize();
 
-        var points = OBB.graphicsComponent[0].points;
+        var points = OBB.graphicsComponents[0].points;
         var p1 = points[0], p2 = points[2];
         var p = new P(point.physicsComponents[0].x,
             point.physicsComponents[0].y);
@@ -281,8 +281,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.KDopKDop = function (KDop1, KDop2) {
-        var KDopPhysics1 = KDop1.physicalComponents[0];
-        var KDopPhysics2 = KDop2.physicalComponents[0];
+        var KDopPhysics1 = KDop1.physicsComponents[0];
+        var KDopPhysics2 = KDop2.physicsComponents[0];
         var axis = KDopPhysics1.axis;
         axis.concat(KDopPhysics2.axis);
 
@@ -315,12 +315,12 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.KDopPoint = function (KDop, point) {
-        var min = KDop.physicalComponents[0].min;
-        var max = KDop.physicalComponents[0].max;
-        var axis = KDop.physicalComponents[0].axis;
+        var min = KDop.physicsComponents[0].min;
+        var max = KDop.physicsComponents[0].max;
+        var axis = KDop.physicsComponents[0].axis;
         var size = axis.length;
-        var x = point.physicalComponents[0].x
-        var y = point.physicalComponents[0].y
+        var x = point.physicsComponents[0].x
+        var y = point.physicsComponents[0].y
 
         for (var i = 0; i < size; i++) {
             var value = axis[i].x * x + axis[i].y * y;
@@ -350,11 +350,11 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.PointPoint = function (point1, point2) {
-        if (point1.physicalComponents[0].x != point2.physicalComponents[0].x) {
+        if (point1.physicsComponents[0].x != point2.physicsComponents[0].x) {
             return false;
         }
 
-        if (point1.physicalComponents[0].y != point2.physicalComponents[0].y) {
+        if (point1.physicsComponents[0].y != point2.physicsComponents[0].y) {
             return false;
         }
 
@@ -414,12 +414,12 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
             edges.push(new E(points[i-1], points[i]));
         }
 
-        edges.push(new E(points[size-1]), points[0]);
+        edges.push(new E(points[size-1], points[0]));
 
         return edges;
     }
 
-    PhysicsEngine.prototype.SATTHeorem = function (axis, points1, points2) {
+    PhysicsEngine.prototype.SATTheorem = function (axis, points1, points2) {
         var size = axis.length;
         var size1 = points1.length;
         var size2 = points2.length;
@@ -461,45 +461,45 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     }
 
     PhysicsEngine.prototype.getOBBFromAABB = function (AABB) {
-        var p1 = AABB.physicalComponents[0].p1;
-        var p2 = AABB.physicalComponents[0].p2;
+        var p1 = AABB.physicsComponents[0].p1;
+        var p2 = AABB.physicsComponents[0].p2;
         var width = p2.x - p1.x;
         var length = p2.y - p1.y;
         var vector = new V(1, 0);
-        var center = new P((p1.x +p2.x)/2), (p1.y +p2.y)/2));
+        var center = new P((p1.x +p2.x)/2, (p1.y +p2.y)/2);
 
-        return new OBBOject(center, vector, width, length);
+        return new OBBObject(center, vector, width, length);
     }
 
     PhysicsEngine.prototype.createCollisionsHashmap = function () {
         this.computeCollisions = [];
-        this.computeCollisions['CircleObjectCircleObject'] = this.CircleCircle;
-        this.computeCollisions['CircleObjectAABBObject'] = this.CircleAABB;
-        this.computeCollisions['CircleObjectOBBObject'] = this.CircleOBB;
-        this.computeCollisions['CircleObjectKDopObject'] = this.CircleKDop;
-        this.computeCollisions['CircleObjectPointObject'] = this.CirclePoint;
-        this.computeCollisions['AABBObjectCircleObject'] = this.AABBACircle;
-        this.computeCollisions['AABBObjectAABBObject'] = this.AABBAABB;
-        this.computeCollisions['AABBObjectOBBObject'] = this.AABBOBB;
-        this.computeCollisions['AABBObjectKDopObject'] = this.AABBKDop;
-        this.computeCollisions['AABBObjectPointObject'] = this.AABBPoint;
-        this.computeCollisions['OBBObjectCircleObject'] = this.OBBCircle;
-        this.computeCollisions['OBBObjectAABBObject'] = this.OBBAABB;
-        this.computeCollisions['OBBObjectOBBObject'] = this.OBBOBB;
-        this.computeCollisions['OBBObjectKDopObject'] = this.OBBKDop;
-        this.computeCollisions['OBBObjectPointObject'] = this.OBBPoint;
-        this.computeCollisions['KDopObjectCircleObject'] = this.KDopCircle;
-        this.computeCollisions['KDopObjectAABBObject'] = this.KDopAABB;
-        this.computeCollisions['KDopObjectOBBObject'] = this.KDopOBB;
-        this.computeCollisions['KDopObjectKDopObject'] = this.KDopKDop;
-        this.computeCollisions['KDopObjectPointObject'] = this.KDopPoint;
-        this.computeCollisions['PointObjectCircleObject'] = this.PointCircle;
-        this.computeCollisions['PointObjectAABBObject'] = this.PointAABB;
-        this.computeCollisions['PointObjectOBBObject'] = this.PointOBB;
-        this.computeCollisions['PointObjectKDopObject'] = this.PointKDop;
-        this.computeCollisions['PointObjectPointObject'] = this.PointPoint;
-        this.computeCollisions['CircleObjectEdge'] = this.CircleEdge;
-        this.computeCollisions['EdgeCircleObject'] = this.EdgeCircle;
+        this.computeCollisions['CircleObjectCircleObject'] = this.CircleCircle.bind(this);
+        this.computeCollisions['CircleObjectAABBObject'] = this.CircleAABB.bind(this);
+        this.computeCollisions['CircleObjectOBBObject'] = this.CircleOBB.bind(this);
+        this.computeCollisions['CircleObjectKDopObject'] = this.CircleKDop.bind(this);
+        this.computeCollisions['CircleObjectPointObject'] = this.CirclePoint.bind(this);
+        this.computeCollisions['AABBObjectCircleObject'] = this.AABBCircle.bind(this);
+        this.computeCollisions['AABBObjectAABBObject'] = this.AABBAABB.bind(this);
+        this.computeCollisions['AABBObjectOBBObject'] = this.AABBOBB.bind(this);
+        this.computeCollisions['AABBObjectKDopObject'] = this.AABBKDop.bind(this);
+        this.computeCollisions['AABBObjectPointObject'] = this.AABBPoint.bind(this);
+        this.computeCollisions['OBBObjectCircleObject'] = this.OBBCircle.bind(this);
+        this.computeCollisions['OBBObjectAABBObject'] = this.OBBAABB.bind(this);
+        this.computeCollisions['OBBObjectOBBObject'] = this.OBBOBB.bind(this);
+        this.computeCollisions['OBBObjectKDopObject'] = this.OBBKDop.bind(this);
+        this.computeCollisions['OBBObjectPointObject'] = this.OBBPoint.bind(this);
+        this.computeCollisions['KDopObjectCircleObject'] = this.KDopCircle.bind(this);
+        this.computeCollisions['KDopObjectAABBObject'] = this.KDopAABB.bind(this);
+        this.computeCollisions['KDopObjectOBBObject'] = this.KDopOBB.bind(this);
+        this.computeCollisions['KDopObjectKDopObject'] = this.KDopKDop.bind(this);
+        this.computeCollisions['KDopObjectPointObject'] = this.KDopPoint.bind(this);
+        this.computeCollisions['PointObjectCircleObject'] = this.PointCircle.bind(this);
+        this.computeCollisions['PointObjectAABBObject'] = this.PointAABB.bind(this);
+        this.computeCollisions['PointObjectOBBObject'] = this.PointOBB.bind(this);
+        this.computeCollisions['PointObjectKDopObject'] = this.PointKDop.bind(this);
+        this.computeCollisions['PointObjectPointObject'] = this.PointPoint.bind(this);
+        this.computeCollisions['CircleObjectEdge'] = this.CircleEdge.bind(this);
+        this.computeCollisions['EdgeCircleObject'] = this.EdgeCircle.bind(this);
     };
 
     return PhysicsEngine;

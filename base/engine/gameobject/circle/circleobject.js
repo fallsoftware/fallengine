@@ -1,12 +1,14 @@
-define(['GameObject', 'CircleGraphicsComponent', 'CirclePhysicsComponent'],
-    function (GameObject, CircleGraphicsComponent, CirclePhysicsComponent) {
+define(['GameObject', 'CircleGraphicsComponent', 'CirclePhysicsComponent',
+    'MovementComponent'], function (GameObject, CircleGraphicsComponent,
+    CirclePhysicsComponent, MovementComponent) {
     'use strict';
 
     function CircleObject(x, y, radius, startingAngle, endingAngle,
-        counterClockwise, fillStyle, backgroundSrc, paddingX, paddingY) {
+        counterClockwise, speed, fillStyle, backgroundSrc, paddingX, paddingY) {
         GameObject.call(this);
         this.addPhysicsComponent(new CirclePhysicsComponent(this, x, y, radius,
             startingAngle, endingAngle, counterClockwise));
+        this.addPhysicsComponent(new MovementComponent(this, speed));
 
         if (fillStyle === null || fillStyle === undefined) {
             fillStyle = '#ECEFF1';

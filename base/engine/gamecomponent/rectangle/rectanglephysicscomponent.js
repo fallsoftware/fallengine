@@ -26,5 +26,8 @@ define(['PhysicsComponent'], function (PhysicsComponent) {
 
     };
 
+    RectanglePhysicsComponent.prototype.move = function (x, y) {
+    };
+
     return RectanglePhysicsComponent;
 });

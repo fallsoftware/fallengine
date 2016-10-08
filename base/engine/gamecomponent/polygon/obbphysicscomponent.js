@@ -39,5 +39,12 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         this.graphicsComponent.points = points;
     };
 
+    OBBPhysicsComponent.prototype.move = function (speed) {
+        this.point.x += speed.x;
+        this.point.y += speed.y;
+
+        this.computePoints();
+    };
+
     return OBBPhysicsComponent;
 });
