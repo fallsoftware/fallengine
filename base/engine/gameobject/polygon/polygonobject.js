@@ -8,8 +8,8 @@ define(['jQuery', 'observer', 'GameObject', 'PolygonGraphicsComponent',
         paddingX, paddingY) {
         GameObject.call(this);
         this.addPhysicsComponent(new PolygonPhysicsComponent(this, points,
-            angle));
-        this.addPhysicsComponent(new MovementComponent(this));
+            angle), 'data');
+        this.addPhysicsComponent(new MovementComponent(this), 'movement');
 
         if (fillStyle === null || fillStyle === undefined) {
             fillStyle = '#ECEFF1';
@@ -24,7 +24,7 @@ define(['jQuery', 'observer', 'GameObject', 'PolygonGraphicsComponent',
         }
 
         this.addGraphicsComponent(new PolygonGraphicsComponent(this, fillStyle,
-            backgroundSrc, paddingX, paddingY));
+            backgroundSrc, paddingX, paddingY), 'rendering');
     }
 
     PolygonObject.prototype = Object.create(GameObject.prototype);

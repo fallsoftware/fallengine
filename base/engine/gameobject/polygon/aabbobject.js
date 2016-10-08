@@ -11,10 +11,12 @@ define(['GameObject', 'PolygonGraphicsComponent', 'AABBPhysicsComponent',
         }
 
         this.addGraphicsComponent(new PolygonGraphicsComponent(this,
-            fillStyle));
+            fillStyle), 'rendering');
 
-        this.addPhysicsComponent(new AABBPhysicsComponent(this, p1, p2));
-        this.addPhysicsComponent(new MovementComponent(this, speed));
+        this.addPhysicsComponent(new AABBPhysicsComponent(this, p1, p2),
+            'data');
+        this.addPhysicsComponent(new MovementComponent(this, speed),
+            'movement');
     }
 
     AABBObject.prototype = Object.create(GameObject.prototype);

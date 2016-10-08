@@ -22,14 +22,8 @@ requirejs.config({
         CircleGraphicsComponent: 'gamecomponent/circle/circlegraphicscomponent',
         CirclePhysicsComponent:'gamecomponent/circle/circlephysicscomponent',
         CircleObject: 'gameobject/circle/circleobject',
-        RectangleGraphicsComponent:
-            'gamecomponent/rectangle/rectanglegraphicscomponent',
-        RectanglePhysicsComponent:
-            'gamecomponent/rectangle/rectanglephysicscomponent',
-        RectangleObject: 'gameobject/rectangle/rectangleobject',
         PolygonGraphicsComponent:
             'gamecomponent/polygon/polygongraphicscomponent',
-        PolygonPhysicsComponent:'gamecomponent/polygon/polygonphysicscomponent',
         PolygonObject: 'gameobject/polygon/polygonobject',
         AABBPhysicsComponent: 'gamecomponent/polygon/aabbphysicscomponent',
         OBBPhysicsComponent:'gamecomponent/polygon/obbphysicscomponent',

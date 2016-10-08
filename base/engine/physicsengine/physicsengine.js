@@ -48,8 +48,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.CircleCircle = function (circle1, circle2) {
-        var circle1Physics = circle1.physicsComponents[0];
-        var circle2Physics = circle2.physicsComponents[0];
+        var circle1Physics = circle1.physicsComponents['data'];
+        var circle2Physics = circle2.physicsComponents['data'];
         var distance = (new V(circle2Physics.x-circle1Physics.x,
             circle2Physics.y-circle1Physics.y)).lengthSquare();
         var minDistance = (circle1Physics.radius + circle2Physics.radius)
@@ -63,10 +63,10 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.CircleAABB = function (circle, AABB) {
-        var circleCenter = circle.physicsComponents[0].center;
-        var radius = circle.physicsComponents[0].radius;
-        var p1 = AABB.physicsComponents[0].p1;
-        var p2 = AABB.physicsComponents[0].p2;
+        var circleCenter = circle.physicsComponents['data'].center;
+        var radius = circle.physicsComponents['data'].radius;
+        var p1 = AABB.physicsComponents['data'].p1;
+        var p2 = AABB.physicsComponents['data'].p2;
 
         if (circleCenter.x > Math.min(p1.x, p2.x)
             && circleCenter.x < Math.max(p1.x, p2.x)
@@ -91,9 +91,9 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.CircleOBB = function (circle, OBB) {
-        var points = OBB.graphicsComponents[0].points;
-        var center = new PointObject(circle.physicsComponents[0].x,
-            circle.physicsComponents[0].y);
+        var points = OBB.graphicsComponents['rendering'].points;
+        var center = new PointObject(circle.physicsComponents['data'].x,
+            circle.physicsComponents['data'].y);
 
         if (this.OBBPoint(OBB, center)) {
             return true;
@@ -112,9 +112,9 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.CircleKDop = function (circle, KDop) {
-        var points = KDop.graphicsComponents[0].points;
-        var center = new PointObject(circle.physicsComponents[0].x,
-            circle.physicsComponents[0].y);
+        var points = KDop.graphicsComponents['rendering'].points;
+        var center = new PointObject(circle.physicsComponents['data'].x,
+            circle.physicsComponents['data'].y);
 
         if (this.KDopPoint(KDop, center)) {
             return true;
@@ -133,10 +133,10 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.CirclePoint = function (circle, point) {
-        var center = circle.physicsComponents[0].center;
-        var radius = circle.physicsComponents[0].radius;
-        var p = new P(point.physicsComponents[0].x,
-            point.physicsComponents[0].y);
+        var center = circle.physicsComponents['data'].center;
+        var radius = circle.physicsComponents['data'].radius;
+        var p = new P(point.physicsComponents['data'].x,
+            point.physicsComponents['data'].y);
 
         var v = new V(p.x - center.x, p.y - center.y);
 
@@ -152,10 +152,10 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.AABBAABB = function (AABB1, AABB2) {
-        var p11 = AABB1.physicsComponents[0].p1;
-        var p21 = AABB1.physicsComponents[0].p2;
-        var p12 = AABB2.physicsComponents[0].p1;
-        var p22 = AABB2.physicsComponents[0].p2;
+        var p11 = AABB1.physicsComponents['data'].p1;
+        var p21 = AABB1.physicsComponents['data'].p2;
+        var p12 = AABB2.physicsComponents['data'].p1;
+        var p22 = AABB2.physicsComponents['data'].p2;
 
         var minX1 = Math.min(p11.x, p12.x);
         var maxX1 = Math.max(p11.x, p12.x);
@@ -193,8 +193,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.AABBPoint = function (AABB, point) {
-        var p1 = AABB.physicsComponents[0].p1;
-        var p2 = AABB.physicsComponents[0].p2;
+        var p1 = AABB.physicsComponents['data'].p1;
+        var p2 = AABB.physicsComponents['data'].p2;
 
         if (point.x < p1.x && point.x > p2.x) {
             return false;
@@ -217,32 +217,32 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.OBBOBB = function (OBB1, OBB2) {
         var axis = [];
-        axis.push(OBB1.physicsComponents[0].vector.normalize());
+        axis.push(OBB1.physicsComponents['data'].vector.normalize());
         axis.push(axis[0].normal());
-        axis.push(OBB2.physicsComponents[0].vector.normalize());
+        axis.push(OBB2.physicsComponents['data'].vector.normalize());
         axis.push(axis[2].normal());
 
-        return this.SATTheorem(axis, OBB1.graphicsComponents[0].points,
-            OBB2.graphicsComponents[0].points);
+        return this.SATTheorem(axis, OBB1.graphicsComponents['rendering'].points,
+            OBB2.graphicsComponents['rendering'].points);
     };
 
     PhysicsEngine.prototype.OBBKDop = function (OBB, KDop) {
         var axis = [];
-        axis.push(OBB.physicsComponents[0].vector.normalize());
+        axis.push(OBB.physicsComponents['data'].vector.normalize());
         axis.push(axis[0].normal());
-        axis.concat(KDop.physicsComponents[0].axis);
+        axis.concat(KDop.physicsComponents['data'].axis);
 
-        return this.SATTheorem(axis, OBB.graphicsComponents[0].points,
-            KDop.graphicsComponents[0].points);
+        return this.SATTheorem(axis, OBB.graphicsComponents['rendering'].points,
+            KDop.graphicsComponents['rendering'].points);
     };
 
     PhysicsEngine.prototype.OBBPoint = function (OBB, point) {
-        var vectorNormalized = OBB.physicsComponents[0].vector.normalize();
+        var vectorNormalized = OBB.physicsComponents['data'].vector.normalize();
 
-        var points = OBB.graphicsComponents[0].points;
+        var points = OBB.graphicsComponents['rendering'].points;
         var p1 = points[0], p2 = points[2];
-        var p = new P(point.physicsComponents[0].x,
-            point.physicsComponents[0].y);
+        var p = new P(point.physicsComponents['data'].x,
+            point.physicsComponents['data'].y);
 
         var p1DotNormalize = vectorNormalized.dot(p1);
         var p2DotNormalize = vectorNormalized.dot(p2);
@@ -280,8 +280,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.KDopKDop = function (KDop1, KDop2) {
-        var KDopPhysics1 = KDop1.physicsComponents[0];
-        var KDopPhysics2 = KDop2.physicsComponents[0];
+        var KDopPhysics1 = KDop1.physicsComponents['data'];
+        var KDopPhysics2 = KDop2.physicsComponents['data'];
         var axis = KDopPhysics1.axis;
         axis.concat(KDopPhysics2.axis);
 
@@ -292,8 +292,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
                 if (KDopPhysics1.axis[i] != KDopPhysics2.axis[i]) {
 
                     return this.SATTheorem(axis,
-                        KDop1.graphicsComponents[0].points,
-                        KDop2.graphicsComponents[0].points);
+                        KDop1.graphicsComponents['rendering'].points,
+                        KDop2.graphicsComponents['rendering'].points);
                 }
             }
 
@@ -309,17 +309,17 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         }
 
         return this.SATTheorem(axis,
-            KDop1.graphicsComponents[0].points,
-            KDop2.graphicsComponents[0].points);
+            KDop1.graphicsComponents['rendering'].points,
+            KDop2.graphicsComponents['rendering'].points);
     };
 
     PhysicsEngine.prototype.KDopPoint = function (KDop, point) {
-        var min = KDop.physicsComponents[0].min;
-        var max = KDop.physicsComponents[0].max;
-        var axis = KDop.physicsComponents[0].axis;
+        var min = KDop.physicsComponents['data'].min;
+        var max = KDop.physicsComponents['data'].max;
+        var axis = KDop.physicsComponents['data'].axis;
         var size = axis.length;
-        var x = point.physicsComponents[0].x
-        var y = point.physicsComponents[0].y
+        var x = point.physicsComponents['data'].x
+        var y = point.physicsComponents['data'].y
 
         for (var i = 0; i < size; i++) {
             var value = axis[i].x * x + axis[i].y * y;
@@ -349,11 +349,11 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.PointPoint = function (point1, point2) {
-        if (point1.physicsComponents[0].x != point2.physicsComponents[0].x) {
+        if (point1.physicsComponents['data'].x != point2.physicsComponents['data'].x) {
             return false;
         }
 
-        if (point1.physicsComponents[0].y != point2.physicsComponents[0].y) {
+        if (point1.physicsComponents['data'].y != point2.physicsComponents['data'].y) {
             return false;
         }
 
@@ -361,8 +361,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.CircleEdge = function (circle, edge) {
-        var circleCenter = circle.physicsComponents[0].center;
-        var radius = circle.physicsComponents[0].radius;
+        var circleCenter = circle.physicsComponents['data'].center;
+        var radius = circle.physicsComponents['data'].radius;
         var p1 = edge.p1;
         var p2 = edge.p2;
 
@@ -459,8 +459,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     }
 
     PhysicsEngine.prototype.getOBBFromAABB = function (AABB) {
-        var p1 = AABB.physicsComponents[0].p1;
-        var p2 = AABB.physicsComponents[0].p2;
+        var p1 = AABB.physicsComponents['data'].p1;
+        var p2 = AABB.physicsComponents['data'].p2;
         var width = p2.x - p1.x;
         var length = p2.y - p1.y;
         var vector = new V(1, 0);

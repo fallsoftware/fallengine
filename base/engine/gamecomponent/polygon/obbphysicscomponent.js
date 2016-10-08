@@ -10,7 +10,7 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         this.length = length;
 
         // not generic
-        this.graphicsComponent = gameObject.graphicsComponents[0];
+        this.graphicsComponent = gameObject.graphicsComponents['rendering'];
         this.computePoints();
     }
 

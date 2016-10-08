@@ -7,9 +7,11 @@ define(['GameObject', 'PolygonGraphicsComponent', 'KDopPhysicsComponent',
         GameObject.call(this);
 
         this.addGraphicsComponent(new PolygonGraphicsComponent(this,
-            fillStyle));
-        this.addPhysicsComponent(new KDopPhysicsComponent(this, polygon, axis));
-        this.addPhysicsComponent(new MovementComponent(this, speed));
+            fillStyle), 'rendering');
+        this.addPhysicsComponent(new KDopPhysicsComponent(this, polygon, axis),
+            'data');
+        this.addPhysicsComponent(new MovementComponent(this, speed),
+            'movement');
 
         if (fillStyle === null || fillStyle === undefined) {
             fillStyle = '#ECEFF1';

@@ -4,9 +4,11 @@ define(['GameObject', 'PointPhysicsComponent', 'MovementComponent'],
 
     function PointObject(x, y, speed) {
         GameObject.call(this);
-        //this.addGraphicsComponent(new PointGraphicsComponent(this));
-        this.addPhysicsComponent(new PointPhysicsComponent(this, x, y));
-        this.addPhysicsComponent(new MovementComponent(this, speed));
+        /*this.addGraphicsComponent(new PointGraphicsComponent(this), 
+            'rendering');*/
+        this.addPhysicsComponent(new PointPhysicsComponent(this, x, y), 'data');
+        this.addPhysicsComponent(new MovementComponent(this, speed),
+            'movement');
     }
 
     PointObject.prototype = Object.create(GameObject.prototype);

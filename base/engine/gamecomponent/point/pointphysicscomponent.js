@@ -5,8 +5,6 @@ define(['PhysicsComponent'], function (PhysicsComponent) {
         PhysicsComponent.call(this, gameObject);
         this.x = x;
         this.y = y;
-
-        //this.graphicsComponent = gameObject.graphicsComponent[0]; // not generic
     }
 
     PointPhysicsComponent.prototype =

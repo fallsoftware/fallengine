@@ -8,7 +8,7 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
         this.backgroundSrc = backgroundSrc;
         this.paddingX = paddingX;
         this.paddingY = paddingY;
-        this.circleData = this.gameObject.physicsComponents[0]; // not generic
+        this.circleData = this.gameObject.physicsComponents['data']; // not generic
     }
 
     CircleGraphicsComponent.prototype

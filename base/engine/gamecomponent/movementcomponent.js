@@ -6,7 +6,7 @@ define(['GameComponent', 'Vector'], function (GameComponent, V) {
 
         this.speed = speed;
 
-        this.physics = gameObject.physicsComponents[0];
+        this.physics = gameObject.physicsComponents['data'];
     }
 
     MovementComponent.prototype = Object.create(GameComponent.prototype);

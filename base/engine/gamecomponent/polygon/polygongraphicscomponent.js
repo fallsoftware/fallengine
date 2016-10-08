@@ -6,7 +6,7 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
         this.fillStyle = fillStyle;
         this.points = [];
         // not generic:
-        //this.polygonData = this.gameObject.physicsComponents[0];
+        //this.polygonData = this.gameObject.physicsComponents['data'];
     }
 
     PolygonGraphicsComponent.prototype =

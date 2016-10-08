@@ -6,7 +6,8 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         this.p1 = new P(Math.min(p1.x, p2.x), Math.min(p1.y, p2.y));
         this.p2 = new P(Math.max(p1.x, p2.x), Math.max(p1.y, p2.y));
 
-        this.graphicsComponent = gameObject.graphicsComponents[0]; // not generic
+        // not generic
+        this.graphicsComponent = gameObject.graphicsComponents['rendering'];
         this.computePoints();
     }
 

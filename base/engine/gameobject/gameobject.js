@@ -1,4 +1,4 @@
-define(['jQuery', 'observer'], function ($, observer) {
+define([], function () {
     'use strict';
 
     function GameObject() {
@@ -7,65 +7,57 @@ define(['jQuery', 'observer'], function ($, observer) {
         this.inputComponents = [];
     }
 
-    GameObject.prototype = new Subject();
-
-    GameObject.prototype.addGraphicsComponent = function (component) {
-        this.graphicsComponents.push(component);
+    GameObject.prototype.addGraphicsComponent = function (component, label) {
+        this.graphicsComponents[label] = component;
     };
 
-    GameObject.prototype.addPhysicsComponent = function (component) {
-        this.physicsComponents.push(component);
+    GameObject.prototype.addPhysicsComponent = function (component, label) {
+        this.physicsComponents[label] = component;
     };
 
-    GameObject.prototype.addInputComponent = function (component) {
-        this.inputComponents.push(component);
+    GameObject.prototype.addInputComponent = function (component, label) {
+        this.inputComponents[label] = component;
     };
 
-    GameObject.prototype.removeGraphicsComponent = function (component) {
-        var index = this.graphicsComponents.indexOf(observer);
-
-        if (index >= 0) {
-            return this.graphicsComponents.splice(index, 1);
-        }
-
-        throw 'Unknown component!';
+    GameObject.prototype.removeGraphicsComponent = function (component, label) {
+        this.graphicsComponents[label] = null;
     };
 
-    GameObject.prototype.removePhysicsComponent = function (component) {
-        var index = this.physicsCComponents.indexOf(observer);
-
-        if (index >= 0) {
-            return this.physicsComponents.splice(index, 1);
-        }
-
-        throw 'Unknown component!';
+    GameObject.prototype.removePhysicsComponent = function (component, label) {
+        this.physicsComponents[label] = null;
     };
 
-    GameObject.prototype.removeInputComponent = function (component) {
-        var index = this.inputComponents.indexOf(observer);
-
-        if (index >= 0) {
-            return this.inputComponents.splice(index, 1);
-        }
-
-        throw 'Unknown component!';
+    GameObject.prototype.removeInputComponent = function (component, label) {
+        this.inputComponents[label] = null;
     };
 
     GameObject.prototype.updateGraphics = function (context) {
-        for (var graphicsComponent of this.graphicsComponents) {
-            graphicsComponent.update(context);
+        for (var graphicsComponent in this.graphicsComponents) {
+            if (!this.graphicsComponents.hasOwnProperty(graphicsComponent)) {
+                continue;
+            }
+
+            this.graphicsComponents[graphicsComponent].update(context);
         }
     };
 
     GameObject.prototype.updatePhysics = function (context) {
-        for (var physicsComponent of this.physicsComponents) {
-            physicsComponent.update(context);
+        for (var physicsComponent in this.physicsComponents) {
+            if (!this.physicsComponents.hasOwnProperty(physicsComponent)) {
+                continue;
+            }
+
+            this.physicsComponents[physicsComponent].update(context);
         }
     };
 
     GameObject.prototype.updateInputs = function () {
-        for (var inputComponent of this.inputComponents) {
-            inputComponent.update();
+        for (var inputComponent in this.inputComponents) {
+            if (!this.inputComponents.hasOwnProperty(inputComponent)) {
+                continue;
+            }
+
+            this.inputComponents[inputComponent].update();
         }
     };
 

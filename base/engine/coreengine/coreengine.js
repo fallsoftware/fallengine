@@ -1,8 +1,7 @@
 define(['TimeObject','GameEngine','RenderingEngine', 'CircleObject',
-	'RectangleObject', 'PolygonObject', 'AABBObject', 'OBBObject', 'KDopObject',
-	'Point', 'Vector'], function(TimeObject, GameEngine, RenderingEngine,
-		CircleObject, RectangleObject, PolygonObject, AABBObject, OBBObject,
-		KDopObject, P, V) {
+	'AABBObject', 'OBBObject', 'KDopObject', 'Point', 'Vector'],
+	function(TimeObject, GameEngine, RenderingEngine, CircleObject, AABBObject,
+		OBBObject, KDopObject, P, V) {
 	'use strict';
 
 	function CoreEngine(canvas) {

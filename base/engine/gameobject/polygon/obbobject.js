@@ -7,11 +7,11 @@ define(['GameObject', 'PolygonGraphicsComponent', 'OBBPhysicsComponent',
         GameObject.call(this);
 
         this.addGraphicsComponent(new PolygonGraphicsComponent(this,
-            fillStyle));
-
+            fillStyle), 'rendering');
         this.addPhysicsComponent(new OBBPhysicsComponent(this, point, vector,
-            width, length));
-        this.addPhysicsComponent(new MovementComponent(this, speed));
+            width, length), 'data');
+        this.addPhysicsComponent(new MovementComponent(this, speed),
+            'movement');
 
         if (fillStyle === null || fillStyle === undefined) {
             fillStyle = '#ECEFF1';
