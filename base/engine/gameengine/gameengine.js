@@ -2,12 +2,12 @@ define(['jQuery', 'Inputs','PhysicsEngine'], function ($, Inputs,
     PhysicsEngine) {
     'use strict';
 
-    function GameEngine(gameObjects) {
+    function GameEngine(gameObjects, width, height) {
         this.currentScene = {"context":"MAIN_MENU"};
         this.gameObjects = gameObjects;
         this.input = -1;
         this.getDefaultInputContexts();
-        this.physicsEngine = new PhysicsEngine(gameObjects);
+        this.physicsEngine = new PhysicsEngine(gameObjects, width, height);
     }
 
     GameEngine.prototype.getDefaultInputContexts = function () {

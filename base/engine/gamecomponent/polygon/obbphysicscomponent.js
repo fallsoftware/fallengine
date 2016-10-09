@@ -26,14 +26,22 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         var vectorN = this.vector.normalize();
         var vectorP = vectorN.normal();
 
-        points[0] = new P(this.point.x + vectorN.x*this.width/2+vectorP.x*this.length/2,
-            this.point.y + vectorP.y*this.length/2+ vectorN.y*this.width/2);
-        points[1] = new P(this.point.x + vectorN.x*this.width/2-vectorP.x*this.length/2,
-            this.point.y - vectorP.y*this.length/2+ vectorN.y*this.width/2);
-        points[2] = new P(this.point.x - vectorN.x*this.width/2-vectorP.x*this.length/2,
-            this.point.y - vectorP.y*this.length/2- vectorN.y*this.width/2);
-        points[3] = new P(this.point.x - vectorN.x*this.width/2+vectorP.x*this.length/2,
-            this.point.y + vectorP.y*this.length/2- vectorN.y*this.width/2);
+        points[0] = new P(this.point.x + vectorN.x*this.width/2
+            + vectorP.x*this.length/2,
+            this.point.y + vectorP.y*this.length/2
+            + vectorN.y*this.width/2);
+        points[1] = new P(this.point.x + vectorN.x*this.width/2
+            - vectorP.x*this.length/2,
+            this.point.y - vectorP.y*this.length/2
+            + vectorN.y*this.width/2);
+        points[2] = new P(this.point.x - vectorN.x*this.width/2
+            - vectorP.x*this.length/2,
+            this.point.y - vectorP.y*this.length/2
+            - vectorN.y*this.width/2);
+        points[3] = new P(this.point.x - vectorN.x*this.width/2
+            + vectorP.x*this.length/2,
+            this.point.y + vectorP.y*this.length/2
+            - vectorN.y*this.width/2);
 
         this.graphicsComponent.points = points;
     };

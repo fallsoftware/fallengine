@@ -15,8 +15,8 @@ define(['PhysicsComponent'], function (PhysicsComponent) {
     };
 
     PointPhysicsComponent.prototype.move = function (speed) {
-        this.x += speed.x;
-        this.y += speed.y;
+        this.point.x += speed.x;
+        this.point.y += speed.y;
     };
 
     return PointPhysicsComponent;

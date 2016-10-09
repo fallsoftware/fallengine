@@ -6,9 +6,10 @@ define(['TimeObject','GameEngine','RenderingEngine', 'MathUtils',
 	function CoreEngine(canvas) {
 		this.fps = 60;
 		this.gameObjects = [];
-		this.gameEngine = new GameEngine(this.gameObjects);
 		this.renderingEngine = new RenderingEngine(this.gameObjects, canvas);
 		this.renderingEngine.init();
+		this.gameEngine = new GameEngine(this.gameObjects, canvas.width,
+			canvas.height);
 		this.timeObject = new TimeObject();
 		this.running = false;
 		this.generateGameObjects();

@@ -27,15 +27,15 @@ define(['jQuery', 'observer'],
         }
     };
 
-    RenderingEngine.prototype.init = function (scene) {
+    RenderingEngine.prototype.init = function () {
         this.context.fillStyle = this.defaultColor;
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    }
+    };
 
     RenderingEngine.prototype.setCanvas = function () {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
-    }
+    };
 
     return RenderingEngine;
 });

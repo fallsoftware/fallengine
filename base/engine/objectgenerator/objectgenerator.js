@@ -10,9 +10,8 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
         this.physicsEngine = physicsEngine;
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
-        //this.objectTypes = ['PointObject', 'CircleObject', 'AABBObject',
-        //    'OBBObject', 'KDopObject'];
-        this.objectTypes = ['KDopObject']
+        this.objectTypes = ['PointObject', 'CircleObject', 'AABBObject',
+            'OBBObject', 'KDopObject'];
         this.createObjectsHashmap();
         this.createColorBank();
 	}
@@ -42,8 +41,7 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
     };
 
     ObjectGenerator.prototype.generateSpeed = function () {
-            return new V(M.randomInt(0, 10),
-                M.randomInt(0, 10));
+            return new V(M.randomInt(-10, 10), M.randomInt(-10, 10));
     };
 
     ObjectGenerator.prototype.checkIfCollisions = function (newGameObject) {
@@ -59,7 +57,8 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
     };
 
     ObjectGenerator.prototype.generatePointObject = function () {
-        return new PointObject(this.generatePoint(), this.generateSpeed());
+        return new PointObject(this.generatePoint(), this.generateSpeed(),
+            this.getColor());
 	};
 
     ObjectGenerator.prototype.generateCircleObject = function () {
@@ -86,17 +85,18 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
 	};
 
     ObjectGenerator.prototype.generateKDopObject = function () {
-        var maxLength;
-        var minx=M.randomInt(0, 250);
-        var maxx=M.randomInt(minx, minx+250);
-        var miny=M.randomInt(0, 250);
-        var maxy=M.randomInt(miny, miny+250);
-        var mina=M.randomInt(minx+miny, maxx+maxy);
-        var maxa=M.randomInt(mina, maxx+maxy);
-        var minb=M.randomInt(minx-maxy, maxx-miny);
-        var maxb=M.randomInt(minb, maxx-miny);
-        var min = [minx-maxy,minx,mina,miny];
-        var max = [maxx-miny,maxx,maxx+maxy,maxy];
+        var maxLength = 250;
+        var minx = M.randomInt(0, maxLength);
+        var maxx = M.randomInt(minx, minx+maxLength);
+        var miny = M.randomInt(0, maxLength);
+        var maxy = M.randomInt(miny, miny+maxLength);
+        var dif = Math.min(maxx-minx, maxy-miny)
+        var mina = M.randomInt(minx+miny, minx+miny+dif);
+        var maxa = M.randomInt(maxx+maxy-dif, maxx+maxy);
+        var minb = M.randomInt(minx-maxy, Math.min(2*minx-mina, -2*maxy+maxa));
+        var maxb = M.randomInt(Math.max(2*maxx-maxa, mina-2*miny), maxx-miny);
+        var min = [minb, minx, mina, miny];
+        var max = [maxb, maxx, maxa, maxy];
 
         return new KDopObject(null, [new V(1, -1),
             new V(1, 0),
@@ -132,28 +132,7 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
 
     ObjectGenerator.prototype.generateLength = function () {
         return M.randomInt(10, 200);
-    }
+    };
 
 	return ObjectGenerator;
 });
-
-/*this.gameObjects.push(
-    new CircleObject(new P(250, 250), 25, 0, Math.PI * 2, true,
-    new V(10, 0), '#3d5afe',
-    '../engine/gamecomponent/circle/elements/background.png', 19));
-this.gameObjects.push(
-    new CircleObject(new P(260, 260), 25, 0, Math.PI * 2, true,
-    new V(10, 0), '#ff5722',
-    '../engine/gamecomponent/circle/elements/background.png', 19));
-this.gameObjects.push(
-    new AABBObject(new P(10, 10), new P(100, 150), new V(4, 1),
-    '#ff9800'));
-this.gameObjects.push(
-    new OBBObject(new P(200, 200), new V(4, 1), 200, 100, new V(4, 1),
-        '#ff1744'));
-var polygon = [new P(300, 100), new P(500, 400), new P(100, 500)];
-this.gameObjects.push(
-    new KDopObject(polygon, [new V(1, -1),
-        new V(1, 0),
-        new V(1, 1),
-        new V(0, 1)], new V(4, 1), '#ba68C8'));*/

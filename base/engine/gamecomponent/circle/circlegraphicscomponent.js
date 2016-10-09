@@ -9,7 +9,7 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
         this.paddingX = paddingX;
         this.paddingY = paddingY;
         this.circleData = this.gameObject.physicsComponents['data'];
-    }
+    };
 
     CircleGraphicsComponent.prototype
         = Object.create(GraphicsComponent.prototype);
@@ -22,7 +22,7 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
             this.circleData.endingAngle, this.circleData.counterClockwise);
         context.closePath();
         context.fill();
-    }
+    };
 
     CircleGraphicsComponent.prototype.drawBackground = function (context) {
         var background = new Image();
@@ -41,12 +41,12 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
                 background.height/ratio-this.paddingY);
             context.restore();
         }).bind(this);
-    }
+    };
 
     CircleGraphicsComponent.prototype.getRatio = function (background) {
         var maxImageLength = Math.max(background.width, background.height);
         return maxImageLength / (this.circleData.radius*2);
-    }
+    };
 
     CircleGraphicsComponent.prototype.update = function (context) {
         context.save();

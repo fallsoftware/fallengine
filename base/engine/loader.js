@@ -31,6 +31,7 @@ requirejs.config({
         AABBObject: 'gameobject/polygon/aabbobject',
         OBBObject:'gameobject/polygon/obbobject',
         KDopObject: 'gameobject/polygon/kdopobject',
+        PointGraphicsComponent:'gamecomponent/point/pointgraphicscomponent',
         PointPhysicsComponent:'gamecomponent/point/pointphysicscomponent',
         PointObject: 'gameobject/point/pointobject',
         Point: 'utility/point',
@@ -38,7 +39,8 @@ requirejs.config({
         Edge: 'utility/edge',
         MathUtils: 'utility/mathutils',
         MovementComponent: 'gamecomponent/movementcomponent',
-        ObjectGenerator: 'objectgenerator/objectgenerator'
+        ObjectGenerator: 'objectgenerator/objectgenerator',
+        BoxZoneObject: 'gameobject/polygon/boxzoneobject'
     },
     shim: {
         'jQuery': {

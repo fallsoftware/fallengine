@@ -1,5 +1,6 @@
 define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
-    'OBBObject'], function (P, V, KDopObject, M, E, PointObject, OBBObject) {
+    'OBBObject', 'BoxZoneObject'], function (P, V, KDopObject, M, E,
+    PointObject, OBBObject, BoxZoneObject) {
     'use strict';
 
     Array.prototype.contains = function (v) {
@@ -21,9 +22,10 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         return arr;
     };
 
-    function PhysicsEngine(gameObjects) {
+    function PhysicsEngine(gameObjects, width, height) {
         this.gameObjects = gameObjects;
         this.createCollisionsHashmap();
+        this.bounds = new BoxZoneObject(new P(0, 0), new P(width, height));
     }
 
     PhysicsEngine.prototype = Object.create(Observer.prototype);
@@ -38,6 +40,22 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
                 if (i != j) this.computePhysics(this.gameObjects[i],
                     this.gameObjects[j]);
             }
+        }
+
+        this.checkBox();
+    };
+
+    PhysicsEngine.prototype.checkBox = function () {
+        var size = this.gameObjects.length;
+
+        for (var i = 0; i < size; i++) {
+            this.handleBox(this.gameObjects[i]);
+        }
+    };
+
+    PhysicsEngine.prototype.handleBox = function (gameObject) {
+        if (!this.bounds.contains(gameObject)) {
+
         }
     };
 
@@ -176,8 +194,6 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         }
 
         return true;
-
-
     };
 
     PhysicsEngine.prototype.AABBOBB = function (AABB, OBB) {
@@ -222,7 +238,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         axis.push(OBB2.physicsComponents['data'].vector.normalize());
         axis.push(axis[2].normal());
 
-        return this.SATTheorem(axis, OBB1.graphicsComponents['rendering'].points,
+        return this.SATTheorem(axis,
+            OBB1.graphicsComponents['rendering'].points,
             OBB2.graphicsComponents['rendering'].points);
     };
 
@@ -458,7 +475,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         }
 
         return true;
-    }
+    };
 
     PhysicsEngine.prototype.getOBBFromAABB = function (AABB) {
         var p1 = AABB.physicsComponents['data'].p1;
@@ -469,7 +486,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         var center = new P((p1.x +p2.x)/2, (p1.y +p2.y)/2);
 
         return new OBBObject(center, vector, width, length);
-    }
+    };
 
     PhysicsEngine.prototype.createCollisionsHashmap = function () {
         this.computeCollisions = [];
