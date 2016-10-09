@@ -75,7 +75,7 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
         var point = this.generatePoint();
 
         return new AABBObject(point, new P(point.x + this.generateLength(),
-            point.y, this.generateLength()));
+            point.y + this.generateLength()), this.generateSpeed(),this.getColor());
 	};
 
     ObjectGenerator.prototype.generateOBBObject = function () {

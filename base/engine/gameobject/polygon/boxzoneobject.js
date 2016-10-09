@@ -132,20 +132,20 @@ define(['GameObject', 'AABBObject', 'AABBPhysicsComponent'],
         var ifContains = true;
 
         for (var i = 0; i < size; i++) {
-            if (points.x < left) {
-                left = points.x;
+            if (points[i].x < left) {
+                left = points[i].x;
             }
 
-            if (points.x > right) {
-                right = points.x;
+            if (points[i].x > right) {
+                right = points[i].x;
             }
 
-            if (points.y < top) {
-                top = points.y;
+            if (points[i].y < top) {
+                top = points[i].y;
             }
 
-            if (points.y < bottom) {
-                bottom = points.y;
+            if (points[i].y > bottom) {
+                bottom = points[i].y;
             }
         }
 

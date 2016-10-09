@@ -27,6 +27,8 @@ define([], function () {
     Vector.prototype.dot = function (vector) {
         return this.x * vector.x + this.y * vector.y;
     };
-
+	Vector.prototype.equals=function (vector){
+		return (this.x==vector.x && this.y==vector.y)
+	}
     return Vector;
 });

@@ -5,6 +5,13 @@ define([], function () {
         this.graphicsComponents = [];
         this.physicsComponents = [];
         this.inputComponents = [];
+		if(GameObject.prototype.count==undefined){
+			GameObject.prototype.count=1;
+		}
+		else{
+			GameObject.prototype.count+=1;
+		}
+		this.id=GameObject.prototype.count;
     }
 
     GameObject.prototype.addGraphicsComponent = function (component, label) {

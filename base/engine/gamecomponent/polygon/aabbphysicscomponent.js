@@ -5,7 +5,7 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         PhysicsComponent.call(this, gameObject);
         this.p1 = new P(Math.min(p1.x, p2.x), Math.min(p1.y, p2.y));
         this.p2 = new P(Math.max(p1.x, p2.x), Math.max(p1.y, p2.y));
-
+		this.center=new P((p1.x+p2.x)/2,(p1.y+p2.y)/2);
         this.graphicsComponent = gameObject.graphicsComponents['rendering'];
 
         if (this.graphicsComponent !== undefined
@@ -36,6 +36,7 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         this.p2.y += speed.y;
 
         this.computePoints();
+		this.center=new P((this.p1.x+this.p2.x)/2,(this.p1.y+this.p2.y)/2);
     };
 
     return AABBPhysicsComponent;

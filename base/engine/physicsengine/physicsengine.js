@@ -26,6 +26,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         this.gameObjects = gameObjects;
         this.createCollisionsHashmap();
         this.bounds = new BoxZoneObject(new P(0, 0), new P(width, height));
+		this.collided=[];
+		this.collidedm=[];
     }
 
     PhysicsEngine.prototype = Object.create(Observer.prototype);
@@ -41,7 +43,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
                     this.gameObjects[j]);
             }
         }
-
+		this.collidedm=this.collided;
+		this.collided=[];
         this.checkBox();
     };
 
@@ -67,6 +70,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.handleCollision = function (gameObject1,
         gameObject2) {
+		this.collided[""+gameObject1.id+','+gameObject2.id]=0
         var tmpX = gameObject1.physicsComponents['movement'].speed.x;
         var tmpY = gameObject1.physicsComponents['movement'].speed.y;
         gameObject1.physicsComponents['movement'].speed.x
@@ -75,7 +79,18 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
             = gameObject2.physicsComponents['movement'].speed.y;
         gameObject2.physicsComponents['movement'].speed.x = tmpX;
         gameObject2.physicsComponents['movement'].speed.y = tmpY;
-    };
+		if(this.collidedm[""+gameObject1.id+','+gameObject2.id]!=undefined){
+			var c1=gameObject1.physicsComponents['data'].center;
+			var c2=gameObject2.physicsComponents['data'].center;
+			var difx=c1.x-c2.x;
+			var dify=c1.y-c2.y;
+			gameObject1.physicsComponents['movement'].speed.x=Math.sign(difx)*Math.abs(gameObject1.physicsComponents['movement'].speed.x)
+			gameObject2.physicsComponents['movement'].speed.x=-Math.sign(difx)*Math.abs(gameObject2.physicsComponents['movement'].speed.x)
+			gameObject1.physicsComponents['movement'].speed.y=Math.sign(dify)*Math.abs(gameObject1.physicsComponents['movement'].speed.y)
+			gameObject2.physicsComponents['movement'].speed.y=-Math.sign(dify)*Math.abs(gameObject2.physicsComponents['movement'].speed.y)
+		}
+		
+	};
 
     PhysicsEngine.prototype.CircleCircle = function (circle1, circle2) {
         var circle1Physics = circle1.physicsComponents['data'];
@@ -181,8 +196,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.AABBAABB = function (AABB1, AABB2) {
         var p11 = AABB1.physicsComponents['data'].p1;
-        var p21 = AABB1.physicsComponents['data'].p2;
-        var p12 = AABB2.physicsComponents['data'].p1;
+        var p12 = AABB1.physicsComponents['data'].p2;
+        var p21 = AABB2.physicsComponents['data'].p1;
         var p22 = AABB2.physicsComponents['data'].p2;
 
         var minX1 = p11.x;
@@ -316,7 +331,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
             var size = KDopPhysics1.axis.length;
 
             for (var i = 0; i < size; i++) {
-                if (KDopPhysics1.axis[i] != KDopPhysics2.axis[i]) {
+                if (KDopPhysics1.axis[i].equals(KDopPhysics2.axis[i])) {
 
                     return this.SATTheorem(axis,
                         KDop1.graphicsComponents['rendering'].points,
