@@ -1,0 +1,27 @@
+define(['KDopObject','Vector','Point'], function (C,V,P){
+	var run= function(){
+		QUnit.module( "TestPoint" );
+		c1=new C([new P(3,1),
+			new P(5,4),
+			new P(1,5)],
+			[new V(1, -1),
+            new V(1, 0),
+            new V(1, 1),
+            new V(0, 1)],new V(1,2),'#ffa000');
+		var value;
+		data=c1.physicsComponents["data"]
+		QUnit.test( "Construction of a 0;1 point", function( assert ) {
+			assert.ok( data.min[0]==0&&data.max[0]==1
+						&& data.min[0]==0&&data.max[0]==1
+						&& data.min[0]==0&&data.max[0]==1
+						&& data.min[0]==0&&data.max[0]==1,
+						"point created" );
+		});
+		QUnit.test( "Movement of the point of 1,2", function( assert ) {
+			c1.physicsComponents["movement"].update();
+			assert.ok( data.center.x==1&&data.center.y==3, "point moved" );
+		});
+	};
+	return {run:run}
+}
+);
