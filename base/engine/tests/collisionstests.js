@@ -15,7 +15,7 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 			var c2=new CircleObject(new P(10,0),10,0,2*Math.PI,true);
 			assert.ok(physicsengine.CircleCircle(c1,c2) ," pas de collision" );
 		});
-		
+
 		QUnit.module( "TestCollision: Cercle-AABB" );
 		QUnit.test( "sans collision", function( assert ) {
 			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true);
@@ -37,7 +37,7 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 			var a1=new AABBObject(new P(-10,-10),new P(10,10),10,0,2*Math.PI,true);
 			assert.ok(physicsengine.CircleAABB(c1,a1) ,"collision" );
 		});
-		
+
 		QUnit.module( "TestCollision: Cercle-OBB" );
 		QUnit.test( "sans collision", function( assert ) {
 			var c1=new CircleObject(new P(50,50),10,0,2*Math.PI,true);
@@ -59,7 +59,7 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 			var o1=new OBBObject(new P(0,0),new V(1,1),30,30);
 			assert.ok(physicsengine.CircleOBB(c1,o1),"pas de collision" );;
 		});
-		
+
 		QUnit.module( "TestCollision: Cercle-KDop" );
 		QUnit.test( "sans collision", function( assert ) {
 			var polygon=[new P(30,0),new P(20,10),new P(20,20),new P(30,30),new P(40,30),new P(50,20),new P(50,10),new P(40,0)]
@@ -85,7 +85,7 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 			var c1=new CircleObject(new P(35,15),6,0,2*Math.PI,true)
 			assert.ok(physicsengine.CircleKDop(c1,k1) ,"collision" );
 		});
-		
+
 		QUnit.module( "TestCollision: Cercle-Point" );
 		QUnit.test( "sans collision", function( assert ) {
 			assert.ok( false ,"a implémenter" );
@@ -93,7 +93,7 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 		QUnit.test( "avec collision", function( assert ) {
 			assert.ok( false ,"a implémenter" );
 		});
-		
+
 		QUnit.module( "TestCollision: Cercle-Arrete" );
 		QUnit.test( "sans collision", function( assert ) {
 			assert.ok( false ,"a implémenter" );
@@ -104,7 +104,7 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 		QUnit.test( "avec collision sur un coin", function( assert ) {
 			assert.ok( false ,"a implémenter" );
 		});
-		
+
 		QUnit.module( "TestCollision: AABB-AABB" );
 		QUnit.test( "sans collision", function( assert ) {
 			assert.ok( false ,"a implémenter" );
@@ -112,7 +112,7 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 		QUnit.test( "avec collision", function( assert ) {
 			assert.ok( false ,"a implémenter" );
 		});
-		
+
 		QUnit.module( "TestCollision: AABB-OBB" );
 		QUnit.test( "sans collision", function( assert ) {
 			assert.ok( false ,"a implémenter" );
@@ -120,7 +120,7 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 		QUnit.test( "avec collision", function( assert ) {
 			assert.ok( false ,"a implémenter" );
 		});
-		
+
 		QUnit.module( "TestCollision: AABB-KDop" );
 		QUnit.test( "sans collision", function( assert ) {
 			assert.ok( false ,"a implémenter" );
@@ -128,61 +128,131 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 		QUnit.test( "avec collision", function( assert ) {
 			assert.ok( false ,"a implémenter" );
 		});
-		
+
 		QUnit.module( "TestCollision: AABB-Point" );
-		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+        QUnit.test( "sans collision", function( assert ) {
+            var AABB = new AABBObject(new P(10, 10), new P(30, 30));
+            var point = new PointObject(new P(150, 110));
+			assert.ok(!physicsengine.PointAABB(point, AABB),"sans collision" );
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var AABB = new AABBObject(new P(10, 10), new P(30, 30));
+            var point = new PointObject(new P(20, 20));
+			assert.ok(physicsengine.PointAABB(point, AABB),"avec collision" );
 		});
-		
+
 		QUnit.module( "TestCollision: OBB-OBB" );
-		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+        QUnit.test( "sans collision", function( assert ) {
+            var OBB1 = new OBBObject(new P(100, 100), new V(10, 10), 10, 10,
+                new V(0, 0));
+            var OBB2 = new OBBObject(new P(40, 20), new V(10, 10), 10, 10,
+                new V(0, 0));
+			assert.ok(!physicsengine.OBBOBB(OBB1, OBB2),"sans collision" );
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var OBB1 = new OBBObject(new P(20, 20), new V(10, 10), 100, 100,
+                new V(0, 0));
+            var OBB2 = new OBBObject(new P(40, 20), new V(10, 10), 10, 10,
+                new V(0, 0));
+			assert.ok(physicsengine.OBBOBB(OBB1, OBB2),"avec collision" );
 		});
-		
+
 		QUnit.module( "TestCollision: OBB-KDOP" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var OBB = new OBBObject(new P(100, 100), new V(10, 10), 10, 10,
+                new V(0, 0));
+            var polygon = [new P(30, 10), new P(50, 40), new P(10, 50)];
+            var KDop = new KDopObject(polygon, [new V(1, -1),
+				new V(1, 0),
+				new V(1, 1),
+                new V(0, 1)], new V(4, 1));
+			assert.ok(!physicsengine.KDopOBB(KDop, OBB),"sans collision" );
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var OBB = new OBBObject(new P(40, 20), new V(10, 10), 10, 10,
+                new V(0, 0));
+            var polygon = [new P(30, 10), new P(50, 40), new P(10, 50)];
+            var KDop = new KDopObject(polygon, [new V(1, -1),
+				new V(1, 0),
+				new V(1, 1),
+                new V(0, 1)], new V(4, 1));
+			assert.ok(physicsengine.KDopOBB(KDop, OBB),"avec collision" );
 		});
-		
+
 		QUnit.module( "TestCollision: 0BB-Point" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var OBB = new OBBObject(new P(10, 10), new V(10, 10), 10, 10,
+                new V(0, 0));
+            var point = new PointObject(new P(150, 110));
+			assert.ok(!physicsengine.PointOBB(point, OBB),"sans collision" );
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var OBB = new OBBObject(new P(10, 10), new V(10, 10), 10, 10,
+                new V(0, 0));
+            var point = new PointObject(new P(15, 11));
+			assert.ok(physicsengine.PointOBB(point, OBB),"avec collision" );
 		});
-		
+
 		QUnit.module( "TestCollision: KDop-KDop" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var polygon1 = [new P(20, 15), new P(55, 39), new P(10, 50)];
+            var KDop1 = new KDopObject(polygon1, [new V(1, -1),
+				new V(1, 0),
+				new V(1, 1),
+                new V(0, 1)], new V(2, 2));
+            var polygon2 = [new P(300, 100), new P(500, 400), new P(100, 500)];
+            var KDop2 = new KDopObject(polygon2, [new V(1, -1),
+				new V(1, 0),
+				new V(1, 1),
+                new V(0, 1)], new V(4, 1));
+            assert.ok(!physicsengine.KDopKDop(KDop1, KDop2),"sans collision");
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var polygon1 = [new P(20, 15), new P(55, 39), new P(10, 50)];
+            var KDop1 = new KDopObject(polygon1, [new V(1, -1),
+				new V(1, 0),
+				new V(1, 1),
+                new V(0, 1)], new V(4, 1));
+            var polygon2 = [new P(30, 10), new P(50, 40), new P(10, 50)];
+            var KDop2 = new KDopObject(polygon2, [new V(1, -1),
+				new V(1, 0),
+				new V(1, 1),
+                new V(0, 1)], new V(4, 1));
+            assert.ok(physicsengine.KDopKDop(KDop1, KDop2),"avec collision");
 		});
-		
+
 		QUnit.module( "TestCollision: KDop-Point" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var polygon = [new P(30, 10), new P(50, 40), new P(10, 50)];
+            var KDop = new KDopObject(polygon, [new V(1, -1),
+				new V(1, 0),
+				new V(1, 1),
+                new V(0, 1)], new V(4, 1));
+            var point = new PointObject(new P(300, 100));
+			assert.ok(!physicsengine.PointKDop(point, KDop),"sans collision");
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var polygon = [new P(30, 10), new P(50, 40), new P(10, 50)];
+            var KDop = new KDopObject(polygon, [new V(1, -1),
+				new V(1, 0),
+				new V(1, 1),
+                new V(0, 1)], new V(4, 1));
+            var point = new PointObject(new P(31, 11));
+			assert.ok(physicsengine.PointKDop(point, KDop),"avec collision");
 		});
-		
+
 		QUnit.module( "TestCollision: Point-Point" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var p1 = new PointObject(new P(10, 10));
+            var p2 = new PointObject(new P(10, 20));
+
+			assert.ok(!physicsengine.PointPoint(p1, p2),"sans collision" );
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+            var p1 = new PointObject(new P(10, 10));
+            var p2 = p1;
+
+			assert.ok(physicsengine.PointPoint(p1, p2),"avec collision" );
 		});
 	};
 	return {run:run}

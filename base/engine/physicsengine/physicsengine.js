@@ -249,11 +249,13 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         var p1 = AABB.physicsComponents['data'].p1;
         var p2 = AABB.physicsComponents['data'].p2;
 
-        if (point.x < p1.x && point.x > p2.x) {
+        if (point.physicsComponents['data'].point.x < p1.x
+            || point.physicsComponents['data'].point.x > p2.x) {
             return false;
         }
 
-        if (point.y < p1.y && point.y > p2.y) {
+        if (point.physicsComponents['data'].point.y < p1.y
+            || point.physicsComponents['data'].point.y > p2.y) {
             return false;
         }
 
