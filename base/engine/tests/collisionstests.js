@@ -19,22 +19,22 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 		QUnit.module( "TestCollision: Cercle-AABB" );
 		QUnit.test( "sans collision", function( assert ) {
 			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true);
-			var a1=new AABBObject(new P(10,10),new P(20,20),10,0,2*Math.PI,true);
+			var a1=new AABBObject(new P(10,10),new P(20,20));
 			assert.ok(!(physicsengine.CircleAABB(c1,a1)) ,"pas de collision" );
 		});
 		QUnit.test( "avec collision sur une arrete", function( assert ) {
 			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true);
-			var a1=new AABBObject(new P(-10,9),new P(10,19),10,0,2*Math.PI,true);
+			var a1=new AABBObject(new P(-10,9),new P(10,19));
 			assert.ok(physicsengine.CircleAABB(c1,a1) ,"collision" );
 		});
 		QUnit.test( "avec collision sur un coin", function( assert ) {
 			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true);
-			var a1=new AABBObject(new P(0,9),new P(10,19),10,0,2*Math.PI,true);
+			var a1=new AABBObject(new P(0,9),new P(10,19));
 			assert.ok(physicsengine.CircleAABB(c1,a1) ,"collision" );
 		});
 		QUnit.test( "cercle dans aabb", function( assert ) {
 			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true);
-			var a1=new AABBObject(new P(-10,-10),new P(10,10),10,0,2*Math.PI,true);
+			var a1=new AABBObject(new P(-10,-10),new P(10,10));
 			assert.ok(physicsengine.CircleAABB(c1,a1) ,"collision" );
 		});
 
@@ -88,45 +88,69 @@ define(['Point', 'Vector', 'KDopObject', 'CircleObject', 'Edge', 'PointObject',
 
 		QUnit.module( "TestCollision: Cercle-Point" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true)
+			var p1=new PointObject(new P(0,20))
+			assert.ok(!physicsengine.CirclePoint(c1,p1) ,"non collision" );
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true)
+			var p1=new PointObject(new P(0,5))
+			assert.ok(physicsengine.CirclePoint(c1,p1) ,"collision" );
 		});
 
 		QUnit.module( "TestCollision: Cercle-Arrete" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true)
+			var e1=new E(new P(9,9),new P(19,9))
+			assert.ok(!physicsengine.CircleEdge(c1,e1) ,"non collision" );
 		});
 		QUnit.test( "avec collision sur une arrete", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true)
+			var e1=new E(new P(1,10),new P(10,1))
+			assert.ok( physicsengine.CircleEdge(c1,e1) ,"collision" );
 		});
 		QUnit.test( "avec collision sur un coin", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var c1=new CircleObject(new P(0,0),10,0,2*Math.PI,true)
+			var e1=new E(new P(9,0),new P(9,19))
+			assert.ok( physicsengine.CircleEdge(c1,e1) ,"collision" );
 		});
 
 		QUnit.module( "TestCollision: AABB-AABB" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var a1=new AABBObject(new P(10,10),new P(20,20));
+			var a2=new AABBObject(new P(21,21),new P(31,31));
+			assert.ok(!physicsengine.AABBAABB(a1,a2) ,"non collision" );
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var a1=new AABBObject(new P(10,10),new P(20,20));
+			var a2=new AABBObject(new P(15,15),new P(29,29));
+			assert.ok(physicsengine.AABBAABB(a1,a2) ,"collision" );
 		});
 
 		QUnit.module( "TestCollision: AABB-OBB" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var o1=new OBBObject(new P(0,0),new V(1,1),30,30);
+			var a1=new AABBObject(new P(30,30),new P(20,20));
+			assert.ok(!physicsengine.AABBOBB(a1,o1) ,"non collision" );
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var o1=new OBBObject(new P(0,0),new V(1,1),30,30);
+			var a1=new AABBObject(new P(15,-15),new P(30,30));
+			assert.ok(physicsengine.AABBOBB(a1,o1) ,"collision" );
 		});
 
 		QUnit.module( "TestCollision: AABB-KDop" );
 		QUnit.test( "sans collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var polygon=[new P(30,0),new P(20,10),new P(20,20),new P(30,30),new P(40,30),new P(50,20),new P(50,10),new P(40,0)]
+			var k1=new KDopObject(polygon,axis);
+			var a1=new AABBObject(new P(0,0),new P(25,4));
+			assert.ok(!physicsengine.AABBKDop(a1,k1) ,"collision" );
 		});
 		QUnit.test( "avec collision", function( assert ) {
-			assert.ok( false ,"a implémenter" );
+			var polygon=[new P(30,0),new P(20,10),new P(20,20),new P(30,30),new P(40,30),new P(50,20),new P(50,10),new P(40,0)]
+			var k1=new KDopObject(polygon,axis);
+			var a1=new AABBObject(new P(0,0),new P(25,6));
+			assert.ok(physicsengine.AABBKDop(a1,k1),"non  implémenter" );
 		});
 
 		QUnit.module( "TestCollision: AABB-Point" );
