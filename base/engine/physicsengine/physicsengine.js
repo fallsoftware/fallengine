@@ -38,8 +38,6 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
             i = 0, j = 0;
 
         for (i = 0; i < size; i++) {
-            this.gameObjects[i].updatePhysics();
-
             for (j = i; j < size; j++) {
                 if (i != j) {
                     this.computePhysics(this.gameObjects[i],
