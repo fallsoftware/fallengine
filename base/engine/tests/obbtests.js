@@ -3,7 +3,7 @@ define(['OBBObject','Vector','Point'], function (O,V,P){
 		QUnit.module( "TestOBB" );
 
 		QUnit.test( "Construction of a center 0;1 vector (1,3) w,l 10,30 obb", function( assert ) {
-			var o1=new O(new P(0,1),new V(1,3),10,30,new V(1,2),'#ffa000');
+			var o1=new O(new P(0,1),new V(1,3),10,30);
 			var value;
 			var data=o1.physicsComponents["data"]
 			console.log(data)
