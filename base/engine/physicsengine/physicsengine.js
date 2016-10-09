@@ -443,11 +443,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         }
 
         if (circleCenterNormalize< Math.max(p1DotNormalize, p2DotNormalize)
-            && circleCenterNormalize > Math.min(p1DotNormalize, p2DotNormalize)
-            && circleCenterNormalize - Math.min(p1DotNormalize, p2DotNormalize)
-            > radius
-            && circleCenterNormalize - Math.max(p1DotNormalize, p2DotNormalize)
-            < radius) {
+            && circleCenterNormalize > Math.min(p1DotNormalize, p2DotNormalize)) {
             return true;
         }
 
