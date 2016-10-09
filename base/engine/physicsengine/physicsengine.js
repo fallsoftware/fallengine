@@ -86,8 +86,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     PhysicsEngine.prototype.CircleCircle = function (circle1, circle2) {
         var circle1Physics = circle1.physicsComponents['data'];
         var circle2Physics = circle2.physicsComponents['data'];
-        var distance = (new V(circle2Physics.x-circle1Physics.x,
-            circle2Physics.y-circle1Physics.y)).lengthSquare();
+        var distance = (new V(circle2Physics.center.x-circle1Physics.center.x,
+            circle2Physics.center.y-circle1Physics.center.y)).lengthSquare();
         var minDistance = (circle1Physics.radius + circle2Physics.radius)
             * (circle1Physics.radius + circle2Physics.radius);
 
@@ -128,10 +128,9 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.CircleOBB = function (circle, OBB) {
         var points = OBB.graphicsComponents['rendering'].points;
-        var center = new PointObject(new P(circle.physicsComponents['data'].x,
-            circle.physicsComponents['data'].y));
+        var center = circle.physicsComponents['data'].center;
 
-        if (this.OBBPoint(OBB, center)) {
+        if (this.OBBPoint(OBB, new PointObject(center, new V(0, 0)))) {
             return true;
         }
 
@@ -149,10 +148,9 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.CircleKDop = function (circle, KDop) {
         var points = KDop.graphicsComponents['rendering'].points;
-        var center = new PointObject(new P(circle.physicsComponents['data'].x,
-            circle.physicsComponents['data'].y));
+        var center = circle.physicsComponents['data'].center;
 
-        if (this.KDopPoint(KDop, center)) {
+        if (this.KDopPoint(KDop, new PointObject(center, new V(0, 0)))) {
             return true;
         }
 
@@ -353,8 +351,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         var max = KDop.physicsComponents['data'].max;
         var axis = KDop.physicsComponents['data'].axis;
         var size = axis.length;
-        var x = point.physicsComponents['data'].x
-        var y = point.physicsComponents['data'].y
+        var x = point.physicsComponents['data'].point.x;
+        var y = point.physicsComponents['data'].point.y;
 
         for (var i = 0; i < size; i++) {
             var value = axis[i].x * x + axis[i].y * y;
@@ -463,6 +461,11 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         var value;
 
         for (var i = 0; i < size; i++) {
+            min1 = Infinity;
+            min2 = Infinity;
+            max1 = -Infinity;
+            max2 = -Infinity;
+
             for (var j = 0; j < size1; j++) {
                 value = points1[j].x * axis[i].x + points1[j].y * axis[i].y;
 

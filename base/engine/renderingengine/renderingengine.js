@@ -6,7 +6,6 @@ define(['jQuery', 'observer'],
         if (canvas != undefined) {
             this.canvas = canvas;
             this.context = canvas.getContext('2d');
-            window.addEventListener('resize', this.setCanvas.bind(this));
             this.setCanvas();
         } else {
             this.canvas = null;
@@ -33,8 +32,8 @@ define(['jQuery', 'observer'],
     };
 
     RenderingEngine.prototype.setCanvas = function () {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.canvas.width = 1280;
+        this.canvas.height = 600;
     };
 
     return RenderingEngine;

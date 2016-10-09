@@ -1,5 +1,5 @@
 body {
-    background: #B0BEC5;
+    background: #00897b;
     cursor: default;
     text-align: justify;
     -webkit-user-select: none;
@@ -14,8 +14,11 @@ html, body {
     width: 100%;
 }
 #fallEngine {
-    display:block;
-    margin: 0 auto;
+    box-shadow: 0px 0px 5px black;
+    display: block;
+    margin: auto;
+    position: relative;
+    top: 100px;
     z-index: 999;
 }
 #fallEngineStartButton {
