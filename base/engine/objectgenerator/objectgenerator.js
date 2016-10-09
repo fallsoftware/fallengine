@@ -47,7 +47,7 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
     ObjectGenerator.prototype.checkIfCollisions = function (newGameObject) {
         for (var gameObject of this.gameObjects) {
             if (newGameObject != gameObject
-                && this.physicsEngine.computePhysics(gameObject,
+                && this.physicsEngine.isCollision(gameObject,
                 newGameObject)) {
                 return true;
             }

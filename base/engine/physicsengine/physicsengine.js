@@ -61,8 +61,26 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.computePhysics = function (gameObject1,
         gameObject2) {
-        this.computeCollisions[gameObject1.constructor.name
+        if (this.isCollision(gameObject1,gameObject2)) {
+            this.handleCollision(gameObject1, gameObject2);
+        }
+    };
+
+    PhysicsEngine.prototype.isCollision = function (gameObject1, gameObject2) {
+        return this.computeCollisions[gameObject1.constructor.name
             + gameObject2.constructor.name](gameObject1,gameObject2);
+    };
+
+    PhysicsEngine.prototype.handleCollision = function (gameObject1,
+        gameObject2) {
+        var tmpX = gameObject1.physicsComponents['movement'].speed.x;
+        var tmpY = gameObject1.physicsComponents['movement'].speed.y;
+        gameObject1.physicsComponents['movement'].speed.x
+            = gameObject2.physicsComponents['movement'].speed.x;
+        gameObject1.physicsComponents['movement'].speed.y
+            = gameObject2.physicsComponents['movement'].speed.y;
+        gameObject2.physicsComponents['movement'].speed.x = tmpX;
+        gameObject2.physicsComponents['movement'].speed.y = tmpY;
     };
 
     PhysicsEngine.prototype.CircleCircle = function (circle1, circle2) {
