@@ -128,7 +128,8 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
 
 		var points = this.graphicsComponent.points;
 		var size = points.length;
-
+		this.center.x+=speed.x;
+		this.center.y+=speed.y;
 		for (var i = 0; i < size; i++) {
 			points[i].x += speed.x;
 			points[i].y += speed.y;

@@ -1,7 +1,7 @@
 define(['Vector'], function (V){
 	var run= function(){
 		QUnit.module( "TestVector" );
-		v1=new V(3,4);
+		var v1=new V(3,4);
 		var value;
 		var normalized=v1.normalize();
 		var normal=v1.normal();
@@ -20,10 +20,6 @@ define(['Vector'], function (V){
 			
 			value=normalized.length();
 			assert.ok( value==1, "result is"+value+" with vector"+normalized.x+':'+normalized.y );
-		});
-		QUnit.test( "dotproduct of 2;2 is 14", function( assert ) {
-			value=v1.dot(new V(2,2));
-			assert.ok( value==14, "result is"+value );
 		});
 		QUnit.test( "dotproduct of 2;2 is 14", function( assert ) {
 			value=v1.dot(new V(2,2));
