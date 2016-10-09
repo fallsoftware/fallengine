@@ -7,7 +7,7 @@ define(['GameObject', 'PolygonGraphicsComponent', 'OBBPhysicsComponent',
         GameObject.call(this);
 
         if (fillStyle === null || fillStyle === undefined) {
-            fillStyle = '#ECEFF1';
+            fillStyle = '#eceff1';
         }
 
         this.addGraphicsComponent(new PolygonGraphicsComponent(this,

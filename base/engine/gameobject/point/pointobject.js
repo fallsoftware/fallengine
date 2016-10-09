@@ -7,7 +7,7 @@ define(['GameObject', 'PointPhysicsComponent', 'PointGraphicsComponent',
         GameObject.call(this);
 
         if (fillStyle === null || fillStyle === undefined) {
-            fillStyle = '#ECEFF1';
+            fillStyle = '#eceff1';
         }
 
         this.addPhysicsComponent(new PointPhysicsComponent(this, point),

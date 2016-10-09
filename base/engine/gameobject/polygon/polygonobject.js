@@ -12,7 +12,7 @@ define(['jQuery', 'observer', 'GameObject', 'PolygonGraphicsComponent',
         this.addPhysicsComponent(new MovementComponent(this), 'movement');
 
         if (fillStyle === null || fillStyle === undefined) {
-            fillStyle = '#ECEFF1';
+            fillStyle = '#eceff1';
         }
 
         if (paddingX === null || paddingX === undefined) {
