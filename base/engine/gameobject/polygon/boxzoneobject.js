@@ -34,13 +34,23 @@ define(['GameObject', 'AABBObject', 'AABBPhysicsComponent'],
         var speed = point.physicsComponents['movement'].speed;
         var ifContains = true;
 
-        if (position.x > this.right || position.x < this.left) {
-            speed.x = -speed.x;
+        if (position.x > this.right) {
+            speed.x = -Math.abs(speed.x);
             ifContains = false;
         }
 
-        if (position.y > this.bottom || position.y < this.top) {
-            speed.y = -speed.y;
+        if (position.x < this.left){
+            speed.x = Math.abs(speed.x);
+            ifContains = false;
+        }
+
+        if (position.y > this.bottom) {
+            speed.y = -Math.abs(speed.y)
+            ifContains = false;
+        }
+
+        if (position.y < this.top) {
+            speed.y = Math.abs(speed.y)
             ifContains = false;
         }
 
@@ -57,13 +67,23 @@ define(['GameObject', 'AABBObject', 'AABBPhysicsComponent'],
         var bottom = center.y + radius;
         var ifContains = true;
 
-        if (right > this.right || left < this.left) {
-            speed.x = -speed.x;
+        if (right > this.right) {
+            speed.x = -Math.abs(speed.x);
             ifContains = false;
         }
 
-        if (bottom > this.bottom || top < this.top) {
-            speed.y = -speed.y;
+        if (left < this.left) {
+            speed.x = Math.abs(speed.x);
+            ifContains = false;
+        }
+
+        if (bottom > this.bottom) {
+            speed.y = -Math.abs(speed.y)
+            ifContains = false;
+        }
+
+        if (top < this.top) {
+            speed.y = Math.abs(speed.y)
             ifContains = false;
         }
 
@@ -71,12 +91,117 @@ define(['GameObject', 'AABBObject', 'AABBPhysicsComponent'],
     };
 
     BoxZoneObject.prototype.containsAABB = function (AABB) {
+        var left = AABB.physicsComponents['data'].p1.x;
+        var right = AABB.physicsComponents['data'].p2.x;
+        var top = AABB.physicsComponents['data'].p1.y;
+        var bottom = AABB.physicsComponents['data'].p2.y;
+        var speed = AABB.physicsComponents['movement'].speed;
+        var ifContains = true;
+
+        if (right > this.right) {
+            speed.x = -Math.abs(speed.x);
+            ifContains = false;
+        }
+
+        if (left < this.left) {
+            speed.x = Math.abs(speed.x);
+            ifContains = false;
+        }
+
+        if (bottom > this.bottom) {
+            speed.y = -Math.abs(speed.y)
+            ifContains = false;
+        }
+
+        if (top < this.top) {
+            speed.y = Math.abs(speed.y)
+            ifContains = false;
+        }
+
+        return ifContains;
     };
 
     BoxZoneObject.prototype.containsOBB = function (OBB) {
+        var points = OBB.graphicsComponents['rendering'].points;
+        var size = points.length
+        var right = -Infinity;
+        var left = Infinity;
+        var top = Infinity;
+        var bottom = Infinity;
+        var speed = OBB.physicsComponents['movement'].speed;
+        var ifContains = true;
+
+        for (var i = 0; i < size; i++) {
+            if (points.x < left) {
+                left = points.x;
+            }
+
+            if (points.x > right) {
+                right = points.x;
+            }
+
+            if (points.y < top) {
+                top = points.y;
+            }
+
+            if (points.y < bottom) {
+                bottom = points.y;
+            }
+        }
+
+        if (right > this.right) {
+            speed.x = -Math.abs(speed.x);
+            ifContains = false;
+        }
+
+        if (left < this.left){
+            speed.x = Math.abs(speed.x);
+            ifContains = false;
+        }
+
+        if (bottom > this.bottom) {
+            speed.y = -Math.abs(speed.y)
+            ifContains = false;
+        }
+
+        if (top < this.top) {
+            speed.y = Math.abs(speed.y)
+            ifContains = false;
+        }
+
+        return ifContains;
     };
 
     BoxZoneObject.prototype.containsKDop = function (KDop) {
+        var left = KDop.physicsComponents['data'].min[1];
+        var right = KDop.physicsComponents['data'].max[1];
+        var top = KDop.physicsComponents['data'].min[3];
+        var bottom = KDop.physicsComponents['data'].max[3];
+        var speed = KDop.physicsComponents['movement'].speed;
+        var ifContains = true;
+
+        if (right > this.right) {
+            speed.x = -Math.abs(speed.x);
+            ifContains = false;
+        }
+
+        if (left < this.left){
+            speed.x = Math.abs(speed.x);
+            ifContains = false;
+        }
+
+        if (bottom > this.bottom) {
+            speed.y=-Math.abs(speed.y)
+            ifContains = false;
+        }
+
+        if (top < this.top)
+        {
+            speed.y=Math.abs(speed.y)
+            ifContains = false;
+        }
+
+        return ifContains;
     };
 
     return BoxZoneObject;

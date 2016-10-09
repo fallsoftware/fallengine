@@ -10,9 +10,8 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
         this.physicsEngine = physicsEngine;
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
-        /*this.objectTypes = ['PointObject', 'CircleObject', 'AABBObject',
-            'OBBObject', 'KDopObject'];*/
-        this.objectTypes = ['CircleObject'];
+        this.objectTypes = ['PointObject', 'CircleObject', 'AABBObject',
+            'OBBObject', 'KDopObject'];
         this.createObjectsHashmap();
         this.createColorBank();
 	}
@@ -53,7 +52,6 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
                 return true;
             }
 
-
             if (!this.physicsEngine.bounds.contains(newGameObject)) {
                 return true;
             }
@@ -68,13 +66,9 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
 	};
 
     ObjectGenerator.prototype.generateCircleObject = function () {
-        var images = ['',
-            '../engine/gamecomponent/circle/elements/background.png'];
-
         return new CircleObject(this.generatePoint(),
             M.randomInt(20, 100), 0, Math.PI * 2, true,
-            this.generateSpeed(), this.getColor(),
-            images[M.randomInt(0, images.length-1)], this.generatePadding());
+            this.generateSpeed(), this.getColor());
 	};
 
     ObjectGenerator.prototype.generateAABBObject = function () {
@@ -125,15 +119,14 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
 
     ObjectGenerator.prototype.createColorBank = function () {
         this.colorBank = ['#3d5afe', '#ff5722', '#ff9800', '#ff1744',
-            '#ba68C8'];
+            '#ba68C8', '#f06292', '#2196f3', '#006064', '#009688', '#00c853',
+            '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ffa000', '#ff5722',
+            '#795548', '#bcaaa4', '#a1887f', '#4e342e', '#9e9e9e', '#607d8b',
+            '#b0bec5'];
     };
 
     ObjectGenerator.prototype.getColor = function () {
         return this.colorBank[M.randomInt(0, this.colorBank.length-1)];
-    };
-
-    ObjectGenerator.prototype.generatePadding = function () {
-        return M.randomInt(0, 40);
     };
 
     ObjectGenerator.prototype.generateLength = function () {

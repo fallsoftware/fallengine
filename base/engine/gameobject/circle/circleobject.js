@@ -4,27 +4,19 @@ define(['GameObject', 'CircleGraphicsComponent', 'CirclePhysicsComponent',
     'use strict';
 
     function CircleObject(center, radius, startingAngle, endingAngle,
-        counterClockwise, speed, fillStyle, backgroundSrc, paddingX, paddingY) {
+        counterClockwise, speed, fillStyle) {
         GameObject.call(this);
-        this.addPhysicsComponent(new CirclePhysicsComponent(this, center, radius,
-            startingAngle, endingAngle, counterClockwise), 'data');
+        this.addPhysicsComponent(new CirclePhysicsComponent(this, center,
+            radius, startingAngle, endingAngle, counterClockwise), 'data');
         this.addPhysicsComponent(new MovementComponent(this, speed),
             'movement');
 
         if (fillStyle === null || fillStyle === undefined) {
-            fillStyle = '#ECEFF1';
+            fillStyle = '#eceff1';
         }
 
-        if (paddingX === null || paddingX === undefined) {
-            paddingX = 0;
-        }
-
-        if (paddingY === null || paddingY === undefined) {
-            paddingY = paddingX;
-        }
-
-        this.addGraphicsComponent(new CircleGraphicsComponent(this, fillStyle,
-            backgroundSrc, paddingX, paddingY), 'rendering');
+        this.addGraphicsComponent(new CircleGraphicsComponent(this, fillStyle),
+            'rendering');
     }
 
     CircleObject.prototype = Object.create(GameObject.prototype);
