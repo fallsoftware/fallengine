@@ -9,6 +9,14 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
         this.paddingX = paddingX;
         this.paddingY = paddingY;
         this.circleData = this.gameObject.physicsComponents['data'];
+        if (this.backgroundSrc !== null && this.backgroundSrc !== undefined &&
+            this.backgroundSrc !== '') {
+            this.background = new Image();
+            this.background.onload = (function() {
+            }).bind(this);
+            this.background.src = this.backgroundSrc;
+            this.getRatio();
+        }
     };
 
     CircleGraphicsComponent.prototype
@@ -25,27 +33,20 @@ define(['GraphicsComponent'], function (GraphicsComponent) {
     };
 
     CircleGraphicsComponent.prototype.drawBackground = function (context) {
-        var background = new Image();
-
-        background.src = this.backgroundSrc;
-        background.onload = (function() {
-            this.draw(context);
-            context.clip();
-
-            var ratio = this.getRatio(background);
-
-            context.drawImage(background,
-                this.circleData.center.x-this.circleData.radius+this.paddingX/2,
-                this.circleData.center.y-this.circleData.radius+this.paddingY/2,
-                background.width/ratio-this.paddingX,
-                background.height/ratio-this.paddingY);
-            context.restore();
-        }).bind(this);
+        this.draw(context);
+        context.clip();
+        context.drawImage(this.background,
+            this.circleData.center.x-this.circleData.radius+this.paddingX/2,
+            this.circleData.center.y-this.circleData.radius+this.paddingY/2,
+            this.background.width/this.ratio-this.paddingX,
+            this.background.height/this.ratio-this.paddingY);
+        context.restore();
     };
 
-    CircleGraphicsComponent.prototype.getRatio = function (background) {
-        var maxImageLength = Math.max(background.width, background.height);
-        return maxImageLength / (this.circleData.radius*2);
+    CircleGraphicsComponent.prototype.getRatio = function () {
+        var maxImageLength = Math.max(this.background.width,
+            this.background.height);
+        this.ratio =  maxImageLength / (this.circleData.radius*2);
     };
 
     CircleGraphicsComponent.prototype.update = function (context) {

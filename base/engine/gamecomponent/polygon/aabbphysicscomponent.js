@@ -7,7 +7,11 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         this.p2 = new P(Math.max(p1.x, p2.x), Math.max(p1.y, p2.y));
 
         this.graphicsComponent = gameObject.graphicsComponents['rendering'];
-        this.computePoints();
+
+        if (this.graphicsComponent !== undefined
+            && this.graphicsComponent !== null) {
+            this.computePoints();
+        }
     }
 
     AABBPhysicsComponent.prototype =

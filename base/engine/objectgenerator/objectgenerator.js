@@ -10,8 +10,9 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
         this.physicsEngine = physicsEngine;
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
-        this.objectTypes = ['PointObject', 'CircleObject', 'AABBObject',
-            'OBBObject', 'KDopObject'];
+        /*this.objectTypes = ['PointObject', 'CircleObject', 'AABBObject',
+            'OBBObject', 'KDopObject'];*/
+        this.objectTypes = ['CircleObject'];
         this.createObjectsHashmap();
         this.createColorBank();
 	}
@@ -51,6 +52,11 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
                 newGameObject)) {
                 return true;
             }
+
+
+            if (!this.physicsEngine.bounds.contains(newGameObject)) {
+                return true;
+            }
         }
 
         return false;
@@ -66,7 +72,7 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
             '../engine/gamecomponent/circle/elements/background.png'];
 
         return new CircleObject(this.generatePoint(),
-            M.randomInt(2, 80), 0, Math.PI * 2, true,
+            M.randomInt(20, 100), 0, Math.PI * 2, true,
             this.generateSpeed(), this.getColor(),
             images[M.randomInt(0, images.length-1)], this.generatePadding());
 	};

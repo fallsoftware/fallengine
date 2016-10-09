@@ -49,13 +49,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         var size = this.gameObjects.length;
 
         for (var i = 0; i < size; i++) {
-            this.handleBox(this.gameObjects[i]);
-        }
-    };
-
-    PhysicsEngine.prototype.handleBox = function (gameObject) {
-        if (!this.bounds.contains(gameObject)) {
-
+            this.bounds.contains(this.gameObjects[i])
         }
     };
 
@@ -169,8 +163,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     PhysicsEngine.prototype.CirclePoint = function (circle, point) {
         var center = circle.physicsComponents['data'].center;
         var radius = circle.physicsComponents['data'].radius;
-        var p = new P(point.physicsComponents['data'].x,
-            point.physicsComponents['data'].y);
+        var p = new P(point.physicsComponents['data'].point.x,
+            point.physicsComponents['data'].point.y);
 
         var v = new V(p.x - center.x, p.y - center.y);
 
@@ -274,8 +268,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
         var points = OBB.graphicsComponents['rendering'].points;
         var p1 = points[0], p2 = points[2];
-        var p = new P(point.physicsComponents['data'].x,
-            point.physicsComponents['data'].y);
+        var p = new P(point.physicsComponents['data'].point.x,
+            point.physicsComponents['data'].point.y);
 
         var p1DotNormalize = vectorNormalized.dot(p1);
         var p2DotNormalize = vectorNormalized.dot(p2);
@@ -382,13 +376,13 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
     };
 
     PhysicsEngine.prototype.PointPoint = function (point1, point2) {
-        if (point1.physicsComponents['data'].x
-            != point2.physicsComponents['data'].x) {
+        if (point1.physicsComponents['data'].point.x
+            != point2.physicsComponents['data'].point.x) {
             return false;
         }
 
-        if (point1.physicsComponents['data'].y
-            != point2.physicsComponents['data'].y) {
+        if (point1.physicsComponents['data'].point.y
+            != point2.physicsComponents['data'].point.y) {
             return false;
         }
 
