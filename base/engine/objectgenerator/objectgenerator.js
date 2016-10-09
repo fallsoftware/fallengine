@@ -10,8 +10,8 @@ define(['CircleObject', 'PointObject', 'AABBObject', 'OBBObject', 'KDopObject',
         this.physicsEngine = physicsEngine;
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
-        this.objectTypes = ['AABBObject',
-            'KDopObject'];
+        this.objectTypes = ['CircleObject', 'AABBObject',
+            'OBBObject', 'KDopObject'];
         this.createObjectsHashmap();
         this.createColorBank();
 	}
