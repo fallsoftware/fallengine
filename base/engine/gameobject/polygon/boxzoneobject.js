@@ -127,7 +127,7 @@ define(['GameObject', 'AABBObject', 'AABBPhysicsComponent'],
         var right = -Infinity;
         var left = Infinity;
         var top = Infinity;
-        var bottom = Infinity;
+        var bottom = -Infinity;
         var speed = OBB.physicsComponents['movement'].speed;
         var ifContains = true;
 

@@ -282,7 +282,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         var axis = [];
         axis.push(OBB.physicsComponents['data'].vector.normalize());
         axis.push(axis[0].normal());
-        axis.concat(KDop.physicsComponents['data'].axis);
+        axis=axis.concat(KDop.physicsComponents['data'].axis);
 
         return this.SATTheorem(axis, OBB.graphicsComponents['rendering'].points,
             KDop.graphicsComponents['rendering'].points);

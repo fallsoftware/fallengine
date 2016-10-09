@@ -5,6 +5,7 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         PhysicsComponent.call(this, gameObject);
 
         this.point = point;
+		this.center=point;
         this.vector = vector;
         this.width = width;
         this.length = length;
@@ -51,6 +52,7 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         this.point.y += speed.y;
 
         this.computePoints();
+		this.center=this.point;
     };
 
     return OBBPhysicsComponent;
