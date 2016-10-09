@@ -4,7 +4,7 @@ define(['TimeObject','GameEngine','RenderingEngine', 'MathUtils',
 	'use strict';
 
 	function CoreEngine(canvas) {
-		this.fps = 60;
+		this.fps = 30;
 		this.gameObjects = [];
 		this.renderingEngine = new RenderingEngine(this.gameObjects, canvas);
 		this.renderingEngine.init();
