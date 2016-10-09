@@ -25,7 +25,7 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
                                         new P(this.p1.x, this.p2.y)];
     };
 
-    AABBPhysicsComponent.prototype.update = function (context) {
+    AABBPhysicsComponent.prototype.update = function () {
 
     };
 

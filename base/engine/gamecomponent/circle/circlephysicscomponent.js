@@ -31,7 +31,7 @@ define(['PhysicsComponent'], function (PhysicsComponent) {
         = Object.create(PhysicsComponent.prototype);
     CirclePhysicsComponent.prototype.constructor = CirclePhysicsComponent;
 
-    CirclePhysicsComponent.prototype.update = function (context) {
+    CirclePhysicsComponent.prototype.update = function () {
 
     };
 

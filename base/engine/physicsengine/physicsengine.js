@@ -26,8 +26,8 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
         this.gameObjects = gameObjects;
         this.createCollisionsHashmap();
         this.bounds = new BoxZoneObject(new P(0, 0), new P(width, height));
-		this.collided=[];
-		this.collidedm=[];
+		this.collided = [];
+		this.collidedM = [];
     }
 
     PhysicsEngine.prototype = Object.create(Observer.prototype);
@@ -38,13 +38,18 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
             i = 0, j = 0;
 
         for (i = 0; i < size; i++) {
+            this.gameObjects[i].updatePhysics();
+
             for (j = i; j < size; j++) {
-                if (i != j) this.computePhysics(this.gameObjects[i],
-                    this.gameObjects[j]);
+                if (i != j) {
+                    this.computePhysics(this.gameObjects[i],
+                        this.gameObjects[j]);
+                }
             }
         }
-		this.collidedm=this.collided;
-		this.collided=[];
+
+		this.collidedM = this.collided;
+		this.collided = [];
         this.checkBox();
     };
 
@@ -70,7 +75,7 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
 
     PhysicsEngine.prototype.handleCollision = function (gameObject1,
         gameObject2) {
-		this.collided[""+gameObject1.id+','+gameObject2.id]=0
+		this.collided['' + gameObject1.id + ',' + gameObject2.id] = 0;
         var tmpX = gameObject1.physicsComponents['movement'].speed.x;
         var tmpY = gameObject1.physicsComponents['movement'].speed.y;
         gameObject1.physicsComponents['movement'].speed.x
@@ -79,17 +84,24 @@ define(['Point', 'Vector', 'KDopObject', 'MathUtils', 'Edge', 'PointObject',
             = gameObject2.physicsComponents['movement'].speed.y;
         gameObject2.physicsComponents['movement'].speed.x = tmpX;
         gameObject2.physicsComponents['movement'].speed.y = tmpY;
-		if(this.collidedm[""+gameObject1.id+','+gameObject2.id]!=undefined){
-			var c1=gameObject1.physicsComponents['data'].center;
-			var c2=gameObject2.physicsComponents['data'].center;
-			var difx=c1.x-c2.x;
-			var dify=c1.y-c2.y;
-			gameObject1.physicsComponents['movement'].speed.x=Math.sign(difx)*Math.abs(gameObject1.physicsComponents['movement'].speed.x)
-			gameObject2.physicsComponents['movement'].speed.x=-Math.sign(difx)*Math.abs(gameObject2.physicsComponents['movement'].speed.x)
-			gameObject1.physicsComponents['movement'].speed.y=Math.sign(dify)*Math.abs(gameObject1.physicsComponents['movement'].speed.y)
-			gameObject2.physicsComponents['movement'].speed.y=-Math.sign(dify)*Math.abs(gameObject2.physicsComponents['movement'].speed.y)
+		if (this.collidedM["" + gameObject1.id + ',' + gameObject2.id]
+            != undefined) {
+			var c1 = gameObject1.physicsComponents['data'].center;
+			var c2 = gameObject2.physicsComponents['data'].center;
+			var diFx = c1.x - c2.x;
+			var diFy = c1.y - c2.y;
+			gameObject1.physicsComponents['movement'].speed.x=Math.sign(diFx)
+                * Math.abs(gameObject1.physicsComponents['movement'].speed.x);
+			gameObject2.physicsComponents['movement'].speed.x=-Math.sign(diFx)
+                * Math.abs(gameObject2.physicsComponents['movement'].speed.x);
+			gameObject1.physicsComponents['movement'].speed.y
+                = Math.sign(diFy)
+                * Math.abs(gameObject1.physicsComponents['movement'].speed.y);
+			gameObject2.physicsComponents['movement'].speed.y =
+                -Math.sign(diFy)
+                * Math.abs(gameObject2.physicsComponents['movement'].speed.y);
 		}
-		
+
 	};
 
     PhysicsEngine.prototype.CircleCircle = function (circle1, circle2) {

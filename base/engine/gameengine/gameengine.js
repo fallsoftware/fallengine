@@ -26,7 +26,15 @@ define(['jQuery', 'Inputs','PhysicsEngine'], function ($, Inputs,
         });
     };
 
-    GameEngine.prototype.update = function (step) {
+    GameEngine.prototype.updateInputs = function () {
+        var size = this.gameObjects.length;
+
+        for (var i = 0; i < size; i++) {
+            this.gameObjects[i].updateInputs(this.input);
+        }
+    };
+
+    GameEngine.prototype.update = function () {
         this.getInput();
 
         if (this.currentScene.context === "MAIN_MENU") {

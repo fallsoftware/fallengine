@@ -23,7 +23,7 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         Object.create(PhysicsComponent.prototype);
     KDopPhysicsComponent.prototype.constructor = KDopPhysicsComponent;
 
-    KDopPhysicsComponent.prototype.update = function (context) {
+    KDopPhysicsComponent.prototype.update = function () {
 
     };
 
@@ -81,17 +81,21 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
 
         this.graphicsComponent.points = points;
     };
-	KDopPhysicsComponent.prototype.computeCenter = function(){
-		var points=this.graphicsComponent.points
-		var size= points.length;
-		var totx=0;
-		var toty=0;
-		for(var i=0;i<size-1;i++){
-			totx+=points[i].x;
-			toty+=points[i].y;
+
+	KDopPhysicsComponent.prototype.computeCenter = function () {
+		var points = this.graphicsComponent.points;
+		var size = points.length;
+		var totX = 0;
+		var totY = 0;
+
+		for (var i = 0; i < size-1; i++) {
+			totX += points[i].x;
+			totY += points[i].y;
 		}
-		this.center=new P(totx/size,toty/size)
-	}
+
+		this.center = new P(totX/size, totY/size);
+	};
+
     KDopPhysicsComponent.prototype.buildKDop = function (points) {
         this.min = [];
         this.max = [];
@@ -121,13 +125,16 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
             this.min[i] += value;
             this.max[i] += value;
         }
-		var points=this.graphicsComponent.points
-		var size= points.length;
-		for(var i=0;i<size;i++){
-			points[i].x+=speed.x;
-			points[i].y+=speed.y
+
+		var points = this.graphicsComponent.points;
+		var size = points.length;
+
+		for (var i = 0; i < size; i++) {
+			points[i].x += speed.x;
+			points[i].y += speed.y;
 		}
-		this.graphicsComponent.points=points;
+
+		this.graphicsComponent.points = points;
     };
 
     return KDopPhysicsComponent;

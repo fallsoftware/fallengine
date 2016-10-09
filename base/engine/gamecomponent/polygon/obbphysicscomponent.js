@@ -17,7 +17,7 @@ define(['PhysicsComponent', 'Point'], function (PhysicsComponent, P) {
         Object.create(PhysicsComponent.prototype);
     OBBPhysicsComponent.prototype.constructor = OBBPhysicsComponent;
 
-    OBBPhysicsComponent.prototype.update = function (context) {
+    OBBPhysicsComponent.prototype.update = function () {
 
     };
 

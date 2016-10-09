@@ -22,7 +22,7 @@ define(['jQuery', 'observer'],
         var length = this.gameObjects.length;
 
         for (var gameObject of this.gameObjects) {
-            gameObject.update(this.context);
+            gameObject.updateGraphics(this.context);
         }
     };
 

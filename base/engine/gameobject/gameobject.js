@@ -58,19 +58,19 @@ define([], function () {
         }
     };
 
-    GameObject.prototype.updateInputs = function () {
+    GameObject.prototype.updateInputs = function (input) {
         for (var inputComponent in this.inputComponents) {
             if (!this.inputComponents.hasOwnProperty(inputComponent)) {
                 continue;
             }
 
-            this.inputComponents[inputComponent].update();
+            this.inputComponents[inputComponent].update(input);
         }
     };
 
-    GameObject.prototype.update = function (context) {
-        this.updateInputs();
-        this.updatePhysics(context);
+    GameObject.prototype.update = function (context, input) {
+        this.updateInputs(input);
+        this.updatePhysics();
         this.updateGraphics(context);
     };
 
