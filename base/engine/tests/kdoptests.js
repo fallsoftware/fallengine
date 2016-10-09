@@ -28,9 +28,7 @@ define(['KDopObject','Vector','Point'], function (O,V,P){
             new V(1, 1),
             new V(0, 1)],new V(1,2),'#ffa000');
 			c2.physicsComponents["data"].move(new V(1,2));
-			console.log(c2.physicsComponents["data"].center)
 			var data2=c2.physicsComponents["data"].center
-			console.log(data2)
 			assert.ok(data2.x==ce.x+1&&data2.y==ce.y+2, "kdop moved"+data2.x+":"+data2.y+"attendu"+(ce.x+1)+":"+(ce.y+2) );
 		});
 	};
